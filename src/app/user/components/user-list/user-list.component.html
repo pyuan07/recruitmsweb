@@ -1,0 +1,46 @@
+<div>
+  <div class="table-title">
+      <div class="d-flex">
+          <div><h2>User <b>Details</b></h2></div>
+          <div class="ms-auto">
+            <button type="button" class="btn btn-success add-new" (click)="goToCreateUser()">
+              <i class="bi bi-plus-circle"></i>
+              Add New
+            </button>
+          </div>
+      </div>
+  </div>
+
+  <table class="table table-striped">
+      <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor= "let user of userlist; let i = index" >
+          <th scope="row">{{i + 1}}</th>
+          <td>{{user.username}}</td>
+          <td>{{user.fullName}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.dob | date: 'dd-MM-yyyy'}}</td>
+          <td> 
+            <a href="#" class="view" title="" data-toggle="tooltip" data-original-title="View">
+              <i class="bi bi-eye"></i>
+            </a> &nbsp;
+            <a class="edit" title="" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['user/edit', user.id, 'edit']">
+              <i class="bi bi-pencil-square"></i>         
+            </a> &nbsp;
+            <a class="delete" title="" data-toggle="tooltip" data-original-title="Delete">
+              <i class="bi bi-trash"></i>
+            </a> 
+          </td>
+        </tr>
+      </tbody>
+  </table>
+</div>
