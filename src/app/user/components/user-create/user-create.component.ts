@@ -27,6 +27,7 @@ export class UserCreateComponent implements OnInit {
             icon: 'success',
             title: 'User Created Successfully!'
           });
+          this.router.navigate(['user']);
         },
         error: err => {
           Swal.fire("Error", err.error.message, "error");

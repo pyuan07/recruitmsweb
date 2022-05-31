@@ -1,0 +1,88 @@
+
+<div><h1>User <b>Details</b></h1></div>
+
+<div class="form-group mb-3">
+    <label for="username">Username</label>
+    <input
+        type="text"
+        class="form-control"
+        name="username"
+        [(ngModel)]="userFrom!.username"
+        readonly
+    />
+</div>
+<div class="form-group mb-3">
+    <label for="email">Email</label>
+    <input
+        type="email"
+        class="form-control"
+        name="email"
+        [(ngModel)]="userFrom!.email"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-3">
+    <label for="fullName">Full Name</label>
+    <input
+        type="text"
+        class="form-control"
+        name="fullName"
+        [(ngModel)]="userFrom!.fullName"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-3">
+    <label for="dob">Date of Birth</label>
+    <input
+        type="text"
+        class="form-control"
+        name="dob"
+        [(ngModel)]="userFrom!.dob"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-3">
+    <label for="gender">Gender</label>
+    <input type="text" 
+        class="form-control" 
+        name="gender"
+        [(ngModel)]="userFrom!.gender"
+        readonly
+    >
+</div>
+<div class="form-group mb-3">
+    <label for="roles">Roles</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="userFrom!.roles"
+        readonly
+        name="roles"
+    >
+</div>
+<div class="form-group mb-3">
+    <label for="objectState">Object State</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="userFrom!.objectState"
+        readonly
+        name="objectState"
+    />
+</div>
+
+<div class="form-group pt-3">
+    <div class="d-grid gap-2">
+        <button (click)="gotoEditPage()" class="btn btn-primary">
+            Edit
+        </button>
+        <button (click)="deleteUser()" class="btn btn-danger">
+            Terminate
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">
+            Cancel
+        </button>
+    </div>
+</div>
+

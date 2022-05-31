@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Gender, ObjectState, Role } from 'src/app/_shared/enum/enum';
 import Swal from 'sweetalert2';
@@ -14,32 +14,34 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-  userFrom: User;
+  userFrom: User | undefined;
 
-  constructor(private _userService: UserService, private tokenService:TokenStorageService ,private router: Router) {  
-    this.userFrom = this.tokenService.getUser()!;
+  constructor(private _userService: UserService, private tokenService:TokenStorageService, private route: ActivatedRoute ,private router: Router) {  
+    
   }
    
-
     ngOnInit(): void {
-      
+      this._userService.getById(this.route.snapshot.params['id']).subscribe({
+        next: data => this.userFrom = data,
+        error: (err: any) => {
+          Swal.fire("Error", err.error.message, "error");
+        }
+      });
     }
 
     onSubmit(): void {
-      this._userService.update(this.userFrom).subscribe({
+      this._userService.update(this.userFrom!).subscribe({
         next: data => {
           console.log(data);
           
           Swal.fire({
             icon: 'success',
-            title: 'User editd Successfully!'
+            title: 'User edited Successfully!'
           });
+          window.history.go(-1);
         },
         error: err => {
-          if(err.error.message)
-            Swal.fire("Error", err.error.message, "error");
-          else
-            Swal.fire("Error", err.message, "error");
+          Swal.fire("Error", err.error.message, "error");
         }
       });
     }

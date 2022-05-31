@@ -5,9 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
 import { UserCreateComponent } from './user/components/user-create/user-create.component';
 import { UserListComponent } from './user/components/user-list/user-list.component';
+import { ProfileComponent } from './profile/user-view.component';
+import { UserDetailsComponent } from './user/components/user-details/user-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'user', component: UserListComponent },
   { path: 'user/create', component: UserCreateComponent },
   { path: 'user/edit/:id', component: UserEditComponent },
+  { path: 'user/details/:id', component: UserDetailsComponent },
 
 
 

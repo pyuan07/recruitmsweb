@@ -11,8 +11,16 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getAll(): Observable<User[]> {
+    return this.http.get<User[]>(USER_API);
+  }
+
   getActive(): Observable<User[]> {
     return this.http.get<User[]>(USER_API + '/active');
+  }
+
+  getById(id: string): Observable<User> {
+    return this.http.get<User>(USER_API + '/id/'+ id);
   }
 
   create(user: User): Observable<User> {
@@ -21,5 +29,9 @@ export class UserService {
 
   update(user: User): Observable<User> {
     return this.http.put<User>(USER_API, user);
+  }
+
+  delete(id: string): Observable<boolean>{
+    return this.http.delete<boolean>(USER_API + '/' + id);
   }
 }
