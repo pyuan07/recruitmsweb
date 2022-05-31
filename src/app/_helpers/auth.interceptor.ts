@@ -2,11 +2,11 @@ import { HTTP_INTERCEPTORS, HttpEvent, HttpErrorResponse } from '@angular/common
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 
-import { TokenStorageService } from '../services/token-storage.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { TokenStorageService } from '../services/token-storage.service';
 
 const TOKEN_HEADER_KEY = 'Authorization';       // for Spring Boot back-end
 //const TOKEN_HEADER_KEY = 'x-access-token';   // for Node.js Express back-end

@@ -1,7 +1,9 @@
-import { SignupRequest } from './../models/request/singup-request';
+
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import Swal from 'sweetalert2';
+import { SignupRequest } from '../../models/request/singup-request';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-register',

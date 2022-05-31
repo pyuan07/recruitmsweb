@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../user/models/user-model';
+import { User } from '../models/user-model';
 
 const USER_API = environment.apiEndpoint +'/v1/user';
 

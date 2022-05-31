@@ -1,4 +1,4 @@
-import { Gender, ObjectState, Role } from "../../_shared/enum/enum";
+import { Gender, ObjectState, Role, } from "../_shared/enum/enum";
 
 export interface User{
     id: string;

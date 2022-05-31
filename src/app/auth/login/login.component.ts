@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginRequest } from '../models/request/login-request';
-import { AuthService } from '../services/auth.service';
-import { TokenStorageService } from '../services/token-storage.service';
-import { Role } from '../_shared/enum/enum';
+import { AuthService } from '../../services/auth.service';
+import { TokenStorageService } from '../../services/token-storage.service';
+import { LoginRequest } from '../../models/request/login-request';
+import { Role } from 'src/app/_shared/enum/enum';
 
 @Component({
   selector: 'app-login',
