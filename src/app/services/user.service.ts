@@ -1,3 +1,4 @@
+import { ObjectState } from 'src/app/_shared/enum/enum';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
@@ -15,8 +16,8 @@ export class UserService {
     return this.http.get<User[]>(USER_API);
   }
 
-  getActive(): Observable<User[]> {
-    return this.http.get<User[]>(USER_API + '/active');
+  getByObjState(state: String): Observable<User[]> {
+    return this.http.get<User[]>(USER_API + '/objectState/' + state);
   }
 
   getById(id: string): Observable<User> {

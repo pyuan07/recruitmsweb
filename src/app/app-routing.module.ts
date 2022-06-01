@@ -9,6 +9,7 @@ import { ProfileComponent } from './user/components/profile/user-view.component'
 import { UserDetailsComponent } from './user/components/user-details/user-details.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { TestComponent } from './user/components/test/test.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'user/details/:id', component: UserDetailsComponent },
 
 
-
+  { path: 'test', component: TestComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
