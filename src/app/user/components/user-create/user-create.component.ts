@@ -10,6 +10,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
+  
+  today = new Date(); 
+
   constructor(private _userService: UserService, private router: Router) {  
 
   }
@@ -21,8 +24,7 @@ export class UserCreateComponent implements OnInit {
     onSubmit(createForm: NgForm): void {
       this._userService.create(createForm.value).subscribe({
         next: data => {
-          console.log(data);
-          
+          console.log(data.dob);
           Swal.fire({
             icon: 'success',
             title: 'User Created Successfully!'

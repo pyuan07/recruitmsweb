@@ -2,7 +2,7 @@
 <div><h1>User <b>Edit</b></h1></div>
 
 <form
-    name="userFrom!"
+    name="userFrom"
     (ngSubmit)="f.form.valid && onSubmit()"
     #f="ngForm"
     novalidate
@@ -13,7 +13,7 @@
             type="text"
             class="form-control"
             name="username"
-            [(ngModel)]="userFrom!.username"
+            [(ngModel)]="userFrom.username"
             required
             minlength="3"
             maxlength="20"
@@ -39,7 +39,7 @@
             type="email"
             class="form-control"
             name="email"
-            [(ngModel)]="userFrom!.email"
+            [(ngModel)]="userFrom.email"
             required
             email
             #email="ngModel"
@@ -53,13 +53,14 @@
             </div>
         </div>
     </div>
+
     <div class="form-group mb-3">
         <label for="password">Password</label>
         <input
             type="password"
             class="form-control"
             name="password"
-            [(ngModel)]="userFrom!.password"
+            [(ngModel)]="userFrom.password"
             required
             minlength="6"
             #password="ngModel"
@@ -80,7 +81,7 @@
             type="text"
             class="form-control"
             name="fullName"
-            [(ngModel)]="userFrom!.fullName"
+            [(ngModel)]="userFrom.fullName"
             required
             #fullName="ngModel"
         />
@@ -89,16 +90,24 @@
         </div>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group  mb-3">
         <label for="dob">Date of Birth</label>
-        <input
-            type="date"
-            class="form-control"
-            name="dob"
-            [(ngModel)]="userFrom!.dob"
-            required
-            #dob="ngModel"
-        />
+        <div class="input-group">
+            <input 
+                class="form-control"
+                [max]="today"
+                [matDatepicker]="picker"
+                name="dob"
+                [(ngModel)]="userFrom.dob"
+                required
+                #dob="ngModel"
+            >
+            <div class="btn-datepicker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            </div>
+            <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <mat-hint>MM/DD/YYYY </mat-hint>
         <div class="alert-danger" *ngIf="dob.errors && f.submitted">
             <div *ngIf="dob.errors['required']">Date of Birth is required</div>
         </div>
@@ -108,7 +117,7 @@
         <label for="gender">Gender</label>
         <select 
             class="form-select" 
-            [(ngModel)]="userFrom!.gender"
+            [(ngModel)]="userFrom.gender"
             required
             name="gender"
             #gender="ngModel"
@@ -125,7 +134,7 @@
         <label for="roles">Roles</label>
         <select 
             class="form-select" 
-            [(ngModel)]="userFrom!.roles"
+            [(ngModel)]="userFrom.roles"
             required
             name="roles"
             #roles="ngModel"
@@ -143,7 +152,7 @@
         <label for="objectState">Object State</label>
         <select 
             class="form-select" 
-            [(ngModel)]="userFrom!.objectState"
+            [(ngModel)]="userFrom.objectState"
             required
             name="objectState"
             #objectState="ngModel"

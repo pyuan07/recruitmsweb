@@ -1,9 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Gender, ObjectState, Role } from 'src/app/_shared/enum/enum';
 import Swal from 'sweetalert2';
-import * as $ from 'jquery';
 import { User } from 'src/app/models/user-model';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,7 +12,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-  userFrom: User | undefined;
+  userFrom!: User;
+  today = new Date(); 
 
   constructor(private _userService: UserService, private tokenService:TokenStorageService, private route: ActivatedRoute ,private router: Router) {  
     
@@ -22,7 +21,10 @@ export class UserEditComponent implements OnInit {
    
     ngOnInit(): void {
       this._userService.getById(this.route.snapshot.params['id']).subscribe({
-        next: data => this.userFrom = data,
+        next: data => {
+          this.userFrom = data;
+          this.userFrom.dob = new Date(data.dob);
+        },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
         }

@@ -20,7 +20,10 @@ export class UserDetailsComponent implements OnInit {
    
     ngOnInit(): void {
       this._userService.getById(this.route.snapshot.params['id']).subscribe({
-        next: data => this.userFrom = data,
+        next: data => {
+          this.userFrom = data;
+          this.userFrom.dob = new Date(data.dob);
+        },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
         }
