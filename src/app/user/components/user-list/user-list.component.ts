@@ -88,7 +88,7 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/user/create']);
   }
   
-  deleteUser(id: string, username: string){
+  deleteUser(userId: string, username: string){
     Swal.fire({
       title: 'Do you want to terminate this user?\n username: ' + username,
       icon: 'question',
@@ -96,7 +96,7 @@ export class UserListComponent implements OnInit {
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.isConfirmed) {
-        this._userService.delete(id).subscribe({
+        this._userService.delete(userId).subscribe({
           next: data => {
             if(data){
               Swal.fire("Terminated Successfully", "", "success");

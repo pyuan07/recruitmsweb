@@ -1,4 +1,4 @@
-
+import { Role } from 'src/app/_shared/enum/enum';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { SignupRequest } from '../../models/request/singup-request';
@@ -14,7 +14,8 @@ export class RegisterComponent implements OnInit {
   form: SignupRequest = {
     username: '',
     email: '',
-    password: ''
+    password: '',
+    role: Role.CANDIDATE
   };
   isSuccessful = false;
   isSignUpFailed = false;

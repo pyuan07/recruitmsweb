@@ -1,7 +1,7 @@
 import { Gender, ObjectState, Role, } from "../_shared/enum/enum";
 
 export interface User{
-    id: string;
+    userId: string;
     fullName: string;
     email: string;
     username: string;
@@ -10,4 +10,8 @@ export interface User{
     dob: Date;
     gender?: Gender;
     objectState: ObjectState;
+    createdBy: string;
+    createdDate: Date;
+    modifiedBy: string;
+    lastModifiedDate: Date;
 }

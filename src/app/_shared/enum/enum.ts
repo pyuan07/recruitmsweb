@@ -1,9 +1,10 @@
 
 export enum Role {
-    ADMIN,
-    STAFF,
-    USER,
-    NOT_AUTH
+    ADMIN = 'ADMIN',
+    EMPLOYER = 'EMPLOYER',
+    STAFF = 'STAFF',
+    CANDIDATE = 'CANDIDATE',
+    NOT_AUTH = ''
 }
 
 export enum Gender {
@@ -24,4 +25,9 @@ export enum DataState {
     LOADING = 'LOADING',
     LOADED = 'LOADED',
     ERROR = 'ERROR' 
+}
+
+export enum TagType {
+    RESUME,
+    VACANCY
 }

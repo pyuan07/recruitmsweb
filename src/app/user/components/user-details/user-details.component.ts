@@ -31,7 +31,7 @@ export class UserDetailsComponent implements OnInit {
     }
 
     gotoEditPage(){
-      this.router.navigate(['user/edit', this.userFrom!.id])
+      this.router.navigate(['user/edit', this.userFrom!.userId])
     }
 
     deleteUser(){
@@ -42,7 +42,7 @@ export class UserDetailsComponent implements OnInit {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-          this._userService.delete(this.userFrom!.id).subscribe({
+          this._userService.delete(this.userFrom!.userId).subscribe({
             next: data => {
               if(data){
                 Swal.fire("Terminated Successfully", "", "success");

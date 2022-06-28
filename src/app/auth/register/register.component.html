@@ -70,9 +70,31 @@
           </div>
         </div>
       </div>
-      <span>
-        Already have an account? <a routerLink="/login" >Sign In</a>
-      </span>
+
+      <div class="form-group">
+        <label>
+            <input 
+              type="radio" 
+              name="role" 
+              [(ngModel)]="form.role"
+              value="CANDIDATE"
+              class="form-check-input"
+            /> &nbsp;
+            <b>Candidate</b> who want to apply vacancy
+        </label>
+        <label>
+            <input
+              type="radio" 
+              name="role" 
+              [(ngModel)]="form.role"
+              value="EMPLOYER"
+              class="form-check-input"
+            /> &nbsp;
+            <b>Employer</b> who want to recruit talent
+        </label>
+      </div>
+
+      
       <div class="form-group pt-3">
         <div class="d-grid gap-2">
           <button class="btn btn-primary">
@@ -80,6 +102,9 @@
           </button>
         </div>
       </div>
+      <span>
+        Already have an account? <a routerLink="/login" >Sign In</a>
+      </span>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
         Signup failed!<br />{{ errorMessage }}

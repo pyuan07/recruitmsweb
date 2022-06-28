@@ -141,8 +141,9 @@
             aria-label="Select Role"
         >
             <option value="ADMIN">Admin</option>
-            <option value="STAFF">Staff</option>
-            <option value="USER">User</option>
+            <option value="STAFF">Employer</option>
+            <option value="USER">Staff</option>
+            <option value="CANDIDATE">Candidate</option>
         </select>
         <div class="alert-danger" *ngIf="roles.errors && f.submitted">
             <div *ngIf="roles.errors['required']">Please select a User Role.</div>
