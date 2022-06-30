@@ -7,8 +7,8 @@
     #createForm="ngForm"
     novalidate
 >
-    <div class="form-group mb-3">
-        <label for="username">Username</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="username">Username</label>
         <input
             type="text"
             class="form-control"
@@ -32,8 +32,8 @@
             Your username must be 3-20 characters long.
         </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="email">Email</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="email">Email</label>
         <input
             type="email"
             class="form-control"
@@ -51,8 +51,8 @@
             </div>
         </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="password">Password</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="password">Password</label>
         <input
             type="password"
             class="form-control"
@@ -72,8 +72,8 @@
             Your password must be at least 6 characters long.
         </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="fullName">Full Name</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="fullName">Full Name</label>
         <input
             type="text"
             class="form-control"
@@ -88,7 +88,7 @@
     </div>
 
     <div class="form-group  mb-3">
-        <label for="dob">Date of Birth</label>
+        <label class="form-label" for="dob">Date of Birth</label>
         <div class="input-group">
             <input 
                 class="form-control"
@@ -110,8 +110,8 @@
         </div>
     </div>
 
-    <div class="form-group mb-3">
-        <label for="gender">Gender</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="gender">Gender</label>
         <select 
             class="form-select" 
             ngModel
@@ -128,8 +128,8 @@
             <div *ngIf="gender.errors['required']">Please select your gender.</div>
         </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="roles">Roles</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="roles">Roles</label>
         <select 
             class="form-select" 
             ngModel
@@ -148,8 +148,8 @@
             <div *ngIf="roles.errors['required']">Please select a User Role.</div>
         </div>
     </div>
-    <div class="form-group mb-3">
-        <label for="objectState">Object State</label>
+    <div class="form-group mb-4">
+        <label class="form-label" for="objectState">Object State</label>
         <select 
             class="form-select" 
             ngModel
@@ -166,8 +166,8 @@
             <option value="4">Draft</option>
             <option value="5">Frozen</option>
         </select>
-        <div class="alert-danger" *ngIf="roles.errors && createForm.submitted">
-            <div *ngIf="roles.errors['required']">Please select a User Role.</div>
+        <div class="alert-danger" *ngIf="objectState.errors && createForm.submitted">
+            <div *ngIf="objectState.errors['required']">Please select a User Role.</div>
         </div>
     </div>
     <div class="form-group pt-3">

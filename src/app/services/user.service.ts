@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<User[]>(USER_API + '/objectState/' + state);
   }
 
+  getByRole(role: String): Observable<User[]> {
+    return this.http.get<User[]>(USER_API + '/role/'+ role);
+  }
+
   getById(id: string): Observable<User> {
     return this.http.get<User>(USER_API + '/id/'+ id);
   }

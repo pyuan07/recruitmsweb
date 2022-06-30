@@ -1,12 +1,12 @@
-import { UserCreateComponent } from './components/user-create/user-create.component';
+
+import { OrganizationCreateComponent } from './components/organization-create/organization-create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserListComponent } from './components/user-list/user-list.component';
+import { OrganizationListComponent } from './components/organization-list/organization-list.component';
 import { RouterModule } from '@angular/router';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { TestComponent } from './components/test/test.component';
+import { OrganizationDetailsComponent } from './components/organization-details/organization-details.component';
+import { OrganizationEditComponent } from './components/organization-edit/organization-edit.component';
 
 // Angular/Material
 import { MatInputModule } from '@angular/material/input';
@@ -20,13 +20,15 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserCreateComponent,
-    UserEditComponent,
-    UserDetailsComponent
+    OrganizationListComponent,
+    OrganizationCreateComponent,
+    OrganizationEditComponent,
+    OrganizationDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatOptionModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+
   ]
 })
-export class UserModule { }
+export class OrganizationModule { }

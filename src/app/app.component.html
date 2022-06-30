@@ -5,14 +5,14 @@
       <li class="nav-item">
         <a href="/home" class="nav-link" routerLink="home">Home </a>
       </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+      <li class="nav-item" *ngIf="isLoggedIn && isAdmin">
+        <a href="/user" class="nav-link"  routerLink="user">User</a>
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+      <li class="nav-item" *ngIf="isLoggedIn && isAdmin">
+        <a href="/vacancy" class="nav-link" routerLink="vacancy">Vacancy</a>
       </li>
-      <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+      <li class="nav-item" *ngIf="isLoggedIn && isAdmin">
+        <a href="/organization" class="nav-link" routerLink="organization">Organization</a>
       </li>
     </ul>
 
@@ -37,5 +37,13 @@
 
   <div class="container pt-5">
     <router-outlet></router-outlet>
+  </div>
+
+  <!-- FOOTER CONTENT -->
+  <div class="footer pt-3">
+    <p class="text-center">
+      &nbsp;
+      <!-- CopyRight: NG PIN YUAN (TP055117) -->
+    </p>
   </div>
 </div>

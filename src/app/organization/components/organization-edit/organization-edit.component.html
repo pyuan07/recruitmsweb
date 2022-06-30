@@ -1,0 +1,168 @@
+
+<div><h1>Organization <b>Edit</b></h1></div>
+
+<form
+    name="organizationFrom"
+    (ngSubmit)="editForm.form.valid && onSubmit()"
+    #editForm="ngForm"
+    novalidate
+>
+    <div class="form-group mb-4">
+        <label class="form-label" for="name">Company Name</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="organizationFrom.name"
+            required
+            #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && editForm.submitted">
+            <div *ngIf="name.errors['required']">Company Name is required</div>
+        </div>
+    </div>
+
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="description">Company Description</label>
+        <textarea 
+            class="form-control" 
+            rows="3"
+            name="description"
+            #description="ngModel"
+            [(ngModel)]="organizationFrom.description"
+        >
+        </textarea>
+        <div class="alert-danger" *ngIf="description.errors && editForm.submitted">
+            <div *ngIf="description.errors['required']">Organization Description is required</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="countryISO">Country</label>
+        <select 
+            class="form-select" 
+            required
+            name="countryISO"
+            #countryISO="ngModel"
+            aria-label="Select Country"
+            [(ngModel)]="organizationFrom.country.iso"
+        >
+            <option value="" disabled selected>-- Select Country --</option>
+            <option *ngFor="let country of countryList" 
+                [value]="country.iso" >
+                {{country.name}}
+            </option>
+        </select>
+        <div class="alert-danger" *ngIf="countryISO.errors && editForm.submitted">
+            <div *ngIf="countryISO.errors['required']">Please select the country that you going to provide organization.</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="address">Company Address</label>
+        <input
+            type="text"
+            class="form-control"
+            name="address"
+            required
+            #address="ngModel"
+            [(ngModel)]="organizationFrom.address"
+        />
+        <div class="alert-danger" *ngIf="address.errors && editForm.submitted">
+            <div *ngIf="address.errors['required']">Company Address is required</div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Contact Method
+        </div>
+        <div class="card-body">
+            <div class="form-group mb-4">
+                <label class="form-label" for="email">Email</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    required
+                    email
+                    #email="ngModel"
+                    placeholder="name@example.com"
+                    [(ngModel)]="organizationFrom.email"
+                />
+                <div class="alert-danger" *ngIf="email.errors && editForm.submitted">
+                    <div *ngIf="email.errors['required']">Email is required</div>
+                    <div *ngIf="email.errors['email']">
+                        Email must be a valid email address
+                    </div>
+                </div>
+            </div>
+        
+            <div class="form-group mb-4">
+                <label class="form-label" for="phone">Contact No</label>
+                <input
+                    type="tel"
+                    class="form-control"
+                    name="phone"
+                    required
+                    #phone="ngModel"
+                    [(ngModel)]="organizationFrom.phone"
+                />
+                <div class="alert-danger" *ngIf="phone.errors && editForm.submitted">
+                    <div *ngIf="phone.errors['required']">Contact Number is required</div>
+                    <div *ngIf="phone.errors['tel']">
+                        Please provide a valid phone number
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="website">Official Website</label>
+                <input
+                    type="url"
+                    class="form-control"
+                    name="website"
+                    required
+                    #website="ngModel"
+                    [(ngModel)]="organizationFrom.website"
+                />
+                <div class="alert-danger" *ngIf="website.errors && editForm.submitted">
+                    <div *ngIf="website.errors['required']">Website is required</div>
+                    <div *ngIf="website.errors['url']">
+                        Please provide a valid URL
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="objectState">Object State</label>
+        <select 
+            class="form-select" 
+            required
+            name="objectState"
+            #objectState="ngModel"
+            aria-label="Select Object State"
+            [(ngModel)]="organizationFrom.objectState"
+        >
+            <option value="CREATED" Select>Created</option>
+            <option value="TERMINATED">Terminated</option>
+            <option value="ACTIVE">Active</option>
+            <option value="PENDING">Pending</option>
+            <option value="DRAFT">Draft</option>
+            <option value="FROZON">Frozen</option>
+        </select>
+    </div>
+    <div class="form-group pt-3">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

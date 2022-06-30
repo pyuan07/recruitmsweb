@@ -1,0 +1,122 @@
+
+<div><h1>Organization <b>Details</b></h1></div>
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="name">Company Name</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="organizationFrom!.name"
+            readonly
+        />
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="description">Company Description</label>
+        <textarea 
+            class="form-control" 
+            rows="3"
+            name="description"
+            [(ngModel)]="organizationFrom!.description"
+            readonly
+        >
+        </textarea>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="country">Country</label>
+        <input 
+            type="text"
+            class="form-control" 
+            name="country"
+            [(ngModel)]="organizationFrom!.country.name"
+            readonly
+        >
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="address">Company Address</label>
+        <input
+            type="text"
+            class="form-control"
+            name="address"
+            [(ngModel)]="organizationFrom!.address"
+            readonly
+        />
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Contact Method
+        </div>
+        <div class="card-body">
+            <div class="form-group mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    [(ngModel)]="organizationFrom!.email"
+                    readonly
+                />
+            </div>
+        
+            <div class="form-group mb-3">
+                <label class="form-label" for="phone">Contact No</label>
+                <input
+                    type="tel"
+                    class="form-control"
+                    name="phone"
+                    [(ngModel)]="organizationFrom!.phone"
+                    readonly
+                />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="website">Official Website</label>
+                <input
+                    type="url"
+                    class="form-control"
+                    name="website"
+                    [(ngModel)]="organizationFrom!.website"
+                    readonly
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="owner">Employer/Owner</label>
+        <input 
+            class="form-control" 
+            name="owner"
+            readonly
+            [(ngModel)]="organizationFrom!.owner.fullName"
+        />
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="objectState">Object State</label>
+        <input 
+            class="form-control" 
+            [(ngModel)]="organizationFrom!.objectState"
+            readonly
+            name="objectState"
+        />
+    </div>
+
+<div class="form-group pt-3">
+    <div class="d-grid gap-2">
+        <button (click)="gotoEditPage()" class="btn btn-primary">
+            Edit
+        </button>
+        <button (click)="deleteOrganization()" class="btn btn-danger">
+            Terminate
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">
+            Cancel
+        </button>
+    </div>
+</div>
+

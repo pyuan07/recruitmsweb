@@ -1,3 +1,7 @@
+import { VacancyDetailsComponent } from './vacancy/components/vacancy-details/vacancy-details.component';
+import { VacancyEditComponent } from './vacancy/components/vacancy-edit/vacancy-edit.component';
+import { VacancyCreateComponent } from './vacancy/components/vacancy-create/vacancy-create.component';
+import { VacancyListComponent } from './vacancy/components/vacancy-list/vacancy-list.component';
 import { UserEditComponent } from './user/components/user-edit/user-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,6 +14,10 @@ import { UserDetailsComponent } from './user/components/user-details/user-detail
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { TestComponent } from './user/components/test/test.component';
+import { OrganizationListComponent } from './organization/components/organization-list/organization-list.component';
+import { OrganizationCreateComponent } from './organization/components/organization-create/organization-create.component';
+import { OrganizationEditComponent } from './organization/components/organization-edit/organization-edit.component';
+import { OrganizationDetailsComponent } from './organization/components/organization-details/organization-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -22,6 +30,18 @@ const routes: Routes = [
   { path: 'user/create', component: UserCreateComponent },
   { path: 'user/edit/:id', component: UserEditComponent },
   { path: 'user/details/:id', component: UserDetailsComponent },
+
+  //Vacancy Routing
+  { path: 'vacancy', component: VacancyListComponent },
+  { path: 'vacancy/create', component: VacancyCreateComponent },
+  { path: 'vacancy/edit/:id', component: VacancyEditComponent },
+  { path: 'vacancy/details/:id', component: VacancyDetailsComponent },
+
+  //Organization Routing
+  { path: 'organization', component: OrganizationListComponent },
+  { path: 'organization/create', component: OrganizationCreateComponent },
+  { path: 'organization/edit/:id', component: OrganizationEditComponent },
+  { path: 'organization/details/:id', component: OrganizationDetailsComponent },
 
 
   { path: 'test', component: TestComponent },

@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+  background-color: #fff
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+
+.mat-column-roles {
+  width: 80px;
+}
+
+.mat-column-objectState {
+  width: 80px;
+}
+
+.mat-column-actions {
+  width: 30px;
+  text-align: center;
+}
+

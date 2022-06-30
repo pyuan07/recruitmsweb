@@ -8,10 +8,15 @@ import { Role } from './_shared/enum/enum';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   private roles: Role = Role.NOT_AUTH;
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+  isAdmin = false;
+  isStaff = false;
+  isCandidate = false;
+  isEmployer = false;
   username?: string;
 
   constructor(private tokenStorageService: TokenStorageService) { }
@@ -23,8 +28,10 @@ export class AppComponent {
       const user = this.tokenStorageService.getUser()!;
       this.roles = user.roles;
 
-      this.showAdminBoard = Object.values(this.roles).includes('ADMIN');
-      this.showModeratorBoard = Object.values(this.roles).includes('STAFF');
+      this.isAdmin = this.roles == Role.ADMIN;
+      this.isStaff = this.roles == Role.STAFF;
+      this.isCandidate = this.roles == Role.CANDIDATE;
+      this.isEmployer = this.roles == Role.EMPLOYER;
 
       this.username = user.username;
     }

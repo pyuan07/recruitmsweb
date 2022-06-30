@@ -1,32 +1,27 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from 'src/app/models/user-model';
-import { UserService } from 'src/app/services/user.service';
+import { Vacancy } from 'src/app/models/vacancy-model';
+import { VacancyService } from 'src/app/services/vacancy.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-user-details',
-  templateUrl: './user-details.component.html',
-  styleUrls: ['./user-details.component.css']
+  selector: 'app-vacancy-details',
+  templateUrl: './vacancy-details.component.html',
+  styleUrls: ['./vacancy-details.component.css']
 })
-export class UserDetailsComponent implements OnInit {
+export class VacancyDetailsComponent implements OnInit {
 
-  userFrom!: User;
+  vacancyFrom: Vacancy | undefined;
 
-  constructor(private _userService: UserService, private route: ActivatedRoute ,private router: Router) {  
+  constructor(private _vacancyService: VacancyService, private route: ActivatedRoute ,private router: Router) {  
     
   }
    
     ngOnInit(): void {
-      this.getUserDetails(this.route.snapshot.params['id']);
-    }
-
-    getUserDetails(id:string){
-      this._userService.getById(id).subscribe({
+      this._vacancyService.getById(this.route.snapshot.params['id']).subscribe({
         next: data => {
-          this.userFrom = data;
-          this.userFrom.dob = new Date(data.dob);
+          this.vacancyFrom = data;
         },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
@@ -35,22 +30,22 @@ export class UserDetailsComponent implements OnInit {
     }
 
     gotoEditPage(){
-      this.router.navigate(['user/edit', this.userFrom!.userId])
+      this.router.navigate(['vacancy/edit', this.vacancyFrom!.vacancyId])
     }
 
-    deleteUser(){
+    deleteVacancy(){
       Swal.fire({
-        title: 'Do you want to terminate this user?\n username: ' + this.userFrom!.username,
+        title: 'Do you want to terminate this vacancy?\n Title: ' + this.vacancyFrom!.name,
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-          this._userService.delete(this.userFrom!.userId).subscribe({
+          this._vacancyService.delete(this.vacancyFrom!.vacancyId).subscribe({
             next: data => {
               if(data){
                 Swal.fire("Terminated Successfully", "", "success");
-                this.router.navigate(['user'])
+                this.router.navigate(['vacancy'])
               }
               else{
                 Swal.fire("Failed to Terminate", "Something went wrong...", "error");

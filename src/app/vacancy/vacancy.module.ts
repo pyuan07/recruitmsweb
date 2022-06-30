@@ -1,12 +1,13 @@
-import { UserCreateComponent } from './components/user-create/user-create.component';
+import { OnlyNumber } from './../_shared/directive/onlynumber.directive';
+import { TestComponent } from './../user/components/test/test.component';
+import { VacancyCreateComponent } from './components/vacancy-create/vacancy-create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UserListComponent } from './components/user-list/user-list.component';
+import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
 import { RouterModule } from '@angular/router';
-import { UserDetailsComponent } from './components/user-details/user-details.component';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { TestComponent } from './components/test/test.component';
+import { VacancyDetailsComponent } from './components/vacancy-details/vacancy-details.component';
+import { VacancyEditComponent } from './components/vacancy-edit/vacancy-edit.component';
 
 // Angular/Material
 import { MatInputModule } from '@angular/material/input';
@@ -20,13 +21,17 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    UserListComponent,
-    UserCreateComponent,
-    UserEditComponent,
-    UserDetailsComponent
+    VacancyListComponent,
+    VacancyCreateComponent,
+    VacancyEditComponent,
+    VacancyDetailsComponent,
+    OnlyNumber,
+    TestComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +50,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatOptionModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+
   ]
 })
-export class UserModule { }
+export class VacancyModule { }
