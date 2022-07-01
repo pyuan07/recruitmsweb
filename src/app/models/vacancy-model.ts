@@ -1,5 +1,4 @@
 import { Organization } from './organization-model';
-import { Category } from './category-model';
 import { ObjectState, TagType } from "../_shared/enum/enum";
 import { Tag } from "./tag-model";
 import { Country } from './country-model';
@@ -9,7 +8,6 @@ export interface Vacancy{
     name: string;
     description: string;
     tags: Set<Tag>;
-    category: Category;
     country: Country
     organization: Organization;
     numberOfOpening: number;
