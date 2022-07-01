@@ -13,20 +13,96 @@ td, th {
 }
 
 
-.mat-column-roles {
-  width: 80px;
+.mat-column-name {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 18%;
+  width: 18%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
-.mat-column-objectState {
-  width: 100px;
+.mat-column-description {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 30%;
+  width: 30%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-email {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 20%;
+  width: 20%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .mat-column-country {
-  width: 100px;
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 10%;
+  width: 10%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-objectState {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 10%;
+  width: 10%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .mat-column-actions {
-  width: 30px;
-  text-align: center;
-}
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 13%;
+  width: 13%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
