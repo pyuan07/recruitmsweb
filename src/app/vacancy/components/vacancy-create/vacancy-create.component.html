@@ -3,12 +3,12 @@
 
 <form
     name="vacancyForm"
-    (ngSubmit)="createForm.form.valid && onSubmit(createForm)"
+    (ngSubmit)="createForm.form.valid && selectedTags.length < 1 && onSubmit(createForm)"
     #createForm="ngForm"
     novalidate
 >
     <div class="form-group mb-4">
-        <label class="form-label" for="name">Vacancy Title</label>
+        <label class="form-label" for="name">Vacancy Title <span class="required-symbol"></span></label>
         <input
             type="text"
             class="form-control"
@@ -23,12 +23,13 @@
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="description">Vacancy Description</label>
+        <label class="form-label" for="description">Vacancy Description <span class="required-symbol"></span></label>
         <textarea 
             class="form-control" 
             rows="3"
             name="description"
             ngModel
+            required
             #description="ngModel"
         >
         </textarea>
@@ -38,22 +39,7 @@
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="category">Category</label>
-        <input
-            type="text"
-            class="form-control"
-            name="category"
-            ngModel
-            required
-            #category="ngModel"
-        />
-        <div class="alert-danger" *ngIf="category.errors && createForm.submitted">
-            <div *ngIf="category.errors['required']">Vacancy Category is required</div>
-        </div>
-    </div>
-
-    <div class="form-group mb-4">
-        <label class="form-label" for="tag">Tag</label>
+        <label class="form-label" for="tag">Tag <span class="required-symbol"></span></label>
         <mat-chip-list class="form-control" #chipList aria-label="Tag selection">
             <mat-chip
                 *ngFor="let tag of selectedTags"
@@ -72,7 +58,10 @@
                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                 (matChipInputTokenEnd)="add($event)">
         </mat-chip-list>
-        <mat-hint> Can include Required Skill, Type of Vacancy, Experience, and so on... </mat-hint>
+        <div class="alert-danger" *ngIf="createForm.submitted && selectedTags.length < 1">
+            <div>At least one tag is required</div>
+        </div>
+        <mat-hint> Can include Category, Required Skill, Type of Vacancy, Experience, and so on... </mat-hint>
     </div>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
@@ -81,7 +70,7 @@
     </mat-autocomplete>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="country">Country</label>
+        <label class="form-label" for="country">Country <span class="required-symbol"></span></label>
         <select 
             class="form-select" 
             ngModel
@@ -102,7 +91,7 @@
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="organization">Organization</label>
+        <label class="form-label" for="organization">Organization <span class="required-symbol"></span></label>
         <select 
             class="form-select" 
             ngModel
@@ -146,7 +135,6 @@
                 class="form-control"
                 name="minSalary"
                 min = "0"
-                required
                 ngModel
                 #minSalary="ngModel"
             />
@@ -168,7 +156,7 @@
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="objectState">Object State</label>
+        <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
         <select 
             class="form-select" 
             ngModel
