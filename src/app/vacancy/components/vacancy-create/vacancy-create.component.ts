@@ -92,6 +92,8 @@ export class VacancyCreateComponent implements OnInit {
   }
 
   onSubmit(createForm: NgForm): void {
+    createForm.value.tags = this.selectedTags;
+
     this._vacancyService.create(createForm.value).subscribe({
       next: data => {
         console.log(data);

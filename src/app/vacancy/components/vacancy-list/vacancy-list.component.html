@@ -14,7 +14,7 @@
     <tr>
       <td>
         <mat-form-field appearance="fill">
-          <mat-label>Search by Vacancyname and Full Name </mat-label>
+          <mat-label>Search by Vacancy Title </mat-label>
           <input matInput (keyup)="applyFilter()" placeholder="Filter Vacancyname and FullName Here" #input [(ngModel)]="filterText">
         </mat-form-field>
       </td>
@@ -38,41 +38,41 @@
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <!-- Title Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
       <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
 
-    <!-- Full Name Column -->
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
       <td mat-cell *matCellDef="let row"> {{row.description}} </td>
     </ng-container>
 
-    <!-- Email Column -->
-    <ng-container matColumnDef="category">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-      <td mat-cell *matCellDef="let row"> {{row.category}} </td>
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+      <td mat-cell *matCellDef="let row"> {{row.country.name}} </td>
     </ng-container>
 
-    <!-- ObjectState Column -->
+    <ng-container matColumnDef="organization">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Organization </th>
+      <td mat-cell *matCellDef="let row"> {{row.organization.name}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="objectState">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Object State </th>
       <td mat-cell *matCellDef="let row"> {{row.objectState}} </td>
     </ng-container>
 
-    <!-- ObjectState Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
       <td mat-cell *matCellDef="let row"> 
-        <a href="#" class="view" data-toggle="tooltip" data-original-title="View" [routerLink]="['details', row.id]">
+        <a href="#" class="view" data-toggle="tooltip" data-original-title="View" [routerLink]="['details', row.vacancyId]">
           <i class="bi bi-eye"></i>
         </a> &nbsp;
-        <a class="edit" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['edit', row.id]">
+        <a class="edit" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['edit', row.vacancyId]">
           <i class="bi bi-pencil-square"></i>         
         </a> &nbsp;
-        <a class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteVacancy(row.id, row.vacancyname)">
+        <a class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteVacancy(row.vacancyId, row.vacancyname)">
           <i class="bi bi-trash"></i>
         </a> 
       </td>
@@ -83,7 +83,7 @@
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the vacancyname OR fullname "{{input.value}}"</td>
+      <td class="mat-cell" colspan="4">No data matching the vacancy title "{{input.value}}"</td>
     </tr>
   </table>
 

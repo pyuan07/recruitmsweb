@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class OrganizationDetailsComponent implements OnInit {
 
-  organizationFrom!: Organization;
+  organizationForm!: Organization;
 
   constructor(private _organizationService: OrganizationService, private route: ActivatedRoute ,private router: Router) {  
     
@@ -21,7 +21,7 @@ export class OrganizationDetailsComponent implements OnInit {
     ngOnInit(): void {
       this._organizationService.getById(this.route.snapshot.params['id']).subscribe({
         next: data => {
-          this.organizationFrom = data;
+          this.organizationForm = data;
         },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
@@ -30,18 +30,18 @@ export class OrganizationDetailsComponent implements OnInit {
     }
 
     gotoEditPage(){
-      this.router.navigate(['organization/edit', this.organizationFrom!.organizationId])
+      this.router.navigate(['organization/edit', this.organizationForm!.organizationId])
     }
 
     deleteOrganization(){
       Swal.fire({
-        title: 'Do you want to terminate this organization?\n Title: ' + this.organizationFrom!.name,
+        title: 'Do you want to terminate this organization?\n Title: ' + this.organizationForm!.name,
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
-          this._organizationService.delete(this.organizationFrom!.organizationId).subscribe({
+          this._organizationService.delete(this.organizationForm!.organizationId).subscribe({
             next: data => {
               if(data){
                 Swal.fire("Terminated Successfully", "", "success");

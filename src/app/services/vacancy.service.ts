@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Vacancy } from '../models/vacancy-model';
+import { VacancyCreateRequest } from '../models/request/vacancy-create-request';
+import { VacancyModifyRequest } from '../models/request/vacancy-modify-request';
 
 const VACANCY_API = environment.apiEndpoint +'/v1/vacancy';
 
@@ -20,19 +22,19 @@ export class VacancyService {
     return this.http.get<Vacancy[]>(VACANCY_API + '/objectState/' + state);
   }
 
-  getById(id: string): Observable<Vacancy> {
+  getById(id: number): Observable<Vacancy> {
     return this.http.get<Vacancy>(VACANCY_API + '/id/'+ id);
   }
 
-  create(vacancy: Vacancy): Observable<Vacancy> {
-    return this.http.post<Vacancy>(VACANCY_API, vacancy);
+  create(vacancyRequest: VacancyCreateRequest): Observable<Vacancy> {
+    return this.http.post<Vacancy>(VACANCY_API, vacancyRequest);
   }
 
-  update(vacancy: Vacancy): Observable<Vacancy> {
+  update(vacancy: VacancyModifyRequest): Observable<Vacancy> {
     return this.http.put<Vacancy>(VACANCY_API, vacancy);
   }
 
-  delete(id: string): Observable<boolean>{
+  delete(id: number): Observable<boolean>{
     return this.http.delete<boolean>(VACANCY_API + '/' + id);
   }
 }

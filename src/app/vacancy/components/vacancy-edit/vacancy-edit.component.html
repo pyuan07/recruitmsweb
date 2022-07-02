@@ -3,22 +3,154 @@
 
 <form
     name="vacancyFrom"
-    (ngSubmit)="f.form.valid && onSubmit()"
-    #f="ngForm"
+    (ngSubmit)="editForm.form.valid && selectedTags.length > 0 && onSubmit()"
+    #editForm="ngForm"
     novalidate
 >
     <div class="form-group mb-4">
-        <label class="form-label" for="name">Title <span class="required-symbol"></span></label>
+        <label class="form-label" for="name">Vacancy Title <span class="required-symbol"></span></label>
         <input
             type="text"
             class="form-control"
             name="name"
-            [(ngModel)]="vacancyFrom.name"
-            required
+            [(ngModel)]="vacancyForm.name"
             #name="ngModel"
         />
-        <div class="alert-danger" *ngIf="name.errors && f.submitted">
+        <div class="alert-danger" *ngIf="name.errors && editForm.submitted">
             <div *ngIf="name.errors['required']">Vacancy Title is required</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="description">Vacancy Description <span class="required-symbol"></span></label>
+        <textarea 
+            class="form-control" 
+            rows="3"
+            name="description"
+            [(ngModel)]="vacancyForm.description"
+            #description="ngModel"
+        >
+        </textarea>
+        <div class="alert-danger" *ngIf="description.errors && editForm.submitted">
+            <div *ngIf="description.errors['required']">Vacancy Description is required</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="tags">Tag <span class="required-symbol"></span></label>
+        <mat-chip-list class="form-control" #chipList aria-label="Tag selection">
+            <mat-chip
+                *ngFor="let tag of selectedTags"
+                (removed)="remove(tag)">
+                {{tag}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+            <input
+                style="border: none; outline: none"
+                #tagInput
+                [formControl]="tagCtrl"
+                [matAutocomplete]="auto"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)"
+            />
+        </mat-chip-list>
+        <div class="alert-danger" *ngIf="editForm.submitted && selectedTags.length < 1">
+            <div>At least one tag is required</div>
+        </div>
+        <mat-hint> Can include Category, Required Skill, Type of Vacancy, Experience, and so on... </mat-hint>
+    </div>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{tag}}
+        </mat-option>
+    </mat-autocomplete>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="countryISO">Country<span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            required
+            name="countryISO"
+            #countryISO="ngModel"
+            aria-label="Select Country"
+            [(ngModel)]="vacancyForm.country.iso"
+        >
+            <option value="" disabled selected>-- Select Country --</option>
+            <option *ngFor="let country of countryList" 
+                [value]="country.iso" >
+                {{country.name}}
+            </option>
+        </select>
+        <div class="alert-danger" *ngIf="countryISO.errors && editForm.submitted">
+            <div *ngIf="countryISO.errors['required']">Please select the country that you going to provide organization.</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="organization">Organization <span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            [(ngModel)]="vacancyForm.organization.organizationId"   
+            name="organizationId"
+            #organizationId="ngModel"
+            aria-label="Select Organization"
+        >
+            <option value="" disabled selected>-- Select Organization --</option>
+            <option *ngFor="let organization of allOrganization" 
+                [value]="organization.organizationId" >
+                {{organization.name}}
+            </option>
+        </select>
+        <div class="alert-danger" *ngIf="organizationId.errors && editForm.submitted">
+            <div *ngIf="organizationId.errors['required']">Please select the country that you going to provide vacancy.</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="numberOfOpening">Number of Opening</label>
+        <input
+            type="number"
+            OnlyNumber="true"
+            class="form-control"
+            name="numberOfOpening"
+            [(ngModel)]="vacancyForm.numberOfOpening"
+            #numberOfOpening="ngModel"
+        />
+        <div class="alert-danger" *ngIf="numberOfOpening.errors && editForm.submitted">
+            <div *ngIf="numberOfOpening.errors['min']">Please enter a number without decimal</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="minSalary">Salary Range</label>
+        <div class="input-group">
+            <span class="input-group-text">RM</span>
+            <input
+                type="number"
+                class="form-control"
+                name="minSalary"
+                min = "0"
+                [(ngModel)]="vacancyForm.minSalary"
+            
+                #minSalary="ngModel"
+            />
+            <span class="input-group-text">&emsp;~&emsp;</span>
+            <span class="input-group-text">RM</span>
+            <input
+                type="number"
+                class="form-control"
+                min = "0"
+                name="maxSalary"
+                [(ngModel)]="vacancyForm.maxSalary" 
+                #maxSalary="ngModel"
+            />
+        </div>
+        <div class="alert-danger" *ngIf="(minSalary.errors || maxSalary.errors || maxSalary.value < minSalary.value)&& editForm.submitted">
+            <div *ngIf="minSalary.errors?.['min'] || maxSalary.errors?.['min']">Please enter a possitive number</div>
+            <div *ngIf="maxSalary.value < minSalary.value">Please enter a possitive number greater than minimun salary</div>
         </div>
     </div>
 
@@ -26,20 +158,52 @@
         <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
         <select 
             class="form-select" 
-            [(ngModel)]="vacancyFrom.objectState"
+            [(ngModel)]="vacancyForm.objectState" 
             required
             name="objectState"
             #objectState="ngModel"
             aria-label="Select Object State"
         >
-            <option value="CREATED" Select>Created</option>
+            <option value="" disabled selected>-- Select Object State --</option>
+            <option value="CREATED">Created</option>
             <option value="TERMINATED">Terminated</option>
             <option value="ACTIVE">Active</option>
             <option value="PENDING">Pending</option>
             <option value="DRAFT">Draft</option>
-            <option value="FROZON">Frozen</option>
+            <option value="FROZEN">Frozen</option>
         </select>
+        <div class="alert-danger" *ngIf="objectState.errors && editForm.submitted">
+            <div *ngIf="objectState.errors['required']">Please select ObjectState.</div>
+        </div>
     </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="remarks">Remarks</label>
+        <textarea 
+            class="form-control mt-0" 
+            rows="3"
+            name="remarks"
+            [(ngModel)]="vacancyForm.remarks" 
+            #remarks="ngModel"
+        >
+        </textarea>
+    </div>
+
+    <div class="form-group mb-4 mt-4">
+        <div class="form-check">
+            <input 
+                type="checkbox"
+                class="form-check-input"
+                name="enableQuiz"            
+                [(ngModel)]="vacancyForm.enableQuiz" 
+                #enableQuiz="ngModel"
+            />
+            <label class="form-check-label" for="enableQuiz">
+                Enable related Programming Language Quiz when candidate applying.
+            </label>
+        </div>
+    </div>    
+
     <div class="form-group pt-3">
         <div class="d-grid gap-2">
             <button type="submit" class="btn btn-primary">

@@ -1,9 +1,9 @@
-import { Organization } from './organization-model';
-import { ObjectState, TagType } from "../_shared/enum/enum";
-import { Tag } from "./tag-model";
-import { Country } from './country-model';
+import { Organization } from './../organization-model';
+import { Country } from './../country-model';
+import { ObjectState } from "src/app/_shared/enum/enum";
+import { Tag } from "../tag-model";
 
-export interface Vacancy{
+export interface VacancyModifyRequest{
     vacancyId: number;
     name: string;
     description: string;
@@ -20,4 +20,6 @@ export interface Vacancy{
     createdDate: Date;
     modifiedBy: string;
     lastModifiedDate: Date;
+
+    tagString?: string[];
 }

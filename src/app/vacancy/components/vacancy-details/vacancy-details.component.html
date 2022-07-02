@@ -1,15 +1,139 @@
 
 <div><h1>Vacancy <b>Details</b></h1></div>
 
-<div class="form-group mb-3">
-    <label for="name">Vacancy Title</label>
+<div class="form-group mb-4">
+    <label class="form-label" for="name">Vacancy Title</label>
     <input
         type="text"
         class="form-control"
         name="name"
-        [(ngModel)]="vacancyFrom!.name"
+        #name="ngModel"
+        [(ngModel)]="vacancyForm.name"
         readonly
     />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="description">Vacancy Description</label>
+    <textarea 
+        class="form-control" 
+        rows="3"
+        name="description"
+        #description="ngModel"
+        [(ngModel)]="vacancyForm.description"
+        readonly
+    >
+    </textarea>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="tag">Tag</label>
+    <mat-chip-list>
+        <mat-chip *ngFor="let tag of vacancyForm.tags">
+            {{tag.name}}
+        </mat-chip>
+    </mat-chip-list>
+</div>
+
+
+<div class="form-group mb-4">
+    <label class="form-label" for="country">Country</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="vacancyForm.country.name"
+        readonly
+        name="countryISO"
+        #countryISO="ngModel"
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="organizationId">Organization</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="vacancyForm.organization.name"
+        readonly
+        name="organizationId"
+        #organizationId="ngModel"
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="numberOfOpening">Number of Opening</label>
+    <input
+        type="number"
+        OnlyNumber="true"
+        class="form-control"
+        name="numberOfOpening"
+        [(ngModel)]="vacancyForm.numberOfOpening"
+        readonly
+        #numberOfOpening="ngModel"
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="minSalary">Salary Range</label>
+    <div class="input-group">
+        <span class="input-group-text">RM</span>
+        <input
+            type="number"
+            class="form-control"
+            name="minSalary"
+            [(ngModel)]="vacancyForm.minSalary"
+            readonly
+            #minSalary="ngModel"
+        />
+        <span class="input-group-text">&emsp;~&emsp;</span>
+        <span class="input-group-text">RM</span>
+        <input
+            type="number"
+            class="form-control"
+            [(ngModel)]="vacancyForm.maxSalary"
+            readonly
+            name="maxSalary"
+            #maxSalary="ngModel"
+        />
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="objectState">Object State</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="vacancyForm.objectState"
+        readonly
+        name="objectState"
+        #objectState="ngModel"
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="remarks">Remarks</label>
+    <textarea 
+        class="form-control mt-0" 
+        rows="3"
+        name="remarks"
+        [(ngModel)]="vacancyForm.remarks"
+        readonly
+        #remarks="ngModel"
+    >
+    </textarea>
+</div>
+
+<div class="form-group mb-4 mt-4">
+    <div class="form-check">
+        <input 
+            type="checkbox"
+            class="form-check-input"
+            name="enableQuiz"
+            [(ngModel)]="vacancyForm.enableQuiz"
+            readonly
+            #enableQuiz="ngModel"
+        />
+        <label class="form-check-label" for="enableQuiz">
+            Enable related Programming Language Quiz when candidate applying.
+        </label>
+    </div>
 </div>
 
 <div class="form-group pt-3">

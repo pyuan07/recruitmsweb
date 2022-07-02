@@ -7,7 +7,7 @@
             type="text"
             class="form-control"
             name="name"
-            [(ngModel)]="organizationFrom!.name"
+            [(ngModel)]="organizationForm!.name"
             readonly
         />
     </div>
@@ -18,7 +18,7 @@
             class="form-control" 
             rows="3"
             name="description"
-            [(ngModel)]="organizationFrom!.description"
+            [(ngModel)]="organizationForm!.description"
             readonly
         >
         </textarea>
@@ -30,7 +30,7 @@
             type="text"
             class="form-control" 
             name="country"
-            [(ngModel)]="organizationFrom!.country.name"
+            [(ngModel)]="organizationForm!.country.name"
             readonly
         >
     </div>
@@ -41,7 +41,7 @@
             type="text"
             class="form-control"
             name="address"
-            [(ngModel)]="organizationFrom!.address"
+            [(ngModel)]="organizationForm!.address"
             readonly
         />
     </div>
@@ -57,7 +57,7 @@
                     type="email"
                     class="form-control"
                     name="email"
-                    [(ngModel)]="organizationFrom!.email"
+                    [(ngModel)]="organizationForm!.email"
                     readonly
                 />
             </div>
@@ -68,7 +68,7 @@
                     type="tel"
                     class="form-control"
                     name="phone"
-                    [(ngModel)]="organizationFrom!.phone"
+                    [(ngModel)]="organizationForm!.phone"
                     readonly
                 />
             </div>
@@ -79,7 +79,7 @@
                     type="url"
                     class="form-control"
                     name="website"
-                    [(ngModel)]="organizationFrom!.website"
+                    [(ngModel)]="organizationForm!.website"
                     readonly
                 />
             </div>
@@ -92,7 +92,7 @@
             class="form-control" 
             name="owner"
             readonly
-            [(ngModel)]="organizationFrom!.owner.fullName"
+            [(ngModel)]="organizationForm!.owner.fullName"
         />
     </div>
 
@@ -100,7 +100,7 @@
         <label for="objectState">Object State</label>
         <input 
             class="form-control" 
-            [(ngModel)]="organizationFrom!.objectState"
+            [(ngModel)]="organizationForm!.objectState"
             readonly
             name="objectState"
         />

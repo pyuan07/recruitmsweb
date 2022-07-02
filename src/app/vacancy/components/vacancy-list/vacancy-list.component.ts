@@ -17,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export class VacancyListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'description', 'category', 'objectState','actions'];
+  displayedColumns: string[] = ['name', 'description', 'organization', 'country', 'objectState', 'actions'];
   dataSource!: MatTableDataSource<Vacancy>;
   filterText: String = '';
   filterState: String = 'ALL';
@@ -87,7 +87,7 @@ export class VacancyListComponent implements OnInit {
     this.router.navigate(['/vacancy/create']);
   }
   
-  deleteVacancy(id: string, name: string){
+  deleteVacancy(id: number, name: string){
     Swal.fire({
       title: 'Do you want to terminate this vacancy?\n Title: ' + name,
       icon: 'question',
@@ -108,9 +108,9 @@ export class VacancyListComponent implements OnInit {
           error: (err: any) => {
             Swal.fire("Error", err.error.message, "error");
           }
-        })
+        });
       }
-    })
+    });
   }
 
 }

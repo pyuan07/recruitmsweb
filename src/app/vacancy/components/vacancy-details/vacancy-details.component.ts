@@ -12,16 +12,20 @@ import Swal from 'sweetalert2';
 })
 export class VacancyDetailsComponent implements OnInit {
 
-  vacancyFrom: Vacancy | undefined;
+  vacancyForm!: Vacancy;
 
   constructor(private _vacancyService: VacancyService, private route: ActivatedRoute ,private router: Router) {  
     
   }
    
     ngOnInit(): void {
-      this._vacancyService.getById(this.route.snapshot.params['id']).subscribe({
+      this.getVacancyDetails(this.route.snapshot.params['id']);
+    }
+
+    private getVacancyDetails(id: number){
+      this._vacancyService.getById(id).subscribe({
         next: data => {
-          this.vacancyFrom = data;
+          this.vacancyForm = data;
         },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
@@ -30,18 +34,18 @@ export class VacancyDetailsComponent implements OnInit {
     }
 
     gotoEditPage(){
-      this.router.navigate(['vacancy/edit', this.vacancyFrom!.vacancyId])
+      this.router.navigate(['vacancy/edit', this.vacancyForm!.vacancyId])
     }
 
     deleteVacancy(){
       Swal.fire({
-        title: 'Do you want to terminate this vacancy?\n Title: ' + this.vacancyFrom!.name,
+        title: 'Do you want to terminate this vacancy?\n Title: ' + this.vacancyForm!.name,
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Yes'
+        confirmButtonText: 'Yes',
       }).then((result) => {
         if (result.isConfirmed) {
-          this._vacancyService.delete(this.vacancyFrom!.vacancyId).subscribe({
+          this._vacancyService.delete(this.vacancyForm!.vacancyId).subscribe({
             next: data => {
               if(data){
                 Swal.fire("Terminated Successfully", "", "success");
