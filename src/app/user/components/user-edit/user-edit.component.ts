@@ -14,8 +14,10 @@ import { UserService } from 'src/app/services/user.service';
 export class UserEditComponent implements OnInit {
   userFrom!: User;
   today = new Date(); 
+  isAdmin = false;
 
   constructor(private _userService: UserService, private tokenService:TokenStorageService, private route: ActivatedRoute ,private router: Router) {  
+    this.isAdmin = this.tokenService.isAdmin();
     
   }
    

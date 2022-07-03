@@ -1,26 +1,25 @@
-import { OrganizationService } from './../../../services/organization.service';
-import { Organization } from './../../../models/organization-model';
-import { CountryService } from './../../../services/country.service';
-import { Country } from './../../../models/country-model';
-import { TagService } from './../../../services/tag.service';
+import { OrganizationService } from '../../../services/organization.service';
+import { Organization } from '../../../models/organization-model';
+import { CountryService } from '../../../services/country.service';
+import { Country } from '../../../models/country-model';
+import { TagService } from '../../../services/tag.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormControl, NgForm } from '@angular/forms';
-import { VacancyService } from 'src/app/services/vacancy.service';
+import { ResumeService } from 'src/app/services/resume.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 @Component({
-  selector: 'app-vacancy-create',
-  templateUrl: './vacancy-create.component.html',
-  styleUrls: ['./vacancy-create.component.css']
+  selector: 'app-resume-create',
+  templateUrl: './resume-create.component.html',
+  styleUrls: ['./resume-create.component.css']
 })
-export class VacancyCreateComponent implements OnInit {
+export class ResumeCreateComponent implements OnInit {
   
   separatorKeysCodes: number[] = [ENTER, COMMA];
   filteredTags!: Observable<string[]>;
@@ -31,27 +30,18 @@ export class VacancyCreateComponent implements OnInit {
   countryList!: Country[];
   allOrganization!: Organization[];
 
-  isAdmin: boolean = false;
-  isEmployer: boolean = false;
-  isCandidate: boolean = false;
-
-
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
-  constructor(  private _vacancyService: VacancyService, 
+  constructor(  private _resumeService: ResumeService, 
                 private _tagService: TagService, 
                 private _countryService: CountryService,
                 private _organizationService: OrganizationService,
-                private _tokenStorageService: TokenStorageService,
                 private router: Router
               ) {  
     
   }
 
   ngOnInit(): void {
-    this.isAdmin = this._tokenStorageService.isAdmin();
-    this.isEmployer = this._tokenStorageService.isEmployer();
-
     this.getActiveTags();
     this.getAllCountries();
     this.getAllOrganization();
@@ -72,12 +62,7 @@ export class VacancyCreateComponent implements OnInit {
   private getAllOrganization(){
     this._organizationService.getByObjState("ACTIVE").subscribe({
       next: data => {
-        if(this._tokenStorageService.isAdmin()) {
-          this.allOrganization = data;
-        }
-        else{
-          this.allOrganization = data.filter(x=>x.owner.userId == this._tokenStorageService.getUser()!.userId);
-        }
+        this.allOrganization = data;
       },
       error: (err: any) => {
         Swal.fire("Error", err.error.message, "error");
@@ -109,14 +94,14 @@ export class VacancyCreateComponent implements OnInit {
   onSubmit(createForm: NgForm): void {
     createForm.value.tags = this.selectedTags;
 
-    this._vacancyService.create(createForm.value).subscribe({
+    this._resumeService.create(createForm.value).subscribe({
       next: data => {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: 'Vacancy Created Successfully!'
+          title: 'Resume Created Successfully!'
         });
-        this.router.navigate(['vacancy']);
+        this.router.navigate(['resume']);
       },
       error: err => {
         Swal.fire("Error", err.error.message, "error");

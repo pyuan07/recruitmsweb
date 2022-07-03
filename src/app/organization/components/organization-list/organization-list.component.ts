@@ -1,3 +1,5 @@
+import { ObjectState } from 'src/app/_shared/enum/enum';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {OnInit , Component, ViewChild, Input} from '@angular/core';
 import { Router } from "@angular/router";
 import { Organization } from "src/app/models/organization-model";
@@ -7,6 +9,8 @@ import Swal from "sweetalert2";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { User } from 'src/app/models/user-model';
+import { X } from '@angular/cdk/keycodes';
 
 
 @Component({
@@ -21,30 +25,51 @@ export class OrganizationListComponent implements OnInit {
   dataSource!: MatTableDataSource<Organization>;
   filterText: String = '';
   filterState: String = 'ALL';
+  organizationList!: Organization[];
+  currentUser!: User;
+  ownCompany?: Organization;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _organizationService: OrganizationService, private router: Router) {  
+  constructor(private _organizationService: OrganizationService, private _tokenStorageService: TokenStorageService, private router: Router) {  
     
   }
 
   ngOnInit(): void {
+    this.currentUser = this._tokenStorageService.getUser()!;
     this.getAllOrganization();
   }
 
   private getAllOrganization(){
     this._organizationService.getAll().subscribe({
       next: data => {
+        this.ownCompany = data.find(organization => organization.owner.userId == this.currentUser.userId);
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        
+        this.checkUser();
       },
       error: (err: any) => {
         Swal.fire("Error", err.error.message, "error");
       }
     });
+  }
+
+  private checkUser(){
+    if(! this._tokenStorageService.isAdmin()){
+      if(this._tokenStorageService.isEmployer()){
+        if(this.ownCompany != null){
+          this.router.navigate(['/organization/details/' + this.ownCompany.organizationId]);
+        }
+        else{
+          this.goToCreateOrganization();
+        }
+      }
+      else{
+        this.router.navigate(['home']);
+      }
+    }
   }
   
   applyFilter() {

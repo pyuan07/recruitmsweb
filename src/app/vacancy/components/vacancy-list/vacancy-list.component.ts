@@ -1,3 +1,4 @@
+import { ObjectState } from 'src/app/_shared/enum/enum';
 import {OnInit , Component, ViewChild, Input} from '@angular/core';
 import { Router } from "@angular/router";
 import { Vacancy } from "src/app/models/vacancy-model";
@@ -7,6 +8,7 @@ import Swal from "sweetalert2";
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class VacancyListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _vacancyService: VacancyService, private router: Router) {  
+  constructor(private _vacancyService: VacancyService, private _tokenStorageService: TokenStorageService,private router: Router) {  
     
   }
 
@@ -36,7 +38,18 @@ export class VacancyListComponent implements OnInit {
   private getAllVacancy(){
     this._vacancyService.getAll().subscribe({
       next: data => {
-        this.dataSource = new MatTableDataSource(data);
+        if(this._tokenStorageService.isAdmin())
+        {
+          this.dataSource = new MatTableDataSource(data);
+        }
+        else if(this._tokenStorageService.isEmployer())
+        {
+          this.dataSource = new MatTableDataSource(data.filter(data => data.organization.owner.userId == this._tokenStorageService.getUser()!.userId));
+        }
+        else
+        {
+          this.dataSource = new MatTableDataSource(data.filter(data => data.objectState == ObjectState.ACTIVE));
+        }
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         

@@ -18,6 +18,7 @@ import { OrganizationListComponent } from './organization/components/organizatio
 import { OrganizationCreateComponent } from './organization/components/organization-create/organization-create.component';
 import { OrganizationEditComponent } from './organization/components/organization-edit/organization-edit.component';
 import { OrganizationDetailsComponent } from './organization/components/organization-details/organization-details.component';
+import { ResumeCreateComponent } from './resume/components/resume-create/resume-create.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,17 +32,22 @@ const routes: Routes = [
   { path: 'user/edit/:id', component: UserEditComponent },
   { path: 'user/details/:id', component: UserDetailsComponent },
 
-  //Vacancy Routing
-  { path: 'vacancy', component: VacancyListComponent },
-  { path: 'vacancy/create', component: VacancyCreateComponent },
-  { path: 'vacancy/edit/:id', component: VacancyEditComponent },
-  { path: 'vacancy/details/:id', component: VacancyDetailsComponent },
-
   //Organization Routing
   { path: 'organization', component: OrganizationListComponent },
   { path: 'organization/create', component: OrganizationCreateComponent },
   { path: 'organization/edit/:id', component: OrganizationEditComponent },
   { path: 'organization/details/:id', component: OrganizationDetailsComponent },
+
+   //Vacancy Routing
+   { path: 'vacancy', component: VacancyListComponent },
+   { path: 'vacancy/create', component: VacancyCreateComponent },
+   { path: 'vacancy/edit/:id', component: VacancyEditComponent },
+   { path: 'vacancy/details/:id', component: VacancyDetailsComponent },
+
+   //Resume Routing
+   { path: 'resume/create', component: ResumeCreateComponent },
+   //{ path: 'resume/edit/:id', component: ResumeEditComponent },
+   //{ path: 'resume/details/:id', component: ResumeDetailsComponent },
 
 
   { path: 'test', component: TestComponent },

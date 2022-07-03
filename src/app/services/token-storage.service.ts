@@ -1,3 +1,4 @@
+import { Role } from 'src/app/_shared/enum/enum';
 
 import { Injectable } from '@angular/core';
 import { User } from '../models/user-model';
@@ -37,5 +38,21 @@ export class TokenStorageService {
     else{
       return null;
     }
+  }
+
+  public isAdmin(): boolean {
+    return this.getUser()?.roles == Role.ADMIN;
+  }
+
+  // public isStaff(): boolean {
+  //   return this.getUser()?.roles == Role.STAFF;
+  // }
+
+  public isCandidate(): boolean {
+    return this.getUser()?.roles == Role.CANDIDATE;
+  }
+
+  public isEmployer(): boolean {
+    return this.getUser()?.roles == Role.EMPLOYER;
   }
 }

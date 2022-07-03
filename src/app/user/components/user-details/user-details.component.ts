@@ -1,3 +1,4 @@
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,9 +14,10 @@ import Swal from 'sweetalert2';
 export class UserDetailsComponent implements OnInit {
 
   userFrom!: User;
+  isAdmin: boolean = false;
 
-  constructor(private _userService: UserService, private route: ActivatedRoute ,private router: Router) {  
-    
+  constructor(private _userService: UserService, private _tokenStorageService: TokenStorageService,private route: ActivatedRoute ,private router: Router) {  
+    this.isAdmin = this._tokenStorageService.isAdmin();
   }
    
     ngOnInit(): void {

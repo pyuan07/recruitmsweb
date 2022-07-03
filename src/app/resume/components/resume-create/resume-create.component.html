@@ -1,40 +1,40 @@
 
-<div><h1>Vacancy <b>Create</b></h1></div>
+<div><h1>Resume <b>Create</b></h1></div>
 
 <form
-    name="vacancyForm"
+    name="resumeForm"
     (ngSubmit)="createForm.form.valid && selectedTags.length > 0 && onSubmit(createForm)"
     #createForm="ngForm"
     novalidate
 >
     <div class="form-group mb-4">
-        <label class="form-label" for="name">Vacancy Title <span class="required-symbol"></span></label>
+        <label class="form-label" for="profilePicture">Profile Picture <span class="required-symbol"></span></label>
         <input
             type="text"
             class="form-control"
-            name="name"
+            name="profilePicture"
             ngModel
             required
-            #name="ngModel"
+            #profilePicture="ngModel"
         />
-        <div class="alert-danger" *ngIf="name.errors && createForm.submitted">
-            <div *ngIf="name.errors['required']">Vacancy Title is required</div>
+        <div class="alert-danger" *ngIf="profilePicture.errors && createForm.submitted">
+            <div *ngIf="profilePicture.errors['required']">Profile Picture is required</div>
         </div>
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="description">Vacancy Description <span class="required-symbol"></span></label>
+        <label class="form-label" for="skills">IT Related Skill<span class="required-symbol"></span></label>
         <textarea 
             class="form-control" 
             rows="3"
-            name="description"
+            name="skills"
             ngModel
             required
-            #description="ngModel"
+            #skills="ngModel"
         >
         </textarea>
-        <div class="alert-danger" *ngIf="description.errors && createForm.submitted">
-            <div *ngIf="description.errors['required']">Vacancy Description is required</div>
+        <div class="alert-danger" *ngIf="skills.errors && createForm.submitted">
+            <div *ngIf="skills.errors['required']">At least one IT Related Skill is required</div>
         </div>
     </div>
 
@@ -62,7 +62,7 @@
         <div class="alert-danger" *ngIf="createForm.submitted && selectedTags.length < 1">
             <div>At least one tag is required</div>
         </div>
-        <mat-hint> Can include Category, Required Skill, Type of Vacancy, Experience, and so on... </mat-hint>
+        <mat-hint> Can include Category, Required Skill, Type of Resume, Experience, and so on... </mat-hint>
     </div>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
@@ -87,76 +87,82 @@
             </option>
         </select>
         <div class="alert-danger" *ngIf="countryISO.errors && createForm.submitted">
-            <div *ngIf="countryISO.errors['required']">Please select the country that you going to provide vacancy.</div>
-        </div>
-    </div>
-
-    <div class="form-group mb-4">
-        <label class="form-label" for="organizationId">Organization <span class="required-symbol"></span></label>
-        <select 
-            class="form-select" 
-            ngModel
-            required
-            name="organizationId"
-            #organizationId="ngModel"
-            aria-label="Select Organization"
-            
-        >
-            <option value="" disabled selected>-- Select Organization --</option>
-            <option *ngFor="let organization of allOrganization" 
-                [value]="organization.organizationId" >
-                {{organization.name}}
-            </option>
-        </select>
-        <div class="alert-danger" *ngIf="organizationId.errors && createForm.submitted">
-            <div *ngIf="organizationId.errors['required']">Please select the country that you going to provide vacancy.</div>
+            <div *ngIf="countryISO.errors['required']">Please select the country that you going to provide resume.</div>
         </div>
     </div>
     
     <div class="form-group mb-4">
-        <label class="form-label" for="numberOfOpening">Number of Opening</label>
+        <label class="form-label" for="totalExperienceYear">Total Experience Year</label>
         <input
             type="number"
             OnlyNumber="true"
             class="form-control"
-            name="numberOfOpening"
+            name="totalExperienceYear"
             ngModel
-            #numberOfOpening="ngModel"
+            #totalExperienceYear="ngModel"
         />
-        <div class="alert-danger" *ngIf="numberOfOpening.errors && createForm.submitted">
-            <div *ngIf="numberOfOpening.errors['min']">Please enter a number without decimal</div>
+        <div class="alert-danger" *ngIf="totalExperienceYear.errors && createForm.submitted">
+            <div *ngIf="totalExperienceYear.errors['min']">Please enter a positive number without decimal</div>
         </div>
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="minSalary">Salary Range</label>
-        <div class="input-group">
-            <span class="input-group-text">RM</span>
-            <input
-                type="number"
-                class="form-control"
-                name="minSalary"
-                min = "0"
-                ngModel
-                #minSalary="ngModel"
-            />
-            <span class="input-group-text">&emsp;~&emsp;</span>
-            <span class="input-group-text">RM</span>
-            <input
-                type="number"
-                class="form-control"
-                min = "0"
-                name="maxSalary"
-                ngModel
-                #maxSalary="ngModel"
-            />
-        </div>
-        <div class="alert-danger" *ngIf="(minSalary.errors || maxSalary.errors || maxSalary.value < minSalary.value)&& createForm.submitted">
-            <div *ngIf="minSalary.errors?.['min'] || maxSalary.errors?.['min']">Please enter a possitive number</div>
-            <div *ngIf="maxSalary.value < minSalary.value">Please enter a possitive number greater than minimun salary</div>
+        <label class="form-label" for="salaryExpectation">Salary Expectation</label>
+        <input
+            type="number"
+            min = "0"
+            class="form-control"
+            name="salaryExpectation"
+            ngModel
+            #salaryExpectation="ngModel"
+        />
+        <div class="alert-danger" *ngIf="salaryExpectation.errors && createForm.submitted">
+            <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
         </div>
     </div>
 
+    <div class="form-group mb-4">
+        <label class="form-label" for="salaryExpectation">Salary Expectation</label>
+        <input
+            type="number"
+            min = "0"
+            class="form-control"
+            name="salaryExpectation"
+            ngModel
+            #salaryExpectation="ngModel"
+        />
+        <div class="alert-danger" *ngIf="salaryExpectation.errors && createForm.submitted">
+            <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="resumePdf" class="form-label">Resume PDF <span class="required-symbol"></span></label>
+        <input
+            type="file"
+            required
+            class="form-control"
+            name="resumePdf"
+            ngModel
+            #resumePdf="ngModel"
+        />
+        <div class="alert-danger" *ngIf="resumePdf.errors && createForm.submitted">
+            <div *ngIf="resumePdf.errors['required']">Please upload your resume here</div>
+        </div>
+      </div>
+
+    <div class="form-group mb-4">
+        <label class="form-label" for="remarks">Remarks</label>
+        <textarea 
+            class="form-control mt-0" 
+            rows="3"
+            name="remarks"
+            ngModel
+            #remarks="ngModel"
+        >
+        </textarea>
+    </div>
+    
     <div class="form-group mb-4">
         <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
         <select 
@@ -179,33 +185,6 @@
             <div *ngIf="objectState.errors['required']">Please select ObjectState.</div>
         </div>
     </div>
-
-    <div class="form-group mb-4">
-        <label class="form-label" for="remarks">Remarks</label>
-        <textarea 
-            class="form-control mt-0" 
-            rows="3"
-            name="remarks"
-            ngModel
-            #remarks="ngModel"
-        >
-        </textarea>
-    </div>
-
-    <div class="form-group mb-4 mt-4">
-        <div class="form-check">
-            <input 
-                type="checkbox"
-                class="form-check-input"
-                name="enableQuiz"
-                ngModel
-                #enableQuiz="ngModel"
-            />
-            <label class="form-check-label" for="enableQuiz">
-                Enable related Programming Language Quiz when candidate applying.
-            </label>
-        </div>
-    </div>   
 
     <div class="form-group pt-3">
         <div class="d-grid gap-2">

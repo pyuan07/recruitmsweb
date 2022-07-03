@@ -1,12 +1,8 @@
-import { TestComponent } from './../user/components/test/test.component';
-import { VacancyCreateComponent } from './components/vacancy-create/vacancy-create.component';
+import { ResumeCreateComponent } from './components/resume-create/resume-create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { VacancyListComponent } from './components/vacancy-list/vacancy-list.component';
 import { RouterModule } from '@angular/router';
-import { VacancyDetailsComponent } from './components/vacancy-details/vacancy-details.component';
-import { VacancyEditComponent } from './components/vacancy-edit/vacancy-edit.component';
 
 // Angular/Material
 import { MatInputModule } from '@angular/material/input';
@@ -25,11 +21,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
-    VacancyListComponent,
-    VacancyCreateComponent,
-    VacancyEditComponent,
-    VacancyDetailsComponent,
-    TestComponent
+    ResumeCreateComponent
   ],
   imports: [
     CommonModule,
@@ -54,4 +46,4 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
   ]
 })
-export class VacancyModule { }
+export class ResumeModule { }

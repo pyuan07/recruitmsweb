@@ -1,3 +1,4 @@
+import { ResumeModule } from './resume/resume.module';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -15,6 +16,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { UserModule } from './user/user.module';
 import { OrganizationModule } from './organization/organization.module';
 import { VacancyModule } from './vacancy/vacancy.module';
+import { OnlyNumber } from './_shared/directive/onlynumber.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { VacancyModule } from './vacancy/vacancy.module';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    OnlyNumber,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { VacancyModule } from './vacancy/vacancy.module';
 
     UserModule,
     VacancyModule,
+    ResumeModule,
     OrganizationModule
   ],
   providers: [authInterceptorProviders],

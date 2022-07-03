@@ -25,7 +25,8 @@ export class OrganizationService {
     return this.http.get<Organization>(ORGANIZATION_API + '/id/'+ id);
   }
 
-  create(organizationRequest: Organization): Observable<Organization> {
+  create(organizationRequest: OrganizationCreateRequest): Observable<Organization> {
+    console.log(organizationRequest);
     return this.http.post<Organization>(ORGANIZATION_API , organizationRequest);
   }
 

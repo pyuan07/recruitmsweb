@@ -1,12 +1,18 @@
 import { ObjectState } from "../_shared/enum/enum";
 import { Tag } from "./tag-model";
 import { Image } from "./image-model";
+import { Country } from "./country-model";
 
 export interface Resume{
     resumeId: string;
     profilePicture: Image;
-    tag: Set<Tag>;
-    
+    tags: Tag[];
+    country: Country;
+    totalExperienceYear: number;
+    salaryExpectation:number;
+    remarks: string;
+    resumePdf:File;
+
     objectState: ObjectState;
     createdBy: string;
     createdDate: Date;
