@@ -1,21 +1,20 @@
 import { ObjectState } from "src/app/_shared/enum/enum";
-import { Country } from "../country-model";
-import { Image } from "../image-model";
 
 export interface ResumeCreateRequest{
-    profilePicture: Image;
+    profilePicture: string;
+    owner: string;
     tags: string[];
-    skills :ProgrammingLanguageSkill[];
-    countryIso: string;
+    //skills :ProgrammingLanguageSkill[];
+    countryISO: string;
     totalExperienceYear: number;
     salaryExpectation:number;
     remarks: string;
-    resumePdf:File;
+    resumePdf:string;
 
     objectState: ObjectState;
 }
 
-export interface ProgrammingLanguageSkill {
-    programmingLanguageId:number;
-    experienceYear:number;
-}
+// export interface ProgrammingLanguageSkill {
+//     programmingLanguageId:number;
+//     experienceYear:number;
+// }

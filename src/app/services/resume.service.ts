@@ -1,3 +1,4 @@
+import { UploadResponse } from './../models/response/upload-response';
 import { ObjectState } from 'src/app/_shared/enum/enum';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -36,5 +37,13 @@ export class ResumeService {
 
   delete(id: string): Observable<boolean>{
     return this.http.delete<boolean>(RESUME_API + '/' + id);
+  }
+
+  uploadResume(formData: FormData): Observable<UploadResponse> {
+    return this.http.post<UploadResponse>(RESUME_API+ '/upload/pdf', formData);
+  }
+
+  uploadProfilePic(formData: FormData): Observable<UploadResponse> {
+    return this.http.post<UploadResponse>(RESUME_API+ '/upload/image', formData);
   }
 }

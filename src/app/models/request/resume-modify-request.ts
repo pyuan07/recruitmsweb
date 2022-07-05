@@ -1,13 +1,12 @@
 import { ObjectState } from "src/app/_shared/enum/enum";
 import { Country } from "../country-model";
-import { Image } from "../image-model";
 import { Tag } from "../tag-model";
-import { ProgrammingLanguageSkill } from "./resume-create-request";
 
 export interface ResumeModifyRequest{
-    profilePicture: Image;
+    profilePicture: File;
+    userId: string;
     tags: string[];
-    skills: ProgrammingLanguageSkill[];
+    // skills: ProgrammingLanguageSkill[];
     country: Country;
     totalExperienceYear: number;
     salaryExpectation:number;

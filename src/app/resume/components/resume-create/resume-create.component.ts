@@ -1,3 +1,4 @@
+import { ObjectState } from './../../../_shared/enum/enum';
 import { OrganizationService } from '../../../services/organization.service';
 import { Organization } from '../../../models/organization-model';
 import { CountryService } from '../../../services/country.service';
@@ -13,6 +14,9 @@ import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { User } from 'src/app/models/user-model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-resume-create',
@@ -26,27 +30,56 @@ export class ResumeCreateComponent implements OnInit {
   allTags!: string[];
   selectedTags: string[] = [];
   tagCtrl = new FormControl('');
+  imageUrl?: string | ArrayBuffer | null;
+  pdfFile?: File;
 
+  candidateList!: User[];
   countryList!: Country[];
   allOrganization!: Organization[];
+
+  currentUser!: User;
+  isAdmin: boolean = false;
+  isEmployer: boolean = false;
+  isCandidate: boolean = false;
+
+  picName: string = '';
+  pdfName: string = '';
+
 
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
   constructor(  private _resumeService: ResumeService, 
+                private _userService: UserService, 
                 private _tagService: TagService, 
                 private _countryService: CountryService,
                 private _organizationService: OrganizationService,
+                private tokenService:TokenStorageService, 
                 private router: Router
               ) {  
-    
+    this.currentUser = this.tokenService.getUser()!;
+    this.isAdmin = this.tokenService.isAdmin();
+    this.isEmployer = this.tokenService.isEmployer();
+    this.isCandidate = this.tokenService.isCandidate();
   }
+
 
   ngOnInit(): void {
     this.getActiveTags();
     this.getAllCountries();
     this.getAllOrganization();
+    this.getAllCandidate();
   }
 
+  private getAllCandidate(){
+    this._userService.getByRole("CANDIDATE").subscribe({
+      next: data => {
+        this.candidateList = data;
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.error.message, "error");
+      }
+    });
+  }
 
   private getAllCountries(){
     this._countryService.getAll().subscribe({
@@ -92,7 +125,23 @@ export class ResumeCreateComponent implements OnInit {
   }
 
   onSubmit(createForm: NgForm): void {
+    if(this.picName == ''){
+      Swal.fire("Error", "Please upload your profile picture before proceed", "error");
+      return;
+    }
+    if(this.picName == ''){
+      Swal.fire("Error", "Please upload your resume in PDF format before proceed", "error");
+      return;
+    }
+
     createForm.value.tags = this.selectedTags;
+    createForm.value.profilePicture = this.picName;
+    createForm.value.resumePdf = this.pdfName;
+
+    if(this.isCandidate){
+      createForm.value.owner = this.currentUser.userId;
+      createForm.value.objectState = ObjectState.ACTIVE;
+    }
 
     this._resumeService.create(createForm.value).subscribe({
       next: data => {
@@ -141,5 +190,44 @@ export class ResumeCreateComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue) && !this.selectedTags.includes(tag));
+  }
+
+  onUploadProfilePicture(event: any){
+    const file = event.target.files[0];
+    if (file == null)
+        return;
+    const reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => { 
+        this.imageUrl = reader.result!; 
+    }
+
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', file, file.name);
+    this._resumeService.uploadProfilePic(uploadImageData).subscribe({
+      next: data => {
+        this.picName = data.filename;
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.message, "error");
+      }
+    });
+  }
+
+  onUploadPdf(event: any) {
+    const file = event.target.files[0];
+    if (file == null)
+        return;
+
+    const uploadResumeData = new FormData();
+    uploadResumeData.append('file', file, file.name);
+    this._resumeService.uploadResume(uploadResumeData).subscribe({
+      next: data => {
+        this.pdfName = data.filename;
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.message, "error");
+      }
+    });
   }
 }

@@ -8,21 +8,33 @@
     novalidate
 >
     <div class="form-group mb-4">
-        <label class="form-label" for="profilePicture">Profile Picture <span class="required-symbol"></span></label>
+        <label class="form-label" for="profilePicture">Profile Picture <span class="required-symbol"></span></label><br>
+        <img height="350" width="250" src={{imageUrl}}>
         <input
-            type="text"
+            type="file"
+            accept="image/*"
             class="form-control"
-            name="profilePicture"
-            ngModel
             required
-            #profilePicture="ngModel"
+            (change)="onUploadProfilePicture($event)"
         />
-        <div class="alert-danger" *ngIf="profilePicture.errors && createForm.submitted">
+        <!-- <div class="alert-danger" *ngIf="profilePicture.errors && createForm.submitted">
             <div *ngIf="profilePicture.errors['required']">Profile Picture is required</div>
-        </div>
+        </div> -->
+    </div>
+    
+    <div class="form-group mb-5">
+        <label for="resumePdf" class="form-label">Resume PDF <span class="required-symbol"></span></label>
+
+        <input
+            type="file"
+            accept="application/pdf"
+            required
+            class="form-control"
+            (change)="onUploadPdf($event)"
+        />
     </div>
 
-    <div class="form-group mb-4">
+    <!-- <div class="form-group mb-4">
         <label class="form-label" for="skills">IT Related Skill<span class="required-symbol"></span></label>
         <textarea 
             class="form-control" 
@@ -36,6 +48,37 @@
         <div class="alert-danger" *ngIf="skills.errors && createForm.submitted">
             <div *ngIf="skills.errors['required']">At least one IT Related Skill is required</div>
         </div>
+    </div> -->
+
+    <div class="form-group mb-4" *ngIf="isAdmin">
+        <label class="form-label" for="owner">Candidate/Owner <span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            ngModel
+            required
+            name="owner"
+            #owner="ngModel"
+            aria-label="Select Candidate/Owner"
+        >
+            <option value="" disabled selected>-- Select Candidate/Owner --</option>
+            <option *ngFor="let candidate of candidateList" 
+                [value]="candidate.userId" >
+                {{candidate.username}}
+            </option>
+        </select>
+        <div class="alert-danger" *ngIf="owner.errors && createForm.submitted">
+            <div *ngIf="owner.errors['required']">Please select the Employer/Owner of the organization.</div>
+        </div>
+    </div>
+
+    <div class="form-group mb-4" *ngIf="isCandidate">
+        <label class="form-label" for="owner">Candidate/Owner <span class="required-symbol"></span></label>
+        <input
+            type="text"
+            class="form-control"
+            value = "{{currentUser.fullName}}"
+            readonly
+        />
     </div>
 
     <div class="form-group mb-4">
@@ -62,7 +105,7 @@
         <div class="alert-danger" *ngIf="createForm.submitted && selectedTags.length < 1">
             <div>At least one tag is required</div>
         </div>
-        <mat-hint> Can include Category, Required Skill, Type of Resume, Experience, and so on... </mat-hint>
+        <mat-hint> Can include the Hard Skills or Soft Skills, such as Programming Skill, Experience, and so on... </mat-hint>
     </div>
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
@@ -92,7 +135,7 @@
     </div>
     
     <div class="form-group mb-4">
-        <label class="form-label" for="totalExperienceYear">Total Experience Year</label>
+        <label class="form-label" for="totalExperienceYear">Total Experience Year in the IT field</label>
         <input
             type="number"
             OnlyNumber="true"
@@ -107,7 +150,7 @@
     </div>
 
     <div class="form-group mb-4">
-        <label class="form-label" for="salaryExpectation">Salary Expectation</label>
+        <label class="form-label" for="salaryExpectation">Expected Salary</label>
         <input
             type="number"
             min = "0"
@@ -120,36 +163,6 @@
             <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
         </div>
     </div>
-
-    <div class="form-group mb-4">
-        <label class="form-label" for="salaryExpectation">Salary Expectation</label>
-        <input
-            type="number"
-            min = "0"
-            class="form-control"
-            name="salaryExpectation"
-            ngModel
-            #salaryExpectation="ngModel"
-        />
-        <div class="alert-danger" *ngIf="salaryExpectation.errors && createForm.submitted">
-            <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <label for="resumePdf" class="form-label">Resume PDF <span class="required-symbol"></span></label>
-        <input
-            type="file"
-            required
-            class="form-control"
-            name="resumePdf"
-            ngModel
-            #resumePdf="ngModel"
-        />
-        <div class="alert-danger" *ngIf="resumePdf.errors && createForm.submitted">
-            <div *ngIf="resumePdf.errors['required']">Please upload your resume here</div>
-        </div>
-      </div>
 
     <div class="form-group mb-4">
         <label class="form-label" for="remarks">Remarks</label>
@@ -163,7 +176,7 @@
         </textarea>
     </div>
     
-    <div class="form-group mb-4">
+    <div class="form-group mb-4" *ngIf="isAdmin">
         <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
         <select 
             class="form-select" 

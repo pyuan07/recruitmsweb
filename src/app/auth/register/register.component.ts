@@ -1,4 +1,4 @@
-import { Role } from 'src/app/_shared/enum/enum';
+import { Gender, Role } from 'src/app/_shared/enum/enum';
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { SignupRequest } from '../../models/request/singup-request';
@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
     username: '',
     email: '',
     password: '',
+    fullName: '',
+    gender: Gender.MALE,
     role: Role.CANDIDATE
   };
   isSuccessful = false;

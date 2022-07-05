@@ -5,6 +5,7 @@
       src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
       class="profile-img-card"
     />
+    <h2 align="center"> Registration </h2>
     <form
       *ngIf="!isSuccessful"
       name="form"
@@ -34,6 +35,22 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="fullName"
+          [(ngModel)]="form.fullName"
+          required
+          #fullName="ngModel"
+        />
+        <div class="alert-danger" *ngIf="username.errors && f.submitted">
+          <div *ngIf="username.errors['required']">Full Name is required</div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -52,6 +69,7 @@
           </div>
         </div>
       </div>
+
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -70,6 +88,24 @@
           </div>
         </div>
       </div>
+
+      <div class="form-group mb-4">
+        <label class="form-label" for="gender">Gender</label>
+        <select 
+            class="form-select" 
+            [(ngModel)]="form.gender"
+            required
+            name="gender"
+            #gender="ngModel"
+            aria-label="Select Gender"
+        >
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+        </select>
+        <div class="alert-danger" *ngIf="gender.errors && f.submitted">
+            <div *ngIf="gender.errors['required']">Please select your gender.</div>
+        </div>
+    </div>
 
       <div class="form-group">
         <label>
@@ -93,6 +129,7 @@
             <b>Employer</b> who want to recruit talent
         </label>
       </div>
+
 
       
       <div class="form-group pt-3">
