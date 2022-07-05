@@ -1,0 +1,202 @@
+<div><h1>Resume <b>Edit</b></h1></div>
+
+<form
+    name="resumeFrom"
+    (ngSubmit)="editForm.form.valid && selectedTags.length > 0 && onSubmit()"
+    #editForm="ngForm"
+    novalidate
+>
+<div class="form-group mb-4">
+    <label class="form-label" for="profilePicture">Profile Picture <span class="required-symbol"></span></label><br>
+    <img height="350" width="250" src={{imageUrl}}>
+    <input
+        type="file"
+        accept="image/*"
+        class="form-control"
+        title="Click me to upload image"
+        (change)="onUploadProfilePicture($event)"
+        value="{{picName}}"
+    />
+    <!-- <div class="alert-danger" *ngIf="profilePicture.errors && editForm.submitted">
+        <div *ngIf="profilePicture.errors['required']">Profile Picture is required</div>
+    </div> -->
+</div>
+
+<div class="form-group mb-5">
+    <label for="resumePdf" class="form-label">Resume PDF <span class="required-symbol"></span></label>
+
+    <input
+        type="file"
+        accept="application/pdf"
+        title="Click me to upload resume in pdf"
+        class="form-control"
+        (change)="onUploadPdf($event)"
+    />
+
+    <div class="d-grid">
+        <a class="btn btn-primary" href="{{pdfUrl}}"> <i class="bi bi-download"></i> Download Latest Version </a>
+    </div>
+</div>
+
+<div class="form-group mb-4" *ngIf="isAdmin">
+    <label class="form-label" for="candidate">Candidate/Owner <span class="required-symbol"></span></label>
+    <select 
+        class="form-select" 
+        [(ngModel)]="resumeForm.candidate.userId"
+        required
+        name="candidate"
+        #candidate = "ngModel"
+        aria-label="Select Candidate/Owner"
+    >
+        <option value="" disabled selected>-- Select Candidate/Owner --</option>
+        <option *ngFor="let candidate of candidateList" 
+            [value]="candidate.userId" >
+            {{candidate.username}}
+        </option>
+    </select>
+    <div class="alert-danger" *ngIf="candidate.errors && editForm.submitted">
+        <div *ngIf="candidate.errors['required']">Please select the Candidate/Owner of the resume.</div>
+    </div>
+</div>
+
+<div class="form-group mb-4" *ngIf="isCandidate">
+    <label class="form-label" for="candidate">Candidate/Owner <span class="required-symbol"></span></label>
+    <input
+        type="text"
+        class="form-control"
+        value = "{{currentUser.fullName}}"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="tags">Tag <span class="required-symbol"></span></label>
+    <mat-chip-list class="form-control" #chipList aria-label="Tag selection">
+        <mat-chip
+            *ngFor="let tag of selectedTags"
+            (removed)="remove(tag)">
+            {{tag}}
+            <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </mat-chip>
+        <input
+            style="border: none; outline: none"
+            #tagInput
+            [formControl]="tagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+        />
+    </mat-chip-list>
+    <div class="alert-danger" *ngIf="editForm.submitted && selectedTags.length < 1">
+        <div>At least one tag is required</div>
+    </div>
+    <mat-hint> Can include Category, Required Skill, Type of Vacancy, Experience, and so on... </mat-hint>
+</div>
+<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+        {{tag}}
+    </mat-option>
+</mat-autocomplete>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="countryISO">Country<span class="required-symbol"></span></label>
+    <select 
+        class="form-select" 
+        required
+        name="countryISO"
+        #countryISO="ngModel"
+        aria-label="Select Country"
+        [(ngModel)]="resumeForm.country.iso"
+    >
+        <option value="" disabled selected>-- Select Country --</option>
+        <option *ngFor="let country of countryList" 
+            [value]="country.iso" >
+            {{country.name}}
+        </option>
+    </select>
+    <div class="alert-danger" *ngIf="countryISO.errors && editForm.submitted">
+        <div *ngIf="countryISO.errors['required']">Please select the country that the candidate is living at.</div>
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="totalExperienceYear">Total Experience Year in the IT field</label>
+    <input
+        type="number"
+        OnlyNumber="true"
+        class="form-control"
+        name = "totalExperienceYear"
+        #totalExperienceYear="ngModel"
+        [(ngModel)]="resumeForm.totalExperienceYear"
+    />
+    <div class="alert-danger" *ngIf="totalExperienceYear.errors && editForm.submitted">
+        <div *ngIf="totalExperienceYear.errors['min']">Please enter a positive number without decimal</div>
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="salaryExpectation">Expected Salary</label>
+    <div class="input-group">
+        <span class="input-group-text">RM</span>
+        <input
+            type="number"
+            min = "0"
+            class="form-control"
+            name="salaryExpectation"
+            #salaryExpectation="ngModel"
+            [(ngModel)]="resumeForm.salaryExpectation"
+        />
+    </div>
+    <div class="alert-danger" *ngIf="salaryExpectation.errors && editForm.submitted">
+        <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
+    </div>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="remarks">Remarks</label>
+    <textarea 
+        class="form-control mt-0" 
+        rows="3"
+        name="remarks"
+        [(ngModel)]="resumeForm.remarks"
+    >
+    </textarea>
+</div>
+
+<div class="form-group mb-4" *ngIf="isAdmin">
+    <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
+    <select 
+        class="form-select" 
+        [(ngModel)]="resumeForm.objectState" 
+        required
+        name="objectState"
+        #objectState="ngModel"
+        aria-label="Select Object State"
+    >
+        <option value="" disabled selected>-- Select Object State --</option>
+        <option value="CREATED">Created</option>
+        <option value="TERMINATED">Terminated</option>
+        <option value="ACTIVE">Active</option>
+        <option value="PENDING">Pending</option>
+        <option value="DRAFT">Draft</option>
+        <option value="FROZEN">Frozen</option>
+    </select>
+    <div class="alert-danger" *ngIf="objectState.errors && editForm.submitted">
+        <div *ngIf="objectState.errors['required']">Please select ObjectState.</div>
+    </div>
+</div>
+
+    <div class="form-group pt-3">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

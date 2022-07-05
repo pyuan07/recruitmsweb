@@ -12,6 +12,9 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/organization" class="nav-link" routerLink="organization">Organization</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="/resume" class="nav-link" routerLink="resume">Resume</a>
+        </li>
       </ul>
     </div>
 
@@ -32,7 +35,7 @@
     <div *ngIf="isCandidate">
       <ul class="navbar-nav me-auto" routerLinkActive="active">
         <li class="nav-item" *ngIf="isLoggedIn">
-          <a href="/resume/create" class="nav-link" [routerLink]="['resume','create']">Resume</a>
+          <a href="/resume" class="nav-link" routerLink="resume">Resume</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/vacancy" class="nav-link" routerLink="vacancy">Find Vacancy</a>

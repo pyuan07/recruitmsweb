@@ -1,3 +1,4 @@
+import { ResumeListComponent } from './resume/components/resume-list/resume-list.component';
 import { VacancyDetailsComponent } from './vacancy/components/vacancy-details/vacancy-details.component';
 import { VacancyEditComponent } from './vacancy/components/vacancy-edit/vacancy-edit.component';
 import { VacancyCreateComponent } from './vacancy/components/vacancy-create/vacancy-create.component';
@@ -19,6 +20,8 @@ import { OrganizationCreateComponent } from './organization/components/organizat
 import { OrganizationEditComponent } from './organization/components/organization-edit/organization-edit.component';
 import { OrganizationDetailsComponent } from './organization/components/organization-details/organization-details.component';
 import { ResumeCreateComponent } from './resume/components/resume-create/resume-create.component';
+import { ResumeDetailsComponent } from './resume/components/resume-details/resume-details.component';
+import { ResumeEditComponent } from './resume/components/resume-edit/resume-edit.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,9 +48,11 @@ const routes: Routes = [
    { path: 'vacancy/details/:id', component: VacancyDetailsComponent },
 
    //Resume Routing
+   { path: 'resume', component: ResumeListComponent },
    { path: 'resume/create', component: ResumeCreateComponent },
-   //{ path: 'resume/edit/:id', component: ResumeEditComponent },
-   //{ path: 'resume/details/:id', component: ResumeDetailsComponent },
+   { path: 'resume/edit/:id', component: ResumeEditComponent },
+   { path: 'resume/details/:id', component: ResumeDetailsComponent },
+   
 
 
   { path: 'test', component: TestComponent },

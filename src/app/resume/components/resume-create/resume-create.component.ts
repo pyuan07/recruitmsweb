@@ -129,7 +129,7 @@ export class ResumeCreateComponent implements OnInit {
       Swal.fire("Error", "Please upload your profile picture before proceed", "error");
       return;
     }
-    if(this.picName == ''){
+    if(this.pdfName == ''){
       Swal.fire("Error", "Please upload your resume in PDF format before proceed", "error");
       return;
     }

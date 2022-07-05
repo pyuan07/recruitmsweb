@@ -1,0 +1,93 @@
+table {
+  width: 100%;
+  background-color: #fff
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+}
+
+.mat-column-candidateName {
+  white-space: unset;
+  flex: 0 0 18%;
+  width: 18%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-totalExperienceYear {
+  white-space: unset;
+  flex: 0 0 10%;
+  width: 10%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-expectedSalary {
+  white-space: unset;
+  flex: 0 0 18%;
+  width: 18%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-country {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 13%;
+  width: 13%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-objectState {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 10%;
+  width: 10%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-actions {
+  word-wrap: break-word;
+  white-space: unset;
+  flex: 0 0 13%;
+  width: 13%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

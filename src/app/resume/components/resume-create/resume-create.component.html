@@ -67,7 +67,7 @@
             </option>
         </select>
         <div class="alert-danger" *ngIf="owner.errors && createForm.submitted">
-            <div *ngIf="owner.errors['required']">Please select the Employer/Owner of the organization.</div>
+            <div *ngIf="owner.errors['required']">Please select the Candidate/Owner of the resume.</div>
         </div>
     </div>
 
@@ -130,7 +130,7 @@
             </option>
         </select>
         <div class="alert-danger" *ngIf="countryISO.errors && createForm.submitted">
-            <div *ngIf="countryISO.errors['required']">Please select the country that you going to provide resume.</div>
+            <div *ngIf="countryISO.errors['required']">Please select the country that the candidate is living at.</div>
         </div>
     </div>
     
@@ -151,14 +151,17 @@
 
     <div class="form-group mb-4">
         <label class="form-label" for="salaryExpectation">Expected Salary</label>
-        <input
-            type="number"
-            min = "0"
-            class="form-control"
-            name="salaryExpectation"
-            ngModel
-            #salaryExpectation="ngModel"
-        />
+        <div class="input-group">
+            <span class="input-group-text">RM</span>
+            <input
+                type="number"
+                min = "0"
+                class="form-control"
+                name="salaryExpectation"
+                ngModel
+                #salaryExpectation="ngModel"
+            />
+        </div>
         <div class="alert-danger" *ngIf="salaryExpectation.errors && createForm.submitted">
             <div *ngIf="salaryExpectation.errors['min']">Please enter a positive number</div>
         </div>

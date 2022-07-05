@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user-model';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { Role } from 'src/app/_shared/enum/enum';
+import { ResumeService } from 'src/app/services/resume.service';
 
 @Component({
   selector: 'app-user-details',
@@ -16,7 +18,14 @@ export class UserDetailsComponent implements OnInit {
   userFrom!: User;
   isAdmin: boolean = false;
 
-  constructor(private _userService: UserService, private _tokenStorageService: TokenStorageService,private route: ActivatedRoute ,private router: Router) {  
+  viewingCandidate: boolean = false;
+  viewingEmployer: boolean = false;
+
+  constructor(private _userService: UserService, 
+              private _tokenStorageService: TokenStorageService,
+              private _resumeService: ResumeService,
+              private route: ActivatedRoute ,
+              private router: Router) {  
     this.isAdmin = this._tokenStorageService.isAdmin();
   }
    
@@ -29,6 +38,8 @@ export class UserDetailsComponent implements OnInit {
         next: data => {
           this.userFrom = data;
           this.userFrom.dob = new Date(data.dob);
+          this.viewingCandidate = data.roles == Role.CANDIDATE;
+          this.viewingEmployer = data.roles == Role.EMPLOYER;
         },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
@@ -64,5 +75,16 @@ export class UserDetailsComponent implements OnInit {
           })
         }
       })
+    }
+
+    gotoResumeDetailsPage(){
+      this._resumeService.getResumeByCandidateId(this.userFrom.userId).subscribe({
+        next: data => {
+          this.router.navigate(['resume/details', data.resumeId])
+        },
+        error: (err: any) => {
+          Swal.fire("Error", err.error.message, "error");
+        }
+      });
     }
 }

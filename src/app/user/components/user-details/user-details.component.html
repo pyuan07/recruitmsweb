@@ -74,6 +74,11 @@
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">
+
+        <button *ngIf="viewingCandidate" (click)="gotoResumeDetailsPage()" class="btn btn-info">
+            Check Resume
+        </button>
+
         <button (click)="gotoEditPage()" class="btn btn-primary">
             Edit
         </button>

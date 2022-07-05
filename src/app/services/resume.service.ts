@@ -46,4 +46,16 @@ export class ResumeService {
   uploadProfilePic(formData: FormData): Observable<UploadResponse> {
     return this.http.post<UploadResponse>(RESUME_API+ '/upload/image', formData);
   }
+
+  downloadResume(filename: string): Observable<any> {
+    return this.http.get<any>(RESUME_API + '/download/pdf/'+ filename);
+  }
+
+  downloadProfilePic(filename: string): Observable<Blob> {
+    return this.http.get<Blob>(RESUME_API + '/download/image/'+ filename);
+  }
+
+  getResumeByCandidateId(userId: string): Observable<Resume> {
+    return this.http.get<Resume>(RESUME_API + '/getResumeByCandidateId/'+ userId);
+  }
 }
