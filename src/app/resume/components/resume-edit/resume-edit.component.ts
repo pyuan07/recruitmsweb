@@ -73,8 +73,8 @@ export class ResumeEditComponent implements OnInit {
     this._resumeService.getById(id).subscribe({
       next: data => {
         this.resumeForm = data;
-        this.pdfName = data.resumePdf;
         this.picName = data.profilePicture;
+        this.pdfName = data.resumePdf;
         this.imageUrl = environment.apiEndpoint +'/v1/resume/download/image/'+ data.profilePicture;
         this.pdfUrl = environment.apiEndpoint +'/v1/resume/download/pdf/'+ data.resumePdf;
 

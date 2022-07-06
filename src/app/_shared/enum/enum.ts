@@ -31,3 +31,11 @@ export enum TagType {
     RESUME,
     VACANCY
 }
+
+export enum ApplicationStatus{
+    APPLIED,
+    VIEWED,
+    IN_PROGRESS,
+    CANCEL,
+    COMPLETED
+}

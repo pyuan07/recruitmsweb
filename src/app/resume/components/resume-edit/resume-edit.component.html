@@ -16,10 +16,12 @@
         required
         (change)="onUploadProfilePicture($event)"
     />
+    {{picName}}
     <!-- <div class="alert-danger" *ngIf="profilePicture.errors && createForm.submitted">
         <div *ngIf="profilePicture.errors['required']">Profile Picture is required</div>
     </div> -->
 </div>
+
 
 <div class="form-group mb-5">
     <label for="resumePdf" class="form-label">Resume PDF <span class="required-symbol"></span></label>
@@ -31,7 +33,7 @@
         class="form-control"
         (change)="onUploadPdf($event)"
     />
-
+    {{pdfName}}
     <div class="d-grid">
         <a class="btn btn-primary" href="{{pdfUrl}}"> <i class="bi bi-download"></i> Download Latest Version </a>
     </div>

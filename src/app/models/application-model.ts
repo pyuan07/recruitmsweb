@@ -1,18 +1,20 @@
-import { ObjectState } from "../_shared/enum/enum";
-import { Candidate } from "./candidate-model";
+import { User } from './user-model';
+import { ApplicationStatus, ObjectState } from "../_shared/enum/enum";
 import { Resume } from "./resume-model";
 import { Vacancy } from "./vacancy-model";
 
 export interface Application{
-    applicationId: string;
-    candidate: Candidate;
+    applicationId?: string;
+    candidate: User;
     resume: Resume;
     vacancy: Vacancy;
-    password: string;
-    dob: Date;
+    status: ApplicationStatus;
+    remarks: string;
+    // viewBy?: User;
+
     objectState: ObjectState;
-    createdBy: string;
-    createdDate: Date;
-    modifiedBy: string;
-    lastModifiedDate: Date;
+    createdBy?: string;
+    createdDate?: Date;
+    modifiedBy?: string;
+    lastModifiedDate?: Date;
 }

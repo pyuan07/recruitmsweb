@@ -1,8 +1,11 @@
+import { ApplicationStatus, ObjectState } from './../../../_shared/enum/enum';
+import { Application } from './../../../models/application-model';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user-model';
 import { Vacancy } from 'src/app/models/vacancy-model';
+import { ApplicationService } from 'src/app/services/application.service';
 import { ResumeService } from 'src/app/services/resume.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { VacancyService } from 'src/app/services/vacancy.service';
@@ -21,9 +24,13 @@ export class VacancyDetailsComponent implements OnInit {
 
   currentUser!: User;
   isMyVancacy: boolean = false;
+  applicationRemarks: string  = '';
+
+  application!: Application;
 
   constructor(  private _vacancyService: VacancyService, 
                 private _resumeService: ResumeService,
+                private _applicationsService: ApplicationService,
                 private _tokenStorageService: TokenStorageService,
                 private route: ActivatedRoute ,
                 private router: Router) {  
@@ -56,7 +63,28 @@ export class VacancyDetailsComponent implements OnInit {
       this._resumeService.getResumeByCandidateId(this.currentUser.userId).subscribe({
         next: data => {
           if(data){
-            
+            this.application = {
+              candidate: this.currentUser,
+              resume: data,
+              vacancy: this.vacancyForm,
+              status: ApplicationStatus.APPLIED,
+              remarks: this.applicationRemarks,
+              objectState: ObjectState.ACTIVE
+            };
+
+            this._applicationsService.create(this.application).subscribe({
+              next: data => {
+                console.log(data);
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Applied Successfully!'
+                });
+                this.router.navigate(['application']);
+              },
+              error: err => {
+                Swal.fire("Error", err.error.message, "error");
+              }
+            });
           }
         },
         error: (err: any) => {
@@ -92,4 +120,5 @@ export class VacancyDetailsComponent implements OnInit {
         }
       })
     }
+
 }

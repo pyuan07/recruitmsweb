@@ -139,7 +139,7 @@
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">
-        <button (click)="applyVacancy()" class="btn btn-primary" *ngIf="isCandidate">
+        <button data-bs-toggle="modal" data-bs-target="#remarksModal" class="btn btn-primary" *ngIf="isCandidate">
             Apply for this Vacancy
         </button>
         <button (click)="gotoEditPage()" class="btn btn-primary" *ngIf="isMyVancacy || isAdmin">
@@ -154,3 +154,32 @@
     </div>
 </div>
 
+
+<!--Modal-->
+<div class="modal fade" id="remarksModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="remarksModalLabel">Apply for the Vacancy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mb-4">
+                    <label class="form-label" for="remarks">Any Remarks for the application?</label>
+                    <textarea 
+                        class="form-control mt-0" 
+                        rows="3"
+                        name="remarks"
+                        [(ngModel)]="applicationRemarks"
+                        #remarks="ngModel"
+                    >
+                    </textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" style="border-radius: 0%" (click)="applyVacancy()">Apply</button>
+                <button type="button" class="btn btn-secondary" style="border-radius: 0%" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
