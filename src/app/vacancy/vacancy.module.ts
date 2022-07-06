@@ -22,6 +22,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { VacancyFindComponent } from './components/vacancy-find/vacancy-find.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     VacancyCreateComponent,
     VacancyEditComponent,
     VacancyDetailsComponent,
+    VacancyFindComponent,
     TestComponent
   ],
   imports: [

@@ -13,11 +13,10 @@
         type="file"
         accept="image/*"
         class="form-control"
-        title="Click me to upload image"
+        required
         (change)="onUploadProfilePicture($event)"
-        value="{{picName}}"
     />
-    <!-- <div class="alert-danger" *ngIf="profilePicture.errors && editForm.submitted">
+    <!-- <div class="alert-danger" *ngIf="profilePicture.errors && createForm.submitted">
         <div *ngIf="profilePicture.errors['required']">Profile Picture is required</div>
     </div> -->
 </div>
@@ -28,7 +27,7 @@
     <input
         type="file"
         accept="application/pdf"
-        title="Click me to upload resume in pdf"
+        required
         class="form-control"
         (change)="onUploadPdf($event)"
     />

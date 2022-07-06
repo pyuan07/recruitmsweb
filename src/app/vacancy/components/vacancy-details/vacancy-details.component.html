@@ -139,10 +139,13 @@
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">
-        <button (click)="gotoEditPage()" class="btn btn-primary">
+        <button (click)="applyVacancy()" class="btn btn-primary" *ngIf="isCandidate">
+            Apply for this Vacancy
+        </button>
+        <button (click)="gotoEditPage()" class="btn btn-primary" *ngIf="isMyVancacy || isAdmin">
             Edit
         </button>
-        <button (click)="deleteVacancy()" class="btn btn-danger">
+        <button (click)="deleteVacancy()" class="btn btn-danger" *ngIf="isMyVancacy || isAdmin">
             Terminate
         </button>
         <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">

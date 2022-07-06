@@ -100,14 +100,13 @@ export class ResumeEditComponent implements OnInit {
         return;
       }
 
-      
       this.resumeModifyRequest = this.resumeForm;
       this.resumeModifyRequest.tagString = this.selectedTags;
 
       this.resumeModifyRequest.profilePicture = this.picName;
-      this.resumeModifyRequest.profilePicture = this.pdfName;
+      this.resumeModifyRequest.resumePdf = this.pdfName;
 
-
+      console.log(this.resumeModifyRequest);
       //this.resumeForm.value.tags = this.selectedTags;
       this._resumeService.update(this.resumeModifyRequest).subscribe({
         next: data => {
@@ -203,43 +202,44 @@ export class ResumeEditComponent implements OnInit {
       return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue) && !this.selectedTags.includes(tag));
     }
 
-    onUploadProfilePicture(event: any){
-      const file = event.target.files[0];
-      if (file == null)
-          return;
-      const reader = new FileReader();
-      reader.readAsDataURL(file); 
-      reader.onload = (_event) => { 
-          this.imageUrl = reader.result!; 
+    
+  onUploadProfilePicture(event: any){
+    const file = event.target.files[0];
+    if (file == null)
+        return;
+    const reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onload = (_event) => { 
+        this.imageUrl = reader.result!; 
+    }
+
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', file, file.name);
+    this._resumeService.uploadProfilePic(uploadImageData).subscribe({
+      next: data => {
+        this.picName = data.filename;
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.message, "error");
       }
-  
-      const uploadImageData = new FormData();
-      uploadImageData.append('imageFile', file, file.name);
-      this._resumeService.uploadProfilePic(uploadImageData).subscribe({
-        next: data => {
-          this.picName = data.filename;
-        },
-        error: (err: any) => {
-          Swal.fire("Error", err.message, "error");
-        }
-      });
-    }
-  
-    onUploadPdf(event: any) {
-      const file = event.target.files[0];
-      if (file == null)
-          return;
-  
-      const uploadResumeData = new FormData();
-      uploadResumeData.append('file', file, file.name);
-      this._resumeService.uploadResume(uploadResumeData).subscribe({
-        next: data => {
-          this.pdfName = data.filename;
-        },
-        error: (err: any) => {
-          Swal.fire("Error", err.message, "error");
-        }
-      });
-    }
+    });
+  }
+
+  onUploadPdf(event: any) {
+    const file = event.target.files[0];
+    if (file == null)
+        return;
+
+    const uploadResumeData = new FormData();
+    uploadResumeData.append('file', file, file.name);
+    this._resumeService.uploadResume(uploadResumeData).subscribe({
+      next: data => {
+        this.pdfName = data.filename;
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.message, "error");
+      }
+    });
+  }
 
   }

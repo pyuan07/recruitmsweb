@@ -22,6 +22,7 @@ import { OrganizationDetailsComponent } from './organization/components/organiza
 import { ResumeCreateComponent } from './resume/components/resume-create/resume-create.component';
 import { ResumeDetailsComponent } from './resume/components/resume-details/resume-details.component';
 import { ResumeEditComponent } from './resume/components/resume-edit/resume-edit.component';
+import { VacancyFindComponent } from './vacancy/components/vacancy-find/vacancy-find.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -46,6 +47,8 @@ const routes: Routes = [
    { path: 'vacancy/create', component: VacancyCreateComponent },
    { path: 'vacancy/edit/:id', component: VacancyEditComponent },
    { path: 'vacancy/details/:id', component: VacancyDetailsComponent },
+   { path: 'vacancy/find', component: VacancyFindComponent },
+
 
    //Resume Routing
    { path: 'resume', component: ResumeListComponent },
