@@ -1,3 +1,4 @@
+import { ApplicationModule } from './application/application.module';
 import { ResumeModule } from './resume/resume.module';
 
 import { NgModule } from '@angular/core';
@@ -37,7 +38,8 @@ import { OnlyNumber } from './_shared/directive/onlynumber.directive';
     UserModule,
     VacancyModule,
     ResumeModule,
-    OrganizationModule
+    OrganizationModule,
+    ApplicationModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

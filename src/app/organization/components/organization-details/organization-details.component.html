@@ -108,10 +108,10 @@
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">
-        <button (click)="gotoEditPage()" class="btn btn-primary">
+        <button (click)="gotoEditPage()" class="btn btn-primary" *ngIf="isAdmin || isEmployer">
             Edit
         </button>
-        <button (click)="deleteOrganization()" class="btn btn-danger">
+        <button (click)="deleteOrganization()" class="btn btn-danger" *ngIf="isAdmin || isEmployer">
             Terminate
         </button>
         <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">

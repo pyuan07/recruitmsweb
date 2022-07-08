@@ -20,4 +20,6 @@ export interface Vacancy{
     createdDate: Date;
     modifiedBy: string;
     lastModifiedDate: Date;
+
+    matchedTag?: number;
 }

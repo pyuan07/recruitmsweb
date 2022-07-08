@@ -1,3 +1,4 @@
+import { TokenStorageService } from './../../../services/token-storage.service';
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,9 +14,14 @@ import Swal from 'sweetalert2';
 export class OrganizationDetailsComponent implements OnInit {
 
   organizationForm!: Organization;
+  isAdmin: boolean = false;
+  isEmployer: boolean = false;
+  isCandidate: boolean = false;
 
-  constructor(private _organizationService: OrganizationService, private route: ActivatedRoute ,private router: Router) {  
-    
+  constructor(private _organizationService: OrganizationService, private _tokenService: TokenStorageService, private route: ActivatedRoute ,private router: Router) {  
+    this.isAdmin = this._tokenService.isAdmin();
+    this.isEmployer = this._tokenService.isEmployer();
+    this.isCandidate = this._tokenService.isCandidate();
   }
    
     ngOnInit(): void {
@@ -46,6 +52,7 @@ export class OrganizationDetailsComponent implements OnInit {
               if(data){
                 Swal.fire("Terminated Successfully", "", "success");
                 this.router.navigate(['organization'])
+                
               }
               else{
                 Swal.fire("Failed to Terminate", "Something went wrong...", "error");

@@ -29,9 +29,15 @@
 <div class="form-group mb-4">
     <label class="form-label" for="tag">Tag</label>
     <mat-chip-list>
-        <mat-chip *ngFor="let tag of vacancyForm.tags">
-            {{tag.name}}
-        </mat-chip>
+        <div *ngFor="let tag of vacancyForm.tags">
+            <mat-chip color="primary" selected *ngIf="tag.matched">
+                {{tag.name}}
+            </mat-chip>
+
+            <mat-chip *ngIf="!tag.matched">
+                {{tag.name}}
+            </mat-chip>
+        </div>
     </mat-chip-list>
 </div>
 
@@ -139,8 +145,14 @@
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">
-        <button data-bs-toggle="modal" data-bs-target="#remarksModal" class="btn btn-primary" *ngIf="isCandidate">
+        <button data-bs-toggle="modal" data-bs-target="#remarksModal" class="btn btn-primary" *ngIf="isCandidate && !applied">
             Apply for this Vacancy
+        </button>
+        <button data-bs-toggle="modal" data-bs-target="#remarksModal" class="btn btn-primary" *ngIf="isCandidate && applied" disabled>
+            Applied
+        </button>
+        <button  (click)="gotoOrganizationPage()" class="btn btn-primary" *ngIf="!isMyVancacy">
+            Organization Details
         </button>
         <button (click)="gotoEditPage()" class="btn btn-primary" *ngIf="isMyVancacy || isAdmin">
             Edit
@@ -177,7 +189,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" style="border-radius: 0%" (click)="applyVacancy()">Apply</button>
+                <button type="button" class="btn btn-primary" style="border-radius: 0%" data-dismiss="modal" (click)="applyVacancy()">Apply</button>
                 <button type="button" class="btn btn-secondary" style="border-radius: 0%" data-dismiss="modal">Cancel</button>
             </div>
         </div>

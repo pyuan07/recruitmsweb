@@ -9,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { ResumeService } from 'src/app/services/resume.service';
+import { User } from 'src/app/models/user-model';
 
 
 @Component({
@@ -23,12 +25,16 @@ export class VacancyFindComponent implements OnInit {
   dataSource!: MatTableDataSource<Vacancy>;
   filterText: String = '';
   filterState: String = 'ALL';
+  currentUser!: User;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _vacancyService: VacancyService, private _tokenStorageService: TokenStorageService,private router: Router) {  
-    
+  constructor(private _vacancyService: VacancyService, 
+              private _tokenStorageService: TokenStorageService,
+              private _resumeService: ResumeService,
+              private router: Router) {  
+    this.currentUser = this._tokenStorageService.getUser()!;
   }
 
   ngOnInit(): void {
@@ -37,8 +43,22 @@ export class VacancyFindComponent implements OnInit {
 
   private getAllVacancy(){
     this._vacancyService.getByObjState("ACTIVE").subscribe({
-      next: data => {
-        this.dataSource = new MatTableDataSource(data);
+      next: vacancy => {
+
+        this._resumeService.getResumeByCandidateId(this.currentUser.userId).subscribe({
+          next: resume => {
+            if(resume){
+              vacancy.forEach((data) => {
+                data.matchedTag = resume.tags.filter(resumeTag => data.tags.some(tag => tag.name == resumeTag.name)).length;
+              });
+            }
+          },
+          error: (err: any) => {
+            // Swal.fire("Error", err.error.message, "error");
+          }
+        });
+
+        this.dataSource = new MatTableDataSource(vacancy);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },

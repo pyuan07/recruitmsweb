@@ -4,7 +4,7 @@ import { Resume } from "./resume-model";
 import { Vacancy } from "./vacancy-model";
 
 export interface Application{
-    applicationId?: string;
+    applicationId?: number;
     candidate: User;
     resume: Resume;
     vacancy: Vacancy;
@@ -17,4 +17,6 @@ export interface Application{
     createdDate?: Date;
     modifiedBy?: string;
     lastModifiedDate?: Date;
+
+    matchedTag?: number;
 }

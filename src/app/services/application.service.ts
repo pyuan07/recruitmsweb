@@ -35,4 +35,8 @@ export class ApplicationService {
   delete(id: number): Observable<boolean>{
     return this.http.delete<boolean>(APPLICATION_API + '/' + id);
   }
+
+  getByStatus(status: string): Observable<Application[]> {
+    return this.http.get<Application[]>(APPLICATION_API + '/status/' + status);
+  }
 }

@@ -10,4 +10,6 @@ export interface Tag{
     createdDate: Date;
     modifiedBy: string;
     lastModifiedDate: Date;
+
+    matched?: boolean;
 }

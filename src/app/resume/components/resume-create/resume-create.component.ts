@@ -106,6 +106,7 @@ export class ResumeCreateComponent implements OnInit {
   private getActiveTags(){
     this. _tagService.getByObjState("ACTIVE").subscribe({
       next: data => {
+        data.sort((n2,n1) => n1.totalUsed - n2.totalUsed);
         this.allTags = data.map(function(tag){
             return tag.name;
         });

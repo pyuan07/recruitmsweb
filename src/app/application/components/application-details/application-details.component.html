@@ -1,0 +1,262 @@
+
+<div><h1>Application <b>Details</b></h1></div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        Vacancy Summary
+    </div>
+    <div class="card-body">
+        <div class="form-group mb-4">
+            <label class="form-label" for="owner">Vacancy Title </label>
+            <input 
+                class="form-control" 
+                [(ngModel)]="applicationForm.vacancy.name"
+                readonly
+            />
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label" for="owner">Vacancy Description </label>
+            <textarea
+                class="form-control" 
+                rows="3"
+                [(ngModel)]="applicationForm.vacancy.description"
+                readonly
+            >
+            </textarea>
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label" for="organization">Organization </label>
+            <input 
+                class="form-control" 
+                [(ngModel)]="applicationForm.vacancy.organization.name"
+                readonly
+            />
+        </div>
+    </div>
+</div> 
+
+<div class="card mb-4">
+    <div class="card-header">
+        Candidate Summary
+    </div>
+    <div class="card-body">
+        <div class="form-group mb-4">
+            <label class="form-label" for="profilePicture">Profile Picture </label><br>
+            <img height="350" width="250" src={{imageUrl}}>
+        </div>
+
+        <div class="form-group mb-4"w>
+            <label class="form-label" for="candidate">Candidate</label>
+            <input 
+                class="form-control" 
+                [(ngModel)]="applicationForm.candidate.fullName"
+                readonly
+            />
+        </div>
+        <div class="form-group mb-4"w>
+            <label class="form-label" for="age">Age</label>
+            <input 
+                class="form-control" 
+                [(ngModel)]="candidateAge"
+                readonly
+            />
+        </div>
+    </div>
+</div>  
+
+<div class="card mb-4">
+    <div class="card-header">
+        Comparison Summary
+    </div>
+    <div class="card-body">
+        <div class="form-group mb-4">
+            <label class="form-label" for="tag">Vacancy Tag</label>
+            <mat-chip-list>
+                <div *ngFor="let tag of applicationForm.vacancy.tags">
+                    <mat-chip color="primary" selected *ngIf="tag.matched">
+                        {{tag.name}}
+                    </mat-chip>
+        
+                    <mat-chip *ngIf="!tag.matched">
+                        {{tag.name}}
+                    </mat-chip>
+                </div>
+            </mat-chip-list>
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label" for="tag">Candidate Tag</label>
+            <mat-chip-list>
+                <div *ngFor="let tag of applicationForm.resume.tags">
+                    <mat-chip color="primary" selected *ngIf="tag.matched">
+                        {{tag.name}}
+                    </mat-chip>
+        
+                    <mat-chip *ngIf="!tag.matched">
+                        {{tag.name}}
+                    </mat-chip>
+                </div>
+            </mat-chip-list>
+        </div>
+        <hr>
+        <div class="form-group mb-4">
+            <label class="form-label" for="vacancyCountry">Vacancy Country</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="applicationForm.vacancy.country.name"
+                readonly
+            />
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label" for="candidateCountry">Candidate Country</label>
+            <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="applicationForm.resume.country.name"
+                readonly
+            />
+        </div>
+        <hr>
+        <div class="form-group mb-4">
+            <label class="form-label" for="minSalary">Provided Salary Range</label>
+            <div class="input-group">
+                <span class="input-group-text">RM</span>
+                <input
+                    type="number"
+                    class="form-control"
+                    name="minSalary"
+                    [(ngModel)]="applicationForm.vacancy.minSalary"
+                    readonly
+                    #minSalary="ngModel"
+                />
+                <span class="input-group-text">&emsp;~&emsp;</span>
+                <span class="input-group-text">RM</span>
+                <input
+                    type="number"
+                    class="form-control"
+                    [(ngModel)]="applicationForm.vacancy.maxSalary"
+                    readonly
+                    name="maxSalary"
+                    #maxSalary="ngModel"
+                />
+            </div>
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label" for="salaryExpectation">Expected Salary</label>
+            <input
+                type="number"
+                OnlyNumber="true"
+                class="form-control correctColour"
+                *ngIf="isSalaryInRange"
+                [(ngModel)]="applicationForm.resume.salaryExpectation"
+                readonly
+            />
+            <input
+                type="number"
+                OnlyNumber="true"
+                class="form-control errorColour"
+                *ngIf="!isSalaryInRange"
+                [(ngModel)]="applicationForm.resume.salaryExpectation"
+                readonly
+            />
+        </div>
+    </div>
+</div>
+
+
+<div class="form-group mb-4">
+    <label class="form-label" for="remarks">Remarks</label>
+    <textarea 
+        class="form-control mt-0" 
+        rows="3"
+        [(ngModel)]="applicationForm.remarks"
+        readonly
+    >
+    </textarea>
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="createdDate">Created Date</label>
+    <input 
+        class="form-control mt-0" 
+        value="{{applicationForm.createdDate | date:'MM/dd/yyyy h:mm:ss a'}}"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="createdDate">Last Modified Date</label>
+    <input 
+        class="form-control mt-0" 
+        value="{{applicationForm.lastModifiedDate | date:'MM/dd/yyyy h:mm:ss a'}}"
+        readonly
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="objectState">Applcation Status</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="applicationForm.status"
+        readonly
+        name="status"
+        #status="ngModel"
+    />
+</div>
+
+<div class="form-group mb-4">
+    <label class="form-label" for="objectState">Object State</label>
+    <input 
+        class="form-control" 
+        [(ngModel)]="applicationForm.objectState"
+        readonly
+        name="objectState"
+        #objectState="ngModel"
+    />
+</div>
+
+<div class="form-group pt-3">
+    <div class="d-grid gap-2">
+        <a class="btn btn-primary" href="{{pdfUrl}}">
+            Download Resume PDF
+        </a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="d-grid gap-1">
+                    <button (click)="gotoVacancyDetails()" class="btn btn-info">
+                        Check Vacancy
+                    </button>
+                </div>
+            </div>  
+            <div class="col-md-4">
+                <div class="d-grid gap-1">
+                    <button (click)="gotoResumeDetails()" class="btn btn-info">
+                        Check Resume
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="d-grid gap-1">
+                    <button (click)="gotoOrganizationDetails()" class="btn btn-info">
+                        Check Organization
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <button (click)="shortlistCandidate()" class="btn btn-primary" *ngIf="isEmployer">
+            Shortlist
+        </button>
+        <button (click)="declineApplication()" class="btn btn-primary" *ngIf="isEmployer">
+            Decline Application
+        </button>
+
+        <button (click)="deleteApplication()" class="btn btn-danger" *ngIf="isAdmin">
+            Terminate
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">
+            Cancel
+        </button>
+    </div>
+</div>
+
