@@ -73,11 +73,7 @@
             <label class="form-label" for="tag">Vacancy Tag</label>
             <mat-chip-list>
                 <div *ngFor="let tag of applicationForm.vacancy.tags">
-                    <mat-chip color="primary" selected *ngIf="tag.matched">
-                        {{tag.name}}
-                    </mat-chip>
-        
-                    <mat-chip *ngIf="!tag.matched">
+                    <mat-chip color="primary" [selected]="tag.matched">
                         {{tag.name}}
                     </mat-chip>
                 </div>
@@ -87,11 +83,7 @@
             <label class="form-label" for="tag">Candidate Tag</label>
             <mat-chip-list>
                 <div *ngFor="let tag of applicationForm.resume.tags">
-                    <mat-chip color="primary" selected *ngIf="tag.matched">
-                        {{tag.name}}
-                    </mat-chip>
-        
-                    <mat-chip *ngIf="!tag.matched">
+                    <mat-chip color="primary" [selected]="tag.matched">
                         {{tag.name}}
                     </mat-chip>
                 </div>
@@ -111,7 +103,8 @@
             <label class="form-label" for="candidateCountry">Candidate Country</label>
             <input
                 type="text"
-                class="form-control"
+                class="form-control correctColour"
+                [ngClass]="isSameCountry ? 'correctColour' : 'errorColour'"
                 [(ngModel)]="applicationForm.resume.country.name"
                 readonly
             />
@@ -147,15 +140,7 @@
                 type="number"
                 OnlyNumber="true"
                 class="form-control correctColour"
-                *ngIf="isSalaryInRange"
-                [(ngModel)]="applicationForm.resume.salaryExpectation"
-                readonly
-            />
-            <input
-                type="number"
-                OnlyNumber="true"
-                class="form-control errorColour"
-                *ngIf="!isSalaryInRange"
+                [ngClass]="isSalaryInRange ? 'correctColour' : 'errorColour'"
                 [(ngModel)]="applicationForm.resume.salaryExpectation"
                 readonly
             />
@@ -244,10 +229,10 @@
             </div>
         </div>
 
-        <button (click)="shortlistCandidate()" class="btn btn-primary" *ngIf="isEmployer">
+        <button (click)="shortlistCandidate()" class="btn btn-primary" *ngIf="isEmployer" [disabled]="isShortlisted">
             Shortlist
         </button>
-        <button (click)="declineApplication()" class="btn btn-primary" *ngIf="isEmployer">
+        <button (click)="declineApplication()" class="btn btn-primary" *ngIf="isEmployer" [disabled]="isDeclined">
             Decline Application
         </button>
 

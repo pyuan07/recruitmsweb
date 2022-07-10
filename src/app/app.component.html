@@ -29,8 +29,15 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/vacancy" class="nav-link" routerLink="vacancy">Vacancy</a>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
-          <a href="/application" class="nav-link"  routerLink="application">Application</a>
+        <li class="nav-item dropdown" *ngIf="isLoggedIn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Application
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarApplicationDropdownMenu">
+            <li><a href="/application" class="dropdown-item" routerLink="application">All List</a></li>
+            <li><a href="/application/shortlisted" class="dropdown-item" routerLink="application/shortlisted">Shortlisted List</a></li>
+            <li><hr class="dropdown-divider"></li>
+          </ul>
         </li>
       </ul>
     </div>

@@ -24,4 +24,8 @@ export class AuthService {
   register(signupRequest :SignupRequest): Observable<any> {
     return this.http.post(AUTH_API + 'signup', signupRequest, httpOptions);
   }
+
+  resend(email: string): Observable<any> {
+    return this.http.get(AUTH_API + 'accountVerification/resend/' + email);
+  }
 }

@@ -18,12 +18,16 @@ import { UserModule } from './user/user.module';
 import { OrganizationModule } from './organization/organization.module';
 import { VacancyModule } from './vacancy/vacancy.module';
 import { OnlyNumber } from './_shared/directive/onlynumber.directive';
+import { ResendComponent } from './auth/resend/resend.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+
+    ResendComponent,
     LoginComponent,
     RegisterComponent,
+
     HomeComponent,
     ProfileComponent,
     OnlyNumber,

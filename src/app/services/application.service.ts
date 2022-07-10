@@ -39,4 +39,12 @@ export class ApplicationService {
   getByStatus(status: string): Observable<Application[]> {
     return this.http.get<Application[]>(APPLICATION_API + '/status/' + status);
   }
+
+  shortlistApplication(id: number): Observable<Application> {
+    return this.http.get<Application>(APPLICATION_API + '/shortlist/' + id);
+  }
+
+  declineApplication(id: number): Observable<Application> {
+    return this.http.get<Application>(APPLICATION_API + '/decline/' + id);
+  }
 }

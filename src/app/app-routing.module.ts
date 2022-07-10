@@ -25,11 +25,14 @@ import { ResumeEditComponent } from './resume/components/resume-edit/resume-edit
 import { VacancyFindComponent } from './vacancy/components/vacancy-find/vacancy-find.component';
 import { ApplicationListComponent } from './application/components/application-list/application-list.component';
 import { ApplicationDetailsComponent } from './application/components/application-details/application-details.component';
+import { ResendComponent } from './auth/resend/resend.component';
+import { ApplicationShortlistedComponent } from './application/components/application-shortlisted/application-shortlisted.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'resend', component: ResendComponent },
   { path: 'profile', component: ProfileComponent },
 
   //User Routing
@@ -60,9 +63,9 @@ const routes: Routes = [
    
    //Application Routing
    { path: 'application', component: ApplicationListComponent },
-  //  { path: 'resume/create', component: ApplicationCreateComponent },
-  //  { path: 'resume/edit/:id', component: ApplicationEditComponent },
+   { path: 'application/shortlisted', component: ApplicationShortlistedComponent },
    { path: 'application/details/:id', component: ApplicationDetailsComponent },
+  //  { path: 'application/}
    
 
 

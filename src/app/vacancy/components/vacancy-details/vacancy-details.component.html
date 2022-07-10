@@ -30,11 +30,7 @@
     <label class="form-label" for="tag">Tag</label>
     <mat-chip-list>
         <div *ngFor="let tag of vacancyForm.tags">
-            <mat-chip color="primary" selected *ngIf="tag.matched">
-                {{tag.name}}
-            </mat-chip>
-
-            <mat-chip *ngIf="!tag.matched">
+            <mat-chip color="primary" [selected]="tag.matched">
                 {{tag.name}}
             </mat-chip>
         </div>

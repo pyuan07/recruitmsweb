@@ -34,7 +34,7 @@ export enum TagType {
 
 export enum ApplicationStatus{
     APPLIED,
-    IN_PROGRESS,
+    VIEWED,
     SHORTLISTED,
     DECLINED,
     CANCEL,

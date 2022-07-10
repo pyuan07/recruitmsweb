@@ -27,6 +27,10 @@ export class ApplicationDetailsComponent implements OnInit {
   currentUser!: User;
 
   isSalaryInRange: boolean = false;
+  isSameCountry: boolean = false;
+
+  isShortlisted: boolean = false;
+  isDeclined: boolean = false;
 
   constructor(
     private _applicationService: ApplicationService,
@@ -51,6 +55,8 @@ export class ApplicationDetailsComponent implements OnInit {
 
           this.imageUrl = environment.apiEndpoint +'/v1/resume/download/image/'+ data.resume.profilePicture;
           this.pdfUrl = environment.apiEndpoint +'/v1/resume/download/pdf/'+ data.resume.resumePdf;
+          this.isShortlisted = data.status.toString() == "SHORTLISTED";
+          this.isDeclined = data.status.toString() == "DECLINED";
 
           //Colour same tag
           data.vacancy.tags.forEach((tag) => {
@@ -76,13 +82,24 @@ export class ApplicationDetailsComponent implements OnInit {
 
           //Salary Range
           this.isSalaryInRange = data.resume.salaryExpectation <= data.vacancy.maxSalary && data.resume.salaryExpectation >= data.vacancy.minSalary;
+          //Country
+          this.isSameCountry = data.resume.country.iso == data.vacancy.country.iso;
 
           this.applicationForm = data;
+
+          this.viewedApplication();
         },
         error: (err: any) => {
           Swal.fire("Error", err.error.message, "error");
         }
       });
+    }
+
+    private viewedApplication(){
+      if(this.applicationForm.status == ApplicationStatus.APPLIED){
+        this.applicationForm.status = ApplicationStatus.VIEWED;
+        this._applicationService.update(this.applicationForm);
+      }
     }
 
     gotoEditPage(){
@@ -136,13 +153,10 @@ export class ApplicationDetailsComponent implements OnInit {
     }
 
     shortlistCandidate(){
-      this.applicationForm.status = ApplicationStatus.SHORTLISTED;
-      console.log(this.applicationForm);
-
-      this._applicationService.update(this.applicationForm).subscribe({
+      this._applicationService.shortlistApplication(this.applicationForm.applicationId!).subscribe({
         next: data => {
           Swal.fire("Shortlisted Successfully", "", "success");
-          //this.reloadPage();
+          this.reloadPage();
         },
         error: (err: any) => {
           Swal.fire("Error", err.message, "error");
@@ -151,8 +165,7 @@ export class ApplicationDetailsComponent implements OnInit {
     }
 
     declineApplication(){
-      this.applicationForm.status = ApplicationStatus.DECLINED;
-      this._applicationService.update(this.applicationForm).subscribe({
+      this._applicationService.declineApplication(this.applicationForm.applicationId!).subscribe({
         next: data => {
           Swal.fire("Declined Successfully", "", "success");
           this.reloadPage();

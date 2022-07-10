@@ -20,11 +20,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ApplicationShortlistedComponent } from './components/application-shortlisted/application-shortlisted.component';
 
 @NgModule({
   declarations: [
     ApplicationDetailsComponent,
     ApplicationListComponent,
+    ApplicationShortlistedComponent
   ],
   imports: [
     CommonModule,

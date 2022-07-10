@@ -47,14 +47,15 @@ export class VacancyDetailsComponent implements OnInit {
       if(this.isCandidate){
         this.getCandidateResume();
       }
-      
+      else{
+        this.getVacancyDetails(this.route.snapshot.params['id']);
+      }
     }
 
     private getCandidateResume(){
       this._resumeService.getResumeByCandidateId(this.currentUser.userId).subscribe({
         next: data => {
           this.candidateResume = data;
-
           this.getVacancyDetails(this.route.snapshot.params['id']);
         },
         error: (err: any) => {
@@ -74,21 +75,20 @@ export class VacancyDetailsComponent implements OnInit {
             data.tags.forEach((tag) => {
               tag.matched = this.candidateResume!.tags.map(x=>x.name).includes(tag.name);
             });
+
+            this._applicationsService.getByObjState("ACTIVE").subscribe({
+              next: data => {
+                this.applied = data.filter(x=> x.vacancy.vacancyId == this.vacancyForm!.vacancyId && x.candidate.userId == this.currentUser.userId).length > 0;
+              },
+              error: err => {
+                Swal.fire("Error", err.error.message, "error");
+              }
+            });
           }
           
           data.tags.sort((n2,n1) => n1.totalUsed - n2.totalUsed);
           
           this.isMyVancacy = data.organization.owner.userId == this.currentUser.userId;
-          
-          this._applicationsService.getByObjState("ACTIVE").subscribe({
-            next: data => {
-              this.applied = data.filter(x=> x.vacancy.vacancyId == this.vacancyForm!.vacancyId && x.candidate.userId == this.currentUser.userId).length > 0;
-            },
-            error: err => {
-              Swal.fire("Error", err.error.message, "error");
-            }
-          });
-
           this.vacancyForm = data;
         },
         error: (err: any) => {

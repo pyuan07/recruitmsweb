@@ -1,4 +1,3 @@
-import { ApplicationStatus } from './../../../_shared/enum/enum';
 import {OnInit , Component, ViewChild, Input} from '@angular/core';
 import { Router } from "@angular/router";
 import { Application } from "src/app/models/application-model";
@@ -10,17 +9,18 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/models/user-model';
+import { ApplicationStatus } from 'src/app/_shared/enum/enum';
 
 
 @Component({
-  selector: 'app-application-list',
-  templateUrl: './application-list.component.html',
-  styleUrls: ['./application-list.component.css']
+  selector: 'app-application-shortlisted',
+  templateUrl: './application-shortlisted.component.html',
+  styleUrls: ['./application-shortlisted.component.css']
 })
 
-export class ApplicationListComponent implements OnInit {
+export class ApplicationShortlistedComponent implements OnInit {
 
-  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag','remarks' ,'status', 'objectState', 'actions'];
+  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag', 'remarks' ,'status', 'actions'];
 
   dataSource!: MatTableDataSource<Application>;
   filterText: string = '';
@@ -43,15 +43,17 @@ export class ApplicationListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllApplication();
+    this.getShortlistedApplication();
     if(this.isCandidate){
       this.displayedColumns = ['vacancyName', 'expectedSalary', 'matchedTag','remarks' ,'status', 'objectState', 'actions'];
     }
   }
 
-  private getAllApplication(){
+  private getShortlistedApplication(){
     this._applicationService.getAll().subscribe({
       next: data => {
+        
+        data = data.filter(data => data.status.toString() == "SHORTLISTED");
 
         data.forEach((data) => {
           data.matchedTag = data.resume.tags.filter(resumeTag => data.vacancy.tags.some(tag => tag.name == resumeTag.name)).length;
@@ -66,6 +68,7 @@ export class ApplicationListComponent implements OnInit {
         else{
           this.dataSource = new MatTableDataSource(data);
         }
+
         
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -113,25 +116,7 @@ export class ApplicationListComponent implements OnInit {
   // }
 
   filterByStatus(){
-    if(this.filterStatus == 'ALL'){
-      this.getAllApplication();
-    }
-    else{
-      this._applicationService.getByStatus(this.filterStatus).subscribe({
-        next: data => {
-          this.dataSource = new MatTableDataSource(data);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        },
-        error: (err: any) => {
-          Swal.fire("Error", err.error.message, "error");
-        }
-      });
-    }
-    
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+
   }
 
   goToCreateApplication(){
