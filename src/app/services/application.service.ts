@@ -47,4 +47,8 @@ export class ApplicationService {
   declineApplication(id: number): Observable<Application> {
     return this.http.get<Application>(APPLICATION_API + '/decline/' + id);
   }
+
+  getByVacancyId(id: number): Observable<Application[]> {
+    return this.http.get<Application[]>(APPLICATION_API + '/vacancy/' + id);
+  }
 }

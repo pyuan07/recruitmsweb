@@ -133,10 +133,11 @@ export class VacancyDetailsComponent implements OnInit {
 
     deleteVacancy(){
       Swal.fire({
-        title: 'Do you want to terminate this vacancy?\n Title: ' + this.vacancyForm!.name,
+        title: 'Do you want to terminate this vacancy?',
+        text: "All application related to this vacancy will be updated to CANCEL status after you terminated the vacancy.",
         icon: 'question',
         showCancelButton: true,
-        confirmButtonText: 'Yes',
+        confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
           this._vacancyService.delete(this.vacancyForm!.vacancyId).subscribe({

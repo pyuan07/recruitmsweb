@@ -103,6 +103,7 @@ export class VacancyListComponent implements OnInit {
   deleteVacancy(id: number, name: string){
     Swal.fire({
       title: 'Do you want to terminate this vacancy?\n Title: ' + name,
+      text: "All application related to this vacancy will be updated to CANCEL status after you terminated the vacancy.",
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes'

@@ -90,28 +90,6 @@ export class ApplicationListComponent implements OnInit {
     }
   }
 
-  // filterByState(){
-  //   if(this.filterState == 'ALL'){
-  //     this.getAllApplication();
-  //   }
-  //   else{
-  //     this._applicationService.getByObjState(this.filterState).subscribe({
-  //       next: data => {
-  //         this.dataSource = new MatTableDataSource(data);
-  //         this.dataSource.paginator = this.paginator;
-  //         this.dataSource.sort = this.sort;
-  //       },
-  //       error: (err: any) => {
-  //         Swal.fire("Error", err.error.message, "error");
-  //       }
-  //     });
-  //   }
-    
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
   filterByStatus(){
     if(this.filterStatus == 'ALL'){
       this.getAllApplication();
@@ -164,4 +142,7 @@ export class ApplicationListComponent implements OnInit {
     });
   }
 
+  scheduleApplication(id: number){
+    this.router.navigate(['/schedule/book/'+id]);
+  }
 }

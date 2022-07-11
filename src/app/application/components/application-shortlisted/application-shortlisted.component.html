@@ -93,15 +93,12 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
       <td mat-cell *matCellDef="let row"> 
-        <a href="#" class="view" data-toggle="tooltip" data-original-title="View" [routerLink]="['details', row.applicationId]">
+        <a href="application/details/{{row.applicationId}}" class="view" data-toggle="tooltip" data-original-title="View">
           <i class="bi bi-eye"></i>
         </a> &nbsp;
         <!-- <a class="edit" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['edit', row.applicationId]">
           <i class="bi bi-pencil-square"></i>         
         </a> &nbsp; -->
-        <a *ngIf="!isCandidate" class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteApplication(row.applicationId, row.applicationname)">
-          <i class="bi bi-trash"></i>
-        </a> 
       </td>
     </ng-container>
 

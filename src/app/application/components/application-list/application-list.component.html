@@ -99,8 +99,11 @@
         <!-- <a class="edit" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['edit', row.applicationId]">
           <i class="bi bi-pencil-square"></i>         
         </a> &nbsp; -->
-        <a *ngIf="!isCandidate" class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteApplication(row.applicationId, row.applicationname)">
+        <a *ngIf="!isCandidate" class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteApplication(row.applicationId, row.name)">
           <i class="bi bi-trash"></i>
+        </a> 
+        <a *ngIf="isCandidate && row.status == 'SHORTLISTED'" class="schedule" data-toggle="tooltip" data-original-title="Schedule" (click)="scheduleApplication(row.applicationId)">
+          <i class="bi bi-calendar-check"></i>
         </a> 
       </td>
     </ng-container>

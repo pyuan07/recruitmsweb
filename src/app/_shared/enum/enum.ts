@@ -40,3 +40,8 @@ export enum ApplicationStatus{
     CANCEL,
     COMPLETED
 }
+
+export enum InterviewApproach{
+    ONLINE = 'ONLINE',
+    FACE_TO_FACE = 'FACE_TO_FACE'
+}

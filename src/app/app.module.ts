@@ -1,3 +1,4 @@
+import { ScheduleModule } from './schedule/schedule.module';
 import { ApplicationModule } from './application/application.module';
 import { ResumeModule } from './resume/resume.module';
 
@@ -43,7 +44,8 @@ import { ResendComponent } from './auth/resend/resend.component';
     VacancyModule,
     ResumeModule,
     OrganizationModule,
-    ApplicationModule
+    ApplicationModule,
+    ScheduleModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

@@ -122,31 +122,35 @@ export class ApplicationShortlistedComponent implements OnInit {
   goToCreateApplication(){
     this.router.navigate(['/application/create']);
   }
-  
-  deleteApplication(id: number, name: string){
-    Swal.fire({
-      title: 'Do you want to terminate this application?\n Title: ' + name,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Yes'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this._applicationService.delete(id).subscribe({
-          next: data => {
-            if(data){
-              Swal.fire("Terminated Successfully", "", "success");
-              window.location.reload();
-            }
-            else{
-              Swal.fire("Failed to Terminate", "Something went wrong...", "error");
-            }
-          },
-          error: (err: any) => {
-            Swal.fire("Error", err.error.message, "error");
-          }
-        });
-      }
-    });
+
+  scheduleApplication(id:number){
+
   }
+  
+  // deleteApplication(id: number, name: string){
+  //   Swal.fire({
+  //     title: 'Do you want to terminate this application?\n Title: ' + name,
+  //     icon: 'question',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Yes'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       this._applicationService.delete(id).subscribe({
+  //         next: data => {
+  //           if(data){
+  //             Swal.fire("Terminated Successfully", "", "success");
+  //             window.location.reload();
+  //           }
+  //           else{
+  //             Swal.fire("Failed to Terminate", "Something went wrong...", "error");
+  //           }
+  //         },
+  //         error: (err: any) => {
+  //           Swal.fire("Error", err.error.message, "error");
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 
 }
