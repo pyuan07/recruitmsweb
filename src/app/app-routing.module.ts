@@ -29,6 +29,7 @@ import { ResendComponent } from './auth/resend/resend.component';
 import { ApplicationShortlistedComponent } from './application/components/application-shortlisted/application-shortlisted.component';
 import { ScheduleAvailableComponent } from './schedule/components/schedule-available/schedule-available.component';
 import { ScheduleBookComponent } from './schedule/components/schedule-book/schedule-book.component';
+import { ScheduleListComponent } from './schedule/components/schedule-list/schedule-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -72,6 +73,7 @@ const routes: Routes = [
   //Schedule Routing
   { path: 'schedule/available', component: ScheduleAvailableComponent },
   { path: 'schedule/book/:id', component: ScheduleBookComponent },
+  { path: 'schedule', component: ScheduleListComponent },
 
   { path: 'test', component: TestComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }

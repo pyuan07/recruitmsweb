@@ -18,6 +18,9 @@
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/application" class="nav-link" routerLink="application">Application</a>
         </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="/schedule" class="nav-link" routerLink="schedule">Schedule</a>
+        </li>
       </ul>
     </div>
 
@@ -38,7 +41,7 @@
             <li><a href="/application/shortlisted" class="dropdown-item" routerLink="application/shortlisted">Shortlisted List</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a href="/schedule/available" class="dropdown-item" routerLink="schedule/available">Schedule Timeslot</a></li>
-
+            <li><a href="/schedule" class="dropdown-item" routerLink="schedule">My Schedule</a></li>
           </ul>
         </li>
       </ul>
@@ -54,6 +57,9 @@
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a href="/application" class="nav-link"  routerLink="application">Application</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a href="/schedule" class="nav-link" routerLink="schedule">My Schedule</a>
         </li>
       </ul>
     </div>

@@ -20,12 +20,14 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ScheduleAvailableComponent } from './components/schedule-available/schedule-available.component';
 import { ScheduleBookComponent } from './components/schedule-book/schedule-book.component';
+import { ScheduleListComponent } from './components/schedule-list/schedule-list.component';
 
 
 @NgModule({
   declarations: [
     ScheduleAvailableComponent,
-    ScheduleBookComponent
+    ScheduleBookComponent,
+    ScheduleListComponent,
   ],
   imports: [
     CommonModule,

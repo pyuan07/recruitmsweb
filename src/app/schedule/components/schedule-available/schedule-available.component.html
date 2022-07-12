@@ -16,7 +16,7 @@
         </option>
     </select>
 </div>
-    
+
 <div class="form-group mb-4">
     <label class="form-label" for="description">Vacancy Description</label>
     <textarea 
@@ -78,7 +78,7 @@
             <td>{{timeslot.interviewApproach}}</td>
             <td>{{timeslot.bookedBy == null ? '': timeslot.bookedBy!.fullName }}</td>
             <td>
-                <a *ngIf="!isCandidate" class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteTimeslot(timeslot.scheduleTimeslotId!)">
+                <a *ngIf="!isCandidate && timeslot.bookedBy== null" class="delete" data-toggle="tooltip" data-original-title="Delete" (click)="deleteTimeslot(timeslot.scheduleTimeslotId!)">
                     <i class="bi bi-trash"></i>
                 </a> 
             </td>

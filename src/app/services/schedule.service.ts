@@ -24,7 +24,7 @@ export class ScheduleService {
     return this.http.get<Schedule>(SCHEDULE_API + '/application/' + id);
   }
 
-  getById(id: string): Observable<Schedule> {
+  getById(id: number): Observable<Schedule> {
     return this.http.get<Schedule>(SCHEDULE_API + '/id/'+ id);
   }
 
@@ -36,7 +36,7 @@ export class ScheduleService {
     return this.http.put<Schedule>(SCHEDULE_API, schedule);
   }
 
-  delete(id: string): Observable<boolean>{
+  delete(id: number): Observable<boolean>{
     return this.http.delete<boolean>(SCHEDULE_API + '/' + id);
   }
 }
