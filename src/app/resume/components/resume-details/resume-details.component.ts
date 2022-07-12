@@ -43,7 +43,7 @@ export class ResumeDetailsComponent implements OnInit {
 
     deleteResume(){
       Swal.fire({
-        title: 'Do you want to terminate this resume?',
+        title: 'Do you want to delete this resume?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Yes',

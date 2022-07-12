@@ -1,3 +1,4 @@
+import { OverviewVacancyComponent } from './overview/overview-vacancy/overview-vacancy.component';
 import { ResumeListComponent } from './resume/components/resume-list/resume-list.component';
 import { VacancyDetailsComponent } from './vacancy/components/vacancy-details/vacancy-details.component';
 import { VacancyEditComponent } from './vacancy/components/vacancy-edit/vacancy-edit.component';
@@ -74,6 +75,9 @@ const routes: Routes = [
   { path: 'schedule/available', component: ScheduleAvailableComponent },
   { path: 'schedule/book/:id', component: ScheduleBookComponent },
   { path: 'schedule', component: ScheduleListComponent },
+  
+  { path: 'vacancy/overview', component: OverviewVacancyComponent },
+
 
   { path: 'test', component: TestComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }

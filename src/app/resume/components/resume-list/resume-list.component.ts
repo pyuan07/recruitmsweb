@@ -42,7 +42,7 @@ export class ResumeListComponent implements OnInit {
   private getAllResume(){
     this._resumeService.getAll().subscribe({
       next: data => {
-        this.myResume = data.find(resume => resume.candidate.userId == this.currentUser.userId);
+        this.myResume = data.find(resume => resume.candidate.userId == this.currentUser.userId && resume.objectState.toString() == 'ACTIVE');
         this.dataSource = new MatTableDataSource(data);
         
         this.dataSource.paginator = this.paginator;

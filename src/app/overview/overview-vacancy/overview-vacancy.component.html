@@ -1,0 +1,193 @@
+
+<div><h1><b>Overview</b> of Vacancy</h1></div>
+
+<div class="form-group mb-3">
+    <label class="form-label" for="name">Vacancy</label>
+    <select 
+        class="form-select" 
+        required
+        aria-label="Select a Vacancy"
+        (change)= "onChangeVacancy($event)"
+    >
+        <option value="" disabled selected>-- Select Vacancy --</option>
+        <option *ngFor="let vacancy of vacancyList" 
+            [value]="vacancy.vacancyId" >
+            {{vacancy.name}}
+        </option>
+    </select>
+</div>
+
+<div class="form-group mb-3">
+    <label class="form-label" for="description">Vacancy Description</label>
+    <textarea 
+        class="form-control" 
+        rows="3"
+        name="description"
+        #description="ngModel"
+        [(ngModel)]="vacancyDesc"
+        readonly
+    >
+    </textarea>
+</div>
+
+<div class="form-group mb-3">
+    <label class="form-label" for="numberOfOpening">Number of Opening</label>
+    <input
+        type="number"
+        OnlyNumber="true"
+        class="form-control"
+        name="numberOfOpening"
+        [(ngModel)]="vacancyOpening"
+        readonly
+        #numberOfOpening="ngModel"
+    />
+</div>
+
+<br>
+<hr />
+<h3><b>Application</b></h3>
+
+<div class="form-group mb-3">
+  <label class="form-label" for="numberOfApplied">Number of Application</label>
+  <input
+      type="number"
+      OnlyNumber="true"
+      class="form-control"
+      name="numberOfApplied"
+      [(ngModel)]="appliedQty"
+      readonly
+      #numberOfApplied="ngModel"
+  />
+</div>
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h4 class="accordion-header" id="panelsStayOpen-headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+        Hired Candidates &nbsp; <span class="badge rounded-pill bg-primary"> {{hiredCandidate == null ? '-' : hiredCandidate.length}} </span>
+      </button>
+    </h4>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+      <div class="accordion-body">
+          <!-- table -->
+          <table class="table">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Candidate Name</th>
+                <th scope="col">Country</th>
+                <th scope="col">Expected Salary</th>
+                <th scope="col">Matched Tag</th>
+                <th scope="col" style="width: 50px;">Resume</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let data of hiredCandidate; let i = index">
+                <tr>
+                    <th scope="row">{{i + 1}}</th>
+                    <td>{{data.candidate.fullName}}</td>
+                    <td>{{data.resume.country.name}}</td>
+                    <td>RM {{data.resume.salaryExpectation}}</td>
+                    <td>{{data.matchedTag}}</td>
+                    <td>
+                        <a href="http://localhost:055117/api/v1/resume/download/pdf/{{data.resume.resumePdf}}" >
+                          <i class="bi bi-download"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h4 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Rejected Candidates &nbsp; <span class="badge rounded-pill bg-primary"> {{rejectedCandidate == null ? '-' : rejectedCandidate.length}} </span>
+      </button>
+    </h4>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        <!-- table -->
+        <table class="table">
+          <thead>
+              <tr>
+              <th scope="col">#</th>
+              <th scope="col">Candidate Name</th>
+              <th scope="col">Country</th>
+              <th scope="col">Expected Salary</th>
+              <th scope="col">Matched Tag</th>
+              <th scope="col" style="width: 50px;">Resume</th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let data of rejectedCandidate; let i = index">
+              <tr>
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{data.candidate.fullName}}</td>
+                  <td>{{data.resume.country.name}}</td>
+                  <td>RM {{data.resume.salaryExpectation}}</td>
+                  <td>{{data.matchedTag}}</td>
+                  <td>
+                      <a href="http://localhost:055117/api/v1/resume/download/pdf/{{data.resume.resumePdf}}" >
+                        <i class="bi bi-download"></i>
+                      </a>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h4 class="accordion-header" id="panelsStayOpen-headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+        In Progress Candidates &nbsp; <span class="badge rounded-pill bg-primary"> {{progressCandidate == null ? '-' : progressCandidate.length}} </span>
+      </button>
+    </h4>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+      <div class="accordion-body">
+        <!-- table -->
+        <table class="table">
+          <thead>
+              <tr>
+              <th scope="col">#</th>
+              <th scope="col">Candidate Name</th>
+              <th scope="col">Country</th>
+              <th scope="col">Expected Salary</th>
+              <th scope="col">Matched Tag</th>
+              <th scope="col">Status</th>
+              <th scope="col" style="width: 50px;">Resume</th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let data of progressCandidate; let i = index">
+              <tr>
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{data.candidate.fullName}}</td>
+                  <td>{{data.resume.country.name}}</td>
+                  <td>RM {{data.resume.salaryExpectation}}</td>
+                  <td>{{data.matchedTag}}</td>
+                  <td>{{data.status}}</td>
+                  <td>
+                      <a href="http://localhost:055117/api/v1/resume/download/pdf/{{data.resume.resumePdf}}" >
+                        <i class="bi bi-download"></i>
+                      </a>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="divApplicationPieChart" class="pt-2"></div>
+
+<div class="form-group pt-3 no-print">
+    <div class="d-grid gap-2">
+      <button type="button" class="btn btn-primary" onclick="window.print();">
+          Print
+      </button>
+      <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">
+          Cancel
+      </button>
+    </div>
+</div>

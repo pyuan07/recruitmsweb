@@ -34,6 +34,8 @@ export class VacancyEditComponent implements OnInit {
   countryList!: Country[];
   allOrganization!: Organization[];
 
+  isAdmin: boolean = false;
+
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
   constructor(private _vacancyService: VacancyService,
@@ -43,7 +45,7 @@ export class VacancyEditComponent implements OnInit {
     private tokenService:TokenStorageService, 
     private route: ActivatedRoute ,
     private router: Router) {  
-    
+    this.isAdmin = this.tokenService.isAdmin();
   }
    
   ngOnInit(): void {

@@ -44,7 +44,7 @@ export class OrganizationListComponent implements OnInit {
   private getAllOrganization(){
     this._organizationService.getAll().subscribe({
       next: data => {
-        this.ownCompany = data.find(organization => organization.owner.userId == this.currentUser.userId);
+        this.ownCompany = data.find(organization => organization.owner.userId == this.currentUser.userId && organization.objectState.toString() == 'ACTIVE');
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

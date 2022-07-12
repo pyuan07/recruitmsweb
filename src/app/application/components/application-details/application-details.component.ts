@@ -31,6 +31,8 @@ export class ApplicationDetailsComponent implements OnInit {
 
   isShortlisted: boolean = false;
   isDeclined: boolean = false;
+  isCompleted: boolean = false;
+  isCancelled: boolean = false;
 
   constructor(
     private _applicationService: ApplicationService,
@@ -57,6 +59,8 @@ export class ApplicationDetailsComponent implements OnInit {
           this.pdfUrl = environment.apiEndpoint +'/v1/resume/download/pdf/'+ data.resume.resumePdf;
           this.isShortlisted = data.status.toString() == "SHORTLISTED";
           this.isDeclined = data.status.toString() == "DECLINED";
+          this.isCompleted = data.status.toString() == "COMPLETED";
+          this.isCancelled = data.status.toString() == "CANCEL";
 
           //Colour same tag
           data.vacancy.tags.forEach((tag) => {

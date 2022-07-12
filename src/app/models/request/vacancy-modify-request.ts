@@ -13,7 +13,7 @@ export interface VacancyModifyRequest{
     numberOfOpening: number;
     minSalary: number;
     maxSalary: number;
-    enableQuiz:boolean;
+    // enableQuiz:boolean;
     remarks:string;
     objectState: ObjectState;
     createdBy: string;

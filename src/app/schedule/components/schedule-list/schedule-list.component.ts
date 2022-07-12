@@ -24,7 +24,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 
 export class ScheduleListComponent implements OnInit {
 
-  displayedColumns: string[] = ['vacancy', 'organization', 'candidate','timeslot', 'approach', 'meetingUrl','actions'];
+  displayedColumns: string[] = ['vacancy', 'organization', 'candidate','timeslot', 'approach', 'meetingUrl'];
   dataSource!: MatTableDataSource<Schedule>;
   
   isCandidate: boolean = false;
@@ -51,7 +51,7 @@ export class ScheduleListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllSchedule();
     if(this.isCandidate){
-      this.displayedColumns = ['vacancy', 'organization', 'timeslot', 'approach', 'meetingUrl','actions'];
+      this.displayedColumns = ['vacancy', 'organization', 'timeslot', 'approach', 'meetingUrl'];
     }
     if(this.isEmployer){
       this.displayedColumns = ['vacancy', 'candidate', 'timeslot', 'approach', 'meetingUrl','actions'];
@@ -115,7 +115,7 @@ export class ScheduleListComponent implements OnInit {
   completeMeeting(id: number, offer: boolean){
     Swal.fire({
       title: 'Do you want to complete this meeting,\n as well as the application?',
-      text: "The related application will also be updated to \"COMPLETED\" status after you complete the meeting schedule.",
+      text: "The related application will also be updated to \"COMPLETED\" or \"DECLINED\" status after you complete the meeting schedule.",
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes'
@@ -129,20 +129,27 @@ export class ScheduleListComponent implements OnInit {
                 if(data){
                   let application = schedule.application;
                   if(offer){
-                    application.status = ApplicationStatus.COMPLETED;
+                    this._applicationService.acceptApplication(application.applicationId!).subscribe({
+                      next: data => {
+                        Swal.fire("Completed", "You have completed an application. Please contact your candidate for job offer.", "success");
+                      },
+                      error: (err: any) => {
+                        Swal.fire("Error when update the application", err.error.message, "error");
+                      }
+                    });
                   }
                   else{
-                    application.status = ApplicationStatus.DECLINED;
+                    this._applicationService.declineApplication(application.applicationId!).subscribe({
+                      next: data => {
+                        Swal.fire("Completed", "You have rejected an application.", "success");
+                      },
+                      error: (err: any) => {
+                        Swal.fire("Error when update the application", err.error.message, "error");
+                      }
+                    });
                   }
 
-                  this._applicationService.update(application).subscribe({
-                    next: data => {
-                      Swal.fire("Completed", "You have completed an application.", "success");
-                    },
-                    error: (err: any) => {
-                      Swal.fire("Error when update the application", err.error.message, "error");
-                    }
-                  });
+                  this.reloadPage();
                 }
               },
               error: (err: any) => {

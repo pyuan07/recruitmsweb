@@ -57,35 +57,22 @@ export class ScheduleBookComponent implements OnInit {
    
 
     ngOnInit(): void {
-      this.getScheduleTimeslotByVacancyId(this.applicationId);
+      this._applicationService.getById(this.applicationId).subscribe({
+        next: application =>{
+          this.currentVacancy = application.vacancy;
+          this.getScheduleTimeslotByVacancyId(application.vacancy.vacancyId);
+        },
+        error: err => {
+          Swal.fire("Error", err.error.message, "error");
+        }
+      })
+      
     }
 
     private getScheduleTimeslotByVacancyId(id:number){
       this._scheduleTimeslotService.getByVacancyId(id).subscribe({
         next: timeslot => {
           this.availableTimeslot = timeslot;
-        }
-      });
-    }
-
-    onCreate(createForm: NgForm): void {
-      if(this.currentVacancy == null || this.currentUser == undefined){
-        Swal.fire({
-          icon: 'error',
-          title: 'Please select a vacancy before creating the timeslot!'
-        });
-        return;
-      }
-      createForm.value.vacancy = this.currentVacancy;
-      createForm.value.availableDateTime = moment(createForm.value.availableDateTime).toDate();
-      createForm.value.objectState = ObjectState.ACTIVE;
-      this._scheduleTimeslotService.create(createForm.value).subscribe({
-        next: data => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Timeslot Created Successfully!'
-          });
-          this.getScheduleTimeslotByVacancyId(this.currentVacancy!.vacancyId)
         },
         error: err => {
           Swal.fire("Error", err.error.message, "error");
@@ -125,7 +112,7 @@ export class ScheduleBookComponent implements OnInit {
                             next: schedule => {
                               if(schedule){
                                 Swal.fire("Booked Successfully", "", "success");
-                                this.getScheduleTimeslotByVacancyId(this.applicationId);
+                                this.getScheduleTimeslotByVacancyId(this.currentVacancy!.vacancyId);
                               }
                               else{
                                 Swal.fire("Failed to Book", "Something went wrong...", "error");

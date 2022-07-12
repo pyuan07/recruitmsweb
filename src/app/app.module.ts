@@ -20,6 +20,7 @@ import { OrganizationModule } from './organization/organization.module';
 import { VacancyModule } from './vacancy/vacancy.module';
 import { OnlyNumber } from './_shared/directive/onlynumber.directive';
 import { ResendComponent } from './auth/resend/resend.component';
+import { OverviewModule } from './overview/overview.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ResendComponent } from './auth/resend/resend.component';
     ResumeModule,
     OrganizationModule,
     ApplicationModule,
-    ScheduleModule
+    ScheduleModule,
+    OverviewModule
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
