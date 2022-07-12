@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark no-print">
+  <a href="#" class="navbar-brand">RecruIT Management System</a>
+  <div *ngIf="isAdmin">
+    <ul class="navbar-nav me-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/user" class="nav-link"  routerLink="user">User</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/vacancy" class="nav-link" routerLink="vacancy">Vacancy</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/organization" class="nav-link" routerLink="organization">Organization</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/resume" class="nav-link" routerLink="resume">Resume</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/application" class="nav-link" routerLink="application">Application</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/schedule" class="nav-link" routerLink="schedule">Schedule</a>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="isEmployer">
+    <ul class="navbar-nav me-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/organization" class="nav-link" routerLink="organization">Organization</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/vacancy" class="nav-link" routerLink="vacancy">Vacancy</a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isLoggedIn">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Application
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarApplicationDropdownMenu">
+          <li><a href="/application" class="dropdown-item" routerLink="application">All List</a></li>
+          <li><a href="/application/shortlisted" class="dropdown-item" routerLink="application/shortlisted">Shortlisted List</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a href="/vacancy/overview" class="dropdown-item" routerLink="vacancy/overview">Overview</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown" *ngIf="isLoggedIn">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Schedule
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarApplicationDropdownMenu">
+          <li><a href="/schedule/available" class="dropdown-item" routerLink="schedule/available">Schedule Timeslot</a></li>
+          <li><a href="/schedule" class="dropdown-item" routerLink="schedule">My Schedule</a></li>
+        </ul>
+      </li>
+
+      
+    </ul>
+  </div>
+
+  <div *ngIf="isCandidate">
+    <ul class="navbar-nav me-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/resume" class="nav-link" routerLink="resume">Resume</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/vacancy/find" class="nav-link" routerLink="vacancy/find">Find Vacancy</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/application" class="nav-link"  routerLink="application">Application</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+        <a href="/schedule" class="nav-link" routerLink="schedule">My Schedule</a>
+      </li>
+    </ul>
+  </div>
+
+  <ul class="navbar-nav ms-auto" *ngIf="!isLoggedIn">
+    <li class="nav-item">
+      <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+    </li>
+    <li class="nav-item">
+      <a href="/login" class="nav-link" routerLink="login">Login</a>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn">
+    <li class="nav-item">
+      <a href="/user/details/{{currentUser.userId}}" class="nav-link" [routerLink]="['user','details', currentUser.userId]">{{ username }}</a>
+    </li>
+    <li class="nav-item">
+      <a href class="nav-link" (click)="logout()">LogOut</a>
+    </li>
+  </ul>
+</nav>

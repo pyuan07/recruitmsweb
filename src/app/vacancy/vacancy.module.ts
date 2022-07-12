@@ -1,4 +1,3 @@
-import { TestComponent } from './../user/components/test/test.component';
 import { VacancyCreateComponent } from './components/vacancy-create/vacancy-create.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,8 +29,7 @@ import { VacancyFindComponent } from './components/vacancy-find/vacancy-find.com
     VacancyCreateComponent,
     VacancyEditComponent,
     VacancyDetailsComponent,
-    VacancyFindComponent,
-    TestComponent
+    VacancyFindComponent
   ],
   imports: [
     CommonModule,

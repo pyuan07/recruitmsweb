@@ -6,7 +6,6 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { RouterModule } from '@angular/router';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { TestComponent } from './components/test/test.component';
 
 // Angular/Material
 import { MatInputModule } from '@angular/material/input';

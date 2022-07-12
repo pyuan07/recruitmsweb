@@ -15,7 +15,6 @@ import { ProfileComponent } from './user/components/profile/user-view.component'
 import { UserDetailsComponent } from './user/components/user-details/user-details.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { TestComponent } from './user/components/test/test.component';
 import { OrganizationListComponent } from './organization/components/organization-list/organization-list.component';
 import { OrganizationCreateComponent } from './organization/components/organization-create/organization-create.component';
 import { OrganizationEditComponent } from './organization/components/organization-edit/organization-edit.component';
@@ -78,9 +77,9 @@ const routes: Routes = [
   
   { path: 'vacancy/overview', component: OverviewVacancyComponent },
 
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 
-  { path: 'test', component: TestComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  // { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

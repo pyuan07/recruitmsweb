@@ -1,3 +1,4 @@
+import { HeaderComponent } from './header/header.component';
 import { ScheduleModule } from './schedule/schedule.module';
 import { ApplicationModule } from './application/application.module';
 import { ResumeModule } from './resume/resume.module';
@@ -21,6 +22,7 @@ import { VacancyModule } from './vacancy/vacancy.module';
 import { OnlyNumber } from './_shared/directive/onlynumber.directive';
 import { ResendComponent } from './auth/resend/resend.component';
 import { OverviewModule } from './overview/overview.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { OverviewModule } from './overview/overview.module';
     RegisterComponent,
 
     HomeComponent,
+    HeaderComponent,
+    FooterComponent,
     ProfileComponent,
     OnlyNumber,
   ],
