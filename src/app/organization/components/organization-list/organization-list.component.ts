@@ -21,7 +21,7 @@ import { X } from '@angular/cdk/keycodes';
 
 export class OrganizationListComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'description', 'email' ,'country', 'objectState','actions'];
+  displayedColumns: string[] = ['name', 'email' ,'country', 'objectState','actions'];
   dataSource!: MatTableDataSource<Organization>;
   filterText: String = '';
   filterState: String = 'ALL';

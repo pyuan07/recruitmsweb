@@ -1,0 +1,77 @@
+
+<div><h1 class="EncodeSans-bold">Tag <b>Create</b></h1></div>
+
+<form
+    name="tagForm"
+    (ngSubmit)="createForm.form.valid && onSubmit(createForm)"
+    #createForm="ngForm"
+    novalidate
+>
+    <div class="form-group mb-4">
+        <label class="form-label" for="name">Name <span class="required-symbol"></span></label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            ngModel
+            required
+            #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && createForm.submitted">
+            <div *ngIf="name.errors['required']">Name is required</div>
+        </div>
+    </div>
+
+    <!-- <div class="form-group mb-4">
+        <label class="form-label" for="tagType">Tag Type <span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            ngModel
+            required
+            name="tagType"
+            #tagType="ngModel"
+            aria-label="Select Object State"
+        >
+            <option value="" disabled selected>-- Select Object State --</option>
+            <option value="0">Resume</option>
+            <option value="1">Vacancy</option>
+        </select>
+        <div class="alert-danger" *ngIf="tagType.errors && createForm.submitted">
+            <div *ngIf="tagType.errors['required']">Please select a Tag Type.</div>
+        </div>
+    </div> -->
+    
+    <div class="form-group mb-4" *ngIf="isAdmin">
+        <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            ngModel
+            required
+            name="objectState"
+            #objectState="ngModel"
+            aria-label="Select Object State"
+        >
+            <option value="" disabled selected>-- Select Object State --</option>
+            <option value="0">Created</option>
+            <option value="1">Terminated</option>
+            <option value="2">Active</option>
+            <option value="3">Pending</option>
+            <option value="4">Draft</option>
+            <option value="5">Frozen</option>
+        </select>
+        <div class="alert-danger" *ngIf="objectState.errors && createForm.submitted">
+            <div *ngIf="objectState.errors['required']">Please select ObjectState.</div>
+        </div>
+    </div>
+
+    <div class="form-group pt-3">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+                Create
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

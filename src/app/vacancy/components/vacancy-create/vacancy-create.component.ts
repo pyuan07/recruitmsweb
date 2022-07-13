@@ -1,3 +1,4 @@
+import { ExtractTagsRequest } from './../../../models/request/extract-tags-request';
 import { OrganizationService } from './../../../services/organization.service';
 import { Organization } from './../../../models/organization-model';
 import { CountryService } from './../../../services/country.service';
@@ -156,5 +157,29 @@ export class VacancyCreateComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue) && !this.selectedTags.includes(tag));
+  }
+
+  extractDescriptionTag(desc: string){
+    let request: ExtractTagsRequest = {
+      raw: desc
+    };
+    this._tagService.extractTags(request).subscribe({
+      next: data => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Extract Successfully!'
+        });
+        data.forEach(tag => {
+          if (tag && !this.selectedTags.includes(tag.name)) {
+            this.selectedTags.push(tag.name);
+          }
+        });
+
+      },
+      error: err => {
+        Swal.fire("Error", err.error.message, "error");
+      }
+    });
   }
 }

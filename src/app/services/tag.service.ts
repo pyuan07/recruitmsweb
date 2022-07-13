@@ -1,3 +1,4 @@
+import { ExtractTagsRequest } from './../models/request/extract-tags-request';
 import { ObjectState } from 'src/app/_shared/enum/enum';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -34,5 +35,9 @@ export class TagService {
 
   delete(id: string): Observable<boolean>{
     return this.http.delete<boolean>(TAG_API + '/' + id);
+  }
+
+  extractTags(req: ExtractTagsRequest): Observable<Tag[]> {
+    return this.http.post<Tag[]>(TAG_API + '/extract', req);
   }
 }

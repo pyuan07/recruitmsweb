@@ -1,3 +1,4 @@
+import { ReportModule } from './report/report.module';
 import { HeaderComponent } from './header/header.component';
 import { ScheduleModule } from './schedule/schedule.module';
 import { ApplicationModule } from './application/application.module';
@@ -23,6 +24,7 @@ import { OnlyNumber } from './_shared/directive/onlynumber.directive';
 import { ResendComponent } from './auth/resend/resend.component';
 import { OverviewModule } from './overview/overview.module';
 import { FooterComponent } from './footer/footer.component';
+import { TagModule } from './tag/tag.module';
 
 @NgModule({
   declarations: [
@@ -49,9 +51,11 @@ import { FooterComponent } from './footer/footer.component';
     VacancyModule,
     ResumeModule,
     OrganizationModule,
+    TagModule,
     ApplicationModule,
     ScheduleModule,
-    OverviewModule
+    OverviewModule,
+    ReportModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

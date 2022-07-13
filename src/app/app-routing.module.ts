@@ -1,3 +1,4 @@
+import { VacancyReportComponent } from './report/vacancy-report/vacancy-report.component';
 import { OverviewVacancyComponent } from './overview/overview-vacancy/overview-vacancy.component';
 import { ResumeListComponent } from './resume/components/resume-list/resume-list.component';
 import { VacancyDetailsComponent } from './vacancy/components/vacancy-details/vacancy-details.component';
@@ -30,6 +31,10 @@ import { ApplicationShortlistedComponent } from './application/components/applic
 import { ScheduleAvailableComponent } from './schedule/components/schedule-available/schedule-available.component';
 import { ScheduleBookComponent } from './schedule/components/schedule-book/schedule-book.component';
 import { ScheduleListComponent } from './schedule/components/schedule-list/schedule-list.component';
+import { TagCreateComponent } from './tag/components/tag-create/tag-create.component';
+import { TagDetailsComponent } from './tag/components/tag-details/tag-details.component';
+import { TagEditComponent } from './tag/components/tag-edit/tag-edit.component';
+import { TagListComponent } from './tag/components/tag-list/tag-list.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -63,6 +68,11 @@ const routes: Routes = [
    { path: 'resume/edit/:id', component: ResumeEditComponent },
    { path: 'resume/details/:id', component: ResumeDetailsComponent },
 
+   //Tag Routing
+  { path: 'tag', component: TagListComponent },
+  { path: 'tag/create', component: TagCreateComponent },
+  { path: 'tag/edit/:id', component: TagEditComponent },
+  { path: 'tag/details/:id', component: TagDetailsComponent },
    
    //Application Routing
    { path: 'application', component: ApplicationListComponent },
@@ -76,6 +86,9 @@ const routes: Routes = [
   { path: 'schedule', component: ScheduleListComponent },
   
   { path: 'vacancy/overview', component: OverviewVacancyComponent },
+
+  { path: 'report/vacancy', component: VacancyReportComponent },
+
 
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 

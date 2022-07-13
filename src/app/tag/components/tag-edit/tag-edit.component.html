@@ -1,0 +1,55 @@
+
+<div><h1>Tag <b>Edit</b></h1></div>
+
+<form
+    name="tagFrom"
+    (ngSubmit)="editForm.form.valid && onSubmit()"
+    #editForm="ngForm"
+    novalidate
+>
+    <div class="form-group mb-4">
+        <label class="form-label" for="name">Name<span class="required-symbol"></span></label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="tagFrom.name"
+            required
+            readonly
+            #name="ngModel"
+        />
+        <div class="alert-danger" *ngIf="name.errors && editForm.submitted">
+            <div *ngIf="name.errors['required']">Name is required</div>
+        </div>
+    </div>
+
+
+    <div class="form-group mb-4" *ngIf="isAdmin">
+        <label class="form-label" for="objectState">Object State<span class="required-symbol"></span></label>
+        <select 
+            class="form-select" 
+            required
+            name="objectState"
+            #objectState="ngModel"
+            aria-label="Select Object State"
+            [(ngModel)]="tagFrom.objectState"
+        >
+            <option value="CREATED" Select>Created</option>
+            <option value="TERMINATED">Terminated</option>
+            <option value="ACTIVE">Active</option>
+            <option value="PENDING">Pending</option>
+            <option value="DRAFT">Draft</option>
+            <option value="FROZON">Frozen</option>
+        </select>
+    </div>
+    <div class="form-group pt-3">
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="history.back()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

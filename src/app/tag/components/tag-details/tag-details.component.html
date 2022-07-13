@@ -1,0 +1,49 @@
+
+<div><h1>Tag <b>Details</b></h1></div>
+
+    <div class="form-group mb-3">
+        <label class="form-label" for="name">Name</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="tagForm!.name"
+            readonly
+        />
+    </div>
+
+    <!-- <div class="form-group mb-3">
+        <label class="form-label" for="name">Tag Type</label>
+        <input
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="tagForm!.tagType"
+            readonly
+        />
+    </div> -->
+    
+    <div class="form-group mb-3">
+        <label for="objectState">Object State</label>
+        <input 
+            class="form-control" 
+            [(ngModel)]="tagForm!.objectState"
+            readonly
+            name="objectState"
+        />
+    </div>
+
+<div class="form-group pt-3">
+    <div class="d-grid gap-2">
+        <button (click)="gotoEditPage()" class="btn btn-primary" *ngIf="isAdmin">
+            Edit
+        </button>
+        <button (click)="deleteTag()" class="btn btn-danger" *ngIf="isAdmin">
+            Terminate
+        </button>
+        <button type="button" class="btn btn-secondary" onclick="window.history.go(-1)">
+            Cancel
+        </button>
+    </div>
+</div>
+

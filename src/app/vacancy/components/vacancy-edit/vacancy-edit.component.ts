@@ -15,6 +15,7 @@ import { TagService } from 'src/app/services/tag.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { VacancyModifyRequest } from 'src/app/models/request/vacancy-modify-request';
+import { ExtractTagsRequest } from 'src/app/models/request/extract-tags-request';
 
 @Component({
   selector: 'app-vacancy-edit',
@@ -169,4 +170,27 @@ export class VacancyEditComponent implements OnInit {
       return this.allTags.filter(tag => tag.toLowerCase().includes(filterValue) && !this.selectedTags.includes(tag));
     }
 
+    extractDescriptionTag(desc: string){
+      let request: ExtractTagsRequest = {
+        raw: desc
+      };
+      this._tagService.extractTags(request).subscribe({
+        next: data => {
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: 'Extract Successfully!'
+          });
+          data.forEach(tag => {
+            if (tag && !this.selectedTags.includes(tag.name)) {
+              this.selectedTags.push(tag.name);
+            }
+          });
+  
+        },
+        error: err => {
+          Swal.fire("Error", err.error.message, "error");
+        }
+      });
+    }
   }

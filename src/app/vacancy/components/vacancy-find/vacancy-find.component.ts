@@ -21,7 +21,7 @@ import { User } from 'src/app/models/user-model';
 
 export class VacancyFindComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'description', 'organization', 'country', 'objectState', 'actions'];
+  displayedColumns: string[] = ['name', 'organization', 'country', 'objectState', 'actions'];
   dataSource!: MatTableDataSource<Vacancy>;
   filterText: String = '';
   filterState: String = 'ALL';

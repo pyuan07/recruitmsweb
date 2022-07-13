@@ -21,12 +21,15 @@ export class UserDetailsComponent implements OnInit {
   viewingCandidate: boolean = false;
   viewingEmployer: boolean = false;
 
+  currentUser: User | null;
+
   constructor(private _userService: UserService, 
               private _tokenStorageService: TokenStorageService,
               private _resumeService: ResumeService,
               private route: ActivatedRoute ,
               private router: Router) {  
     this.isAdmin = this._tokenStorageService.isAdmin();
+    this.currentUser = this._tokenStorageService.getUser();
   }
    
     ngOnInit(): void {
@@ -59,6 +62,11 @@ export class UserDetailsComponent implements OnInit {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.isConfirmed) {
+          if(this.currentUser && this.currentUser.userId == this.userFrom.userId){
+            Swal.fire("You are not allowed to terminate yourself", "", "error");
+            return;
+          }
+
           this._userService.delete(this.userFrom!.userId).subscribe({
             next: data => {
               if(data){

@@ -3,6 +3,25 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@font-face {
+    font-family: Sora;
+    src: url(assets/fonts/Sora-VariableFont_wght.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Sora-Bold;
+    src: url(assets/fonts/Sora-Bold.ttf) format("truetype");
+}
+
+
+.Sora{
+    font-family: Sora;
+}
+
+.Sora-Bold{
+    font-family: Sora-bold;
+}
+
 .required-symbol:after{
     content:" *";
     color: red;

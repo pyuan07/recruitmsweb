@@ -1,67 +1,60 @@
 import { ObjectState } from 'src/app/_shared/enum/enum';
+import { TokenStorageService } from 'src/app/services/token-storage.service';
 import {OnInit , Component, ViewChild, Input} from '@angular/core';
 import { Router } from "@angular/router";
-import { Vacancy } from "src/app/models/vacancy-model";
-import { VacancyService } from "src/app/services/vacancy.service";
+import { Tag } from "src/app/models/tag-model";
+import { TagService } from "src/app/services/tag.service";
 import Swal from "sweetalert2";
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { User } from 'src/app/models/user-model';
+import { X } from '@angular/cdk/keycodes';
 
 
 @Component({
-  selector: 'app-vacancy-list',
-  templateUrl: './vacancy-list.component.html',
-  styleUrls: ['./vacancy-list.component.css']
+  selector: 'app-tag-list',
+  templateUrl: './tag-list.component.html',
+  styleUrls: ['./tag-list.component.css']
 })
 
-export class VacancyListComponent implements OnInit {
+export class TagListComponent implements OnInit {
 
-  // displayedColumns: string[] = ['name', 'description', 'organization', 'country', 'objectState', 'actions'];
-  displayedColumns: string[] = ['name', 'organization', 'country', 'objectState', 'actions'];
-
-  dataSource!: MatTableDataSource<Vacancy>;
+  displayedColumns: string[] = ['name', 'totalUsed' ,'objectState','actions'];
+  dataSource!: MatTableDataSource<Tag>; 
   filterText: String = '';
   filterState: String = 'ALL';
+  tagList!: Tag[];
+  currentUser!: User;
+  isAdmin: boolean = false;
+  ownCompany?: Tag;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _vacancyService: VacancyService, private _tokenStorageService: TokenStorageService,private router: Router) {  
-    
+  constructor(private _tagService: TagService, private _tokenStorageService: TokenStorageService, private router: Router) {  
+    this.isAdmin = this._tokenStorageService.isAdmin();
   }
 
   ngOnInit(): void {
-    this.getAllVacancy();
+    this.currentUser = this._tokenStorageService.getUser()!;
+    this.getAllTag();
   }
 
-  private getAllVacancy(){
-    this._vacancyService.getAll().subscribe({
+  private getAllTag(){
+    this._tagService.getAll().subscribe({
       next: data => {
-        if(this._tokenStorageService.isAdmin())
-        {
-          this.dataSource = new MatTableDataSource(data);
-        }
-        else if(this._tokenStorageService.isEmployer())
-        {
-          this.dataSource = new MatTableDataSource(data.filter(data => data.organization.owner.userId == this._tokenStorageService.getUser()!.userId));
-        }
-        else
-        {
-          this.dataSource = new MatTableDataSource(data.filter(data => data.objectState == ObjectState.ACTIVE));
-        }
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        
       },
       error: (err: any) => {
         Swal.fire("Error", err.error.message, "error");
       }
     });
   }
-  
+
   applyFilter() {
     const filterValue = this.filterText;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -78,10 +71,10 @@ export class VacancyListComponent implements OnInit {
 
   filterByState(){
     if(this.filterState == 'ALL'){
-      this.getAllVacancy();
+      this.getAllTag();
     }
     else{
-      this._vacancyService.getByObjState(this.filterState).subscribe({
+      this._tagService.getByObjState(this.filterState).subscribe({
         next: data => {
           this.dataSource = new MatTableDataSource(data);
           this.dataSource.paginator = this.paginator;
@@ -98,20 +91,19 @@ export class VacancyListComponent implements OnInit {
     }
   }
 
-  goToCreateVacancy(){
-    this.router.navigate(['/vacancy/create']);
+  goToCreateTag(){
+    this.router.navigate(['/tag/create']);
   }
   
-  deleteVacancy(id: number, name: string){
+  deleteTag(id: string, name: string){
     Swal.fire({
-      title: 'Do you want to terminate this vacancy?\n Title: ' + name,
-      text: "All application related to this vacancy will be updated to CANCEL status after you terminated the vacancy.",
+      title: 'Do you want to terminate this tag?\n Name: ' + name,
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: 'Yes'
     }).then((result) => {
       if (result.isConfirmed) {
-        this._vacancyService.delete(id).subscribe({
+        this._tagService.delete(id).subscribe({
           next: data => {
             if(data){
               Swal.fire("Terminated Successfully", "", "success");
@@ -124,9 +116,9 @@ export class VacancyListComponent implements OnInit {
           error: (err: any) => {
             Swal.fire("Error", err.error.message, "error");
           }
-        });
+        })
       }
-    });
+    })
   }
 
 }
