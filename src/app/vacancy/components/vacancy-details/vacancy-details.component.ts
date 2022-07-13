@@ -11,7 +11,6 @@ import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { VacancyService } from 'src/app/services/vacancy.service';
 import Swal from 'sweetalert2';
 import { Resume } from 'src/app/models/resume-model';
-import { X } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-vacancy-details',

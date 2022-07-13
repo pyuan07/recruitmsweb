@@ -56,5 +56,7 @@ export class ApplicationService {
     return this.http.get<Application[]>(APPLICATION_API + '/vacancy/' + id);
   }
 
-
+  getApplicationByCandidateId(id: string): Observable<Application[]> {
+    return this.http.get<Application[]>(APPLICATION_API + '/candidate/' + id);
+  }
 }

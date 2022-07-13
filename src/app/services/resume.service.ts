@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Resume } from '../models/resume-model';
 import { ResumeCreateRequest } from '../models/request/resume-create-request';
 import { ResumeModifyRequest } from '../models/request/resume-modify-request';
+import { Tag } from '../models/tag-model';
 
 const RESUME_API = environment.apiEndpoint +'/v1/resume';
 
@@ -57,5 +58,9 @@ export class ResumeService {
 
   getResumeByCandidateId(userId: string): Observable<Resume> {
     return this.http.get<Resume>(RESUME_API + '/getResumeByCandidateId/'+ userId);
+  }
+
+  extractTagsFromResume(filename: string): Observable<Tag[]>{
+    return this.http.get<Tag[]>(RESUME_API + '/extract/pdf/'+ filename);
   }
 }

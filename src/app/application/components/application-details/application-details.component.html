@@ -18,7 +18,7 @@
             <label class="form-label" for="owner">Vacancy Description </label>
             <textarea
                 class="form-control" 
-                rows="3"
+                rows="10"
                 [(ngModel)]="applicationForm.vacancy.description"
                 readonly
             >
@@ -198,6 +198,49 @@
         name="objectState"
         #objectState="ngModel"
     />
+</div>
+
+<div class="row">
+    <div class="form-group mb-3 col-md-6">
+        <label for="createdBy">Createdby</label>
+        <input 
+            class="form-control" 
+            [ngModel]="applicationForm.createdBy "
+            readonly
+            name="createdBy"
+        />
+    </div>
+
+    <div class="form-group mb-3 col-md-6">
+        <label for="modifiedBy">Modified By</label>
+        <input 
+            class="form-control" 
+            [ngModel]="applicationForm.modifiedBy"
+            readonly
+            name="modifiedBy"
+        />
+    </div>
+</div>
+<div class="row">
+    <div class="form-group mb-3 col-md-6">
+        <label for="createdDate">Created Date</label>
+        <input 
+            class="form-control" 
+            [ngModel]="applicationForm.createdDate | date:'MMMM dd, YYYY'"
+            readonly
+            name="createdDate"
+        />
+    </div>
+
+    <div class="form-group mb-3 col-md-6">
+        <label for="lastModifiedDate">Last Modified Date</label>
+        <input 
+            class="form-control" 
+            [ngModel]="applicationForm.lastModifiedDate | date:'MMMM dd, YYYY'"
+            readonly
+            name="lastModifiedDate"
+        />
+    </div>
 </div>
 
 <div class="form-group pt-3">

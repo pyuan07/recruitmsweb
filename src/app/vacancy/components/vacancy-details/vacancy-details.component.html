@@ -138,6 +138,28 @@
     </div>
 </div> -->
 
+<div class="row">
+    <div class="form-group mb-3 col-md-6">
+        <label for="createdBy">Created Date</label>
+        <input 
+            class="form-control" 
+            [ngModel]="vacancyForm.createdDate | date:'MMMM dd, YYYY'"
+            readonly
+            name="createdBy"
+        />
+    </div>
+
+    <div class="form-group mb-3 col-md-6">
+        <label for="lastModifiedDate">Last Modified Date</label>
+        <input 
+            class="form-control" 
+            [ngModel]="vacancyForm.lastModifiedDate | date:'MMMM dd, YYYY'"
+            readonly
+            name="lastModifiedDate"
+        />
+    </div>
+</div>
+
 
 <div class="form-group pt-3">
     <div class="d-grid gap-2">

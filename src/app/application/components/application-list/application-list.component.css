@@ -14,8 +14,8 @@ td, th {
 
 .mat-column-vacancyName {
   white-space: unset;
-  flex: 0 0 12%;
-  width: 15%;
+  flex: 0 0 25%;
+  width: 25%;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;

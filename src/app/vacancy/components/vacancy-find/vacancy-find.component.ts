@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { ResumeService } from 'src/app/services/resume.service';
 import { User } from 'src/app/models/user-model';
+import { ApplicationService } from 'src/app/services/application.service';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class VacancyFindComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private _vacancyService: VacancyService, 
+              private _applicationService: ApplicationService,
               private _tokenStorageService: TokenStorageService,
               private _resumeService: ResumeService,
               private router: Router) {  
@@ -54,13 +56,24 @@ export class VacancyFindComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            // Swal.fire("Error", err.error.message, "error");
+            Swal.fire("Error", err.error.message, "error");
           }
         });
 
-        this.dataSource = new MatTableDataSource(vacancy);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this._applicationService.getApplicationByCandidateId(this.currentUser.userId).subscribe({
+          next: application => {
+            vacancy = vacancy.filter((element) => {
+              return !application.map(x=>x.vacancy.vacancyId).includes(element.vacancyId);
+            });
+
+            this.dataSource = new MatTableDataSource(vacancy);
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          },
+          error: (err: any) => {
+            Swal.fire("Error", err.error.message, "error");
+          }
+        });
       },
       error: (err: any) => {
         Swal.fire("Error", err.error.message, "error");

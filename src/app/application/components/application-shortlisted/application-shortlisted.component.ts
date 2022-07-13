@@ -1,4 +1,4 @@
-import {OnInit , Component, ViewChild, Input} from '@angular/core';
+import {OnInit , Component, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { Application } from "src/app/models/application-model";
 import { ApplicationService } from "src/app/services/application.service";
@@ -9,7 +9,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { User } from 'src/app/models/user-model';
-import { ApplicationStatus } from 'src/app/_shared/enum/enum';
 
 
 @Component({
@@ -20,7 +19,7 @@ import { ApplicationStatus } from 'src/app/_shared/enum/enum';
 
 export class ApplicationShortlistedComponent implements OnInit {
 
-  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag', 'remarks' ,'status', 'actions'];
+  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag' ,'status', 'actions'];
 
   dataSource!: MatTableDataSource<Application>;
   filterText: string = '';
@@ -45,7 +44,7 @@ export class ApplicationShortlistedComponent implements OnInit {
   ngOnInit(): void {
     this.getShortlistedApplication();
     if(this.isCandidate){
-      this.displayedColumns = ['vacancyName', 'expectedSalary', 'matchedTag','remarks' ,'status', 'objectState', 'actions'];
+      this.displayedColumns = ['vacancyName', 'expectedSalary', 'matchedTag' ,'status', 'objectState', 'actions'];
     }
   }
 

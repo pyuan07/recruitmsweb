@@ -20,7 +20,7 @@ import { User } from 'src/app/models/user-model';
 
 export class ApplicationListComponent implements OnInit {
 
-  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag','remarks' ,'status', 'objectState', 'actions'];
+  displayedColumns: string[] = ['vacancyName', 'candidateName', 'expectedSalary', 'matchedTag' ,'status', 'objectState', 'actions'];
 
   dataSource!: MatTableDataSource<Application>;
   filterText: string = '';
@@ -45,7 +45,7 @@ export class ApplicationListComponent implements OnInit {
   ngOnInit(): void {
     this.getAllApplication();
     if(this.isCandidate){
-      this.displayedColumns = ['vacancyName', 'expectedSalary', 'matchedTag','remarks' ,'status', 'objectState', 'actions'];
+      this.displayedColumns = ['vacancyName', 'expectedSalary', 'matchedTag' ,'status', 'objectState', 'actions'];
     }
   }
 

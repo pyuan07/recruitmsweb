@@ -1,4 +1,3 @@
-import { Resume } from 'src/app/models/resume-model';
 import { ResumeListComponent } from './components/resume-list/resume-list.component';
 import { ResumeDetailsComponent } from './components/resume-details/resume-details.component';
 import { ResumeCreateComponent } from './components/resume-create/resume-create.component';

@@ -83,25 +83,28 @@
 
     <div class="form-group mb-4">
         <label class="form-label" for="tag">Tag <span class="required-symbol"></span></label>
-        <mat-chip-list class="form-control" #chipList aria-label="Tag selection">
-            <mat-chip
-                *ngFor="let tag of selectedTags"
-                (removed)="remove(tag)">
-                {{tag}}
-                <button matChipRemove>
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </mat-chip>
-            <input
-                style="border: none; outline: none"
-                #tagInput
-                [formControl]="tagCtrl"
-                [matAutocomplete]="auto"
-                [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                (matChipInputTokenEnd)="add($event)"
-            />
-        </mat-chip-list>
+        <div class="input-group">
+            <mat-chip-list class="form-control" #chipList aria-label="Tag selection">
+                <mat-chip
+                    *ngFor="let tag of selectedTags"
+                    (removed)="remove(tag)">
+                    {{tag}}
+                    <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip>
+                <input
+                    style="border: none; outline: none"
+                    #tagInput
+                    [formControl]="tagCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)"
+                />
+            </mat-chip-list>
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="extractResumeTag()">Auto Detect</button>
+        </div>
         <div class="alert-danger" *ngIf="createForm.submitted && selectedTags.length < 1">
             <div>At least one tag is required</div>
         </div>

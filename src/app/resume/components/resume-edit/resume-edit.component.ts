@@ -242,4 +242,23 @@ export class ResumeEditComponent implements OnInit {
     });
   }
 
+  extractResumeTag(){
+    this._resumeService.extractTagsFromResume(this.pdfName).subscribe({
+      next: data => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Extracted Successfully!'
+        });
+
+        data.forEach(tag => {
+          if (tag && !this.selectedTags.includes(tag.name)) {
+            this.selectedTags.push(tag.name);
+          }
+        });
+      },
+      error: (err: any) => {
+        Swal.fire("Error", err.message, "error");
+      }
+    });
+  }
   }

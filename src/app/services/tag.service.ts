@@ -37,7 +37,7 @@ export class TagService {
     return this.http.delete<boolean>(TAG_API + '/' + id);
   }
 
-  extractTags(req: ExtractTagsRequest): Observable<Tag[]> {
-    return this.http.post<Tag[]>(TAG_API + '/extract', req);
+  extractTags(raw: ExtractTagsRequest): Observable<Tag[]> {
+    return this.http.post<Tag[]>(TAG_API + '/extract', raw);
   }
 }

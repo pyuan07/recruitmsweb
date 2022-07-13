@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <div class="form-group mb-4">
+    <div class="form-group mb-4" *ngIf="isAdmin">
         <label class="form-label" for="objectState">Object State <span class="required-symbol"></span></label>
         <select 
             class="form-select" 
@@ -194,7 +194,7 @@
         >
         </textarea>
     </div>
-
+<!-- 
     <div class="form-group mb-4 mt-4">
         <div class="form-check">
             <input 
@@ -208,7 +208,7 @@
                 Enable related Programming Language Quiz when candidate applying.
             </label>
         </div>
-    </div>   
+    </div>    -->
 
     <div class="form-group pt-3">
         <div class="d-grid gap-2">

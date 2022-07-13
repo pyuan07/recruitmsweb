@@ -15,6 +15,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { ObjectState } from 'src/app/_shared/enum/enum';
 
 @Component({
   selector: 'app-vacancy-create',
@@ -109,7 +110,10 @@ export class VacancyCreateComponent implements OnInit {
 
   onSubmit(createForm: NgForm): void {
     createForm.value.tags = this.selectedTags;
-
+    if(this.isEmployer){
+      createForm.value.objectState = ObjectState.ACTIVE;
+    }
+   
     this._vacancyService.create(createForm.value).subscribe({
       next: data => {
         console.log(data);
@@ -165,10 +169,9 @@ export class VacancyCreateComponent implements OnInit {
     };
     this._tagService.extractTags(request).subscribe({
       next: data => {
-        console.log(data);
         Swal.fire({
           icon: 'success',
-          title: 'Extract Successfully!'
+          title: 'Extracted Successfully!'
         });
         data.forEach(tag => {
           if (tag && !this.selectedTags.includes(tag.name)) {

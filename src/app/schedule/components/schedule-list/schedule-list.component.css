@@ -14,8 +14,8 @@ td, th {
 
 .mat-column-vacancy {
   white-space: unset;
-  flex: 0 0 18%;
-  width: 18%;
+  flex: 0 0 25%;
+  width: 25%;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -40,8 +40,8 @@ td, th {
 
 .mat-column-organization {
   white-space: unset;
-  flex: 0 0 16%;
-  width: 16%;
+  flex: 0 0 18%;
+  width: 18%;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-word;
@@ -54,8 +54,8 @@ td, th {
 .mat-column-approach {
   word-wrap: break-word;
   white-space: unset;
-  flex: 0 0 13%;
-  width: 13%;
+  flex: 0 0 10%;
+  width: 10%;
   overflow-wrap: break-word;
   word-wrap: break-word;
   -ms-hyphens: auto;
