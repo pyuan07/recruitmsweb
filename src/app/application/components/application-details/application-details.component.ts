@@ -52,15 +52,12 @@ export class ApplicationDetailsComponent implements OnInit {
     }
 
     private getApplicationDetails(id: number){
+
       this._applicationService.getById(id).subscribe({
         next: data => {
 
           this.imageUrl = environment.apiEndpoint +'/v1/resume/download/image/'+ data.resume.profilePicture;
           this.pdfUrl = environment.apiEndpoint +'/v1/resume/download/pdf/'+ data.resume.resumePdf;
-          this.isShortlisted = data.status.toString() == "SHORTLISTED";
-          this.isDeclined = data.status.toString() == "DECLINED";
-          this.isCompleted = data.status.toString() == "COMPLETED";
-          this.isCancelled = data.status.toString() == "CANCEL";
 
           //Colour same tag
           data.vacancy.tags.forEach((tag) => {
@@ -90,7 +87,6 @@ export class ApplicationDetailsComponent implements OnInit {
           this.isSameCountry = data.resume.country.iso == data.vacancy.country.iso;
 
           this.applicationForm = data;
-
           this.viewedApplication();
         },
         error: (err: any) => {

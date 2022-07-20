@@ -77,7 +77,7 @@ export class ResumeListComponent implements OnInit {
 
     //Specific the filter column
     this.dataSource.filterPredicate = function(data, filter: string): boolean {
-      return data.candidate.username.toLowerCase().includes(filter) || (data.candidate.username != undefined && data.candidate.username.toLowerCase().includes(filter));
+      return data.candidate.fullName.toLowerCase().includes(filter) || (data.candidate.fullName != undefined && data.candidate.fullName.toLowerCase().includes(filter));
     };
 
     if (this.dataSource.paginator) {
