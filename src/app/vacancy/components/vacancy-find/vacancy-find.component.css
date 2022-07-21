@@ -64,7 +64,7 @@ td, th {
   hyphens: auto;
 }
 
-.mat-column-objectState {
+.mat-column-matchedTag {
   word-wrap: break-word;
   white-space: unset;
   flex: 0 0 10%;

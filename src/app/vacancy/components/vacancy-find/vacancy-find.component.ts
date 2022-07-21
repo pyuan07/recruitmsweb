@@ -22,7 +22,7 @@ import { ApplicationService } from 'src/app/services/application.service';
 
 export class VacancyFindComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'organization', 'country', 'objectState', 'actions'];
+  displayedColumns: string[] = ['name', 'organization', 'country', 'matchedTag', 'actions'];
   dataSource!: MatTableDataSource<Vacancy>;
   filterText: String = '';
   filterState: String = 'ALL';
